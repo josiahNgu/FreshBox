@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css?family=Karla:400,700&display=swap");
+
+.Auth {
+  font-family: "Karla" sans-serif;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.AuthForm {
+  font-family: "Karla" sans-serif;
+  margin: 0px auto;
+  text-align: center;
+  padding: 10px;
+}
+.Header {
+  font-family: "Karla" sans-serif;
+  color: #0808088e;
+}
+
+/* @media (min-width: 600px) {
+  .Auth {
+    width: 500px;
+  }
+} */
+.SubmitButton {
+  display: inline-block;
+  padding: 0.5em 1.2em;
+  border: 0.1em solid black;
+  /* margin: 0 0.3em 0.3em 0; */
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: "Karla", sans-serif;
+  font-weight: 700;
+  color: black;
+  text-align: center;
+  transition: all 0.2s;
+}
+.SubmitButton:hover {
+  color: white;
+  background-color: black;
+  text-decoration: none;
+}
+.FacebookButton {
+  display: inline-block;
+  padding: 0.5em 1.2em;
+  background-color: #3b5998;
+  border: 0.1em solid #3b5998;
+  margin: 1em;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 600;
+  color: white;
+  text-align: center;
+}
+
+.GoogleButton {
+  display: inline-block;
+  padding: 0.5em 1.2em;
+  background-color: #ffffff;
+  border: 0.1em solid;
+  margin: 1em;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-weight: 600;
+  color: black;
+  text-align: center;
+  box-sizing: border-box;
+}

@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css?family=Karla:400,700&display=swap");
+.Input {
+  padding: 10px 10px;
+}
+
+.FormInput {
+  font-weight: 400;
+  font-family: "Karla" sans-serif;
+  padding: 10px;
+  border-bottom: 4px solid black;
+  width: 250px;
+}
+.FormInput:focus {
+  border-bottom-color: #cfb53b;
+}
+input {
+  outline: none;
+  border: none;
+}

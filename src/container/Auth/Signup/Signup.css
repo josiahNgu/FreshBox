@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css?family=Karla:400,700&display=swap");
+
+.Signup {
+  margin: 0px auto;
+  text-align: center;
+  width: 90%;
+  border: 1px solid white;
+  padding: 10px;
+  box-sizing: border-box;
+  height: 100%;
+  display: grid;
+}
+@media (min-width: 600px) {
+  .Signup {
+    width: 500px;
+  }
+}

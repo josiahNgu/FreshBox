@@ -1,26 +1,83 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import { Route, Switch, withRouter, Redirect } from "react-router-dom";
+import Homepage from "./container/Homepage/Homepage";
+import { connect } from "react-redux";
+import "./App.css";
+import Layout from "./hoc/Layout/Layout";
+import Auth from "./container/Auth/Auth";
+import Products from "./container/Products/Products";
+import Signup from "./container/Auth/Signup/Signup";
+import ShoppingCart from "./container/ShoppingCart/ShoppingCart";
+import Account from "./container/Account/Account";
+import firebase from "firebase/app";
+import * as actions from "./store/actions/index";
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      isAuthenticated: false
+    };
+  }
+  componentDidMount() {
+    this.checkAuthStatus();
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  checkAuthStatus = () => {
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({
+          isAuthenticated: true
+        });
+        this.props.updateUserReducer(user);
+      } else {
+        this.setState({
+          isAuthenticated: false
+        });
+      }
+    });
+  };
+
+  render() {
+    let routes = (
+      <Switch>
+        <Route path="/auth" component={Auth} />
+        <Route path="/signup" component={Signup} />
+        <Route path="/products" component={Products} />
+        <Route path="/" exact component={Homepage} />
+        <Redirect to="/" />
+      </Switch>
+    );
+    if (this.state.isAuthenticated) {
+      routes = (
+        <Switch>
+          <Route path="/" exact component={Homepage} />
+          <Route path="/products" component={Products} />
+          <Route path="/account" component={Account} />
+          <Route path="/shoppingCart" component={ShoppingCart} />
+          <Redirect to="/" />
+        </Switch>
+      );
+    }
+    return (
+      <Layout isAuthenticated={this.state.isAuthenticated}>{routes}</Layout>
+    );
+  }
 }
-
-export default App;
+const mapStateToProps = state => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated
+  };
+};
+const mapDispatchToProps = dispatch => {
+  return {
+    changeAuthenticationStatus: status =>
+      dispatch(actions.authenticationStatus(status)),
+    updateUserReducer: user => dispatch(actions.loginSuccess(user))
+  };
+};
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(App)
+);
