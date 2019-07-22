@@ -1,54 +1,76 @@
 import * as actionTypes from "./actionTypes";
-import firebase from "firebase/app";
-import "firebase/firestore";
-import "firebase/auth";
-export const loginSuccess = user => {
-  localStorage.setItem("user", user);
-  firebase
-    .auth()
-    .currentUser.getIdToken(true)
-    .then(idToken => {
-      const expiresIn = 10;
-      localStorage.setItem("expires", expiresIn);
-      localStorage.setItem("token", idToken);
-    });
-  if (localStorage.getItem("token") !== null) {
+import axios from "axios";
+export const loginSuccess = () => {
+  if (localStorage.getItem("idToken") !== null) {
     return {
-      type: actionTypes.LOGIN_SUCCESS,
-      user: user
-    };
-  } else {
-    return {
-      type: actionTypes.LOGIN_FAILED
+      type: actionTypes.LOGIN_SUCCESS
     };
   }
 };
-export const loginFailed = () => {
+export const loginFailed = error => {
   return {
     type: actionTypes.LOGIN_FAILED,
-    hasError: true
+    hasError: true,
+    errors: error
   };
 };
-
+export const setUserData = user => {
+  return {
+    type: actionTypes.SET_USER,
+    user: user
+  };
+};
+export const setCallbackLink = callbackLink => {
+  return {
+    type: actionTypes.SET_CALLBACK_LINK,
+    callbackLink
+  };
+};
 export const login = (email, password) => {
-  return dispatch =>
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(user => {
-        console.log(user);
-        dispatch(loginSuccess(user));
+  const user = {
+    email: email,
+    password: password
+  };
+  console.log(user);
+  return dispatch => {
+    axios
+      .post(
+        "https://us-central1-subscriptionservice-f776d.cloudfunctions.net/api/auth",
+        user
+      )
+      .then(res => {
+        setAuthorizationHeader(res.data.token);
+        dispatch(getUserData());
+        // history.push("/products");
+        // dispatch(setCallbackLink(callbackLink));
+        dispatch(loginSuccess(localStorage.getItem("idToken")));
       })
-      .catch(function(error) {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        dispatch(loginFailed());
-        console.log(errorCode + errorMessage);
+      .catch(err => {
+        dispatch(loginFailed(err.data));
       });
+  };
+};
+export const getUserData = () => {
+  return dispatch => {
+    axios
+      .get("/user")
+      .then(res => {
+        console.log(res);
+        dispatch(setUserData(res.data));
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
 };
 export const authenticationStatus = status => {
   return {
     type: actionTypes.IS_AUTHENTICATED,
     isAuthenticated: status
   };
+};
+const setAuthorizationHeader = token => {
+  const FirebaseIdToken = `Bearer:${token}`;
+  localStorage.setItem("idToken", token);
+  axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
 };

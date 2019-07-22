@@ -5,7 +5,7 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import ProductItem from "../../components/ShoppingItem/ShoppingItem";
 class ShoppingCart extends Component {
   componentDidMount() {
-    this.props.initShoppingCart(this.props.userId);
+    this.props.initShoppingCart();
   }
   render() {
     let shoppingCart = <Spinner />;
@@ -14,7 +14,7 @@ class ShoppingCart extends Component {
         <ProductItem
           key={item.itemId}
           itemName={item.itemName}
-          quantity={item.quantity}
+          frequency={item.frequency}
           price={item.price}
         />
       ));
@@ -25,13 +25,12 @@ class ShoppingCart extends Component {
 
 const mapStateToProps = state => {
   return {
-    shoppingList: state.shoppingCart.shoppingList,
-    userId: state.auth.user.uid
+    shoppingList: state.shoppingCart.shoppingList
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    initShoppingCart: userId => dispatch(actions.initShoppingList(userId))
+    initShoppingCart: () => dispatch(actions.initShoppingList())
   };
 };
 export default connect(

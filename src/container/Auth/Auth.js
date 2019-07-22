@@ -31,7 +31,8 @@ class Auth extends Component {
         value: ""
       }
     },
-    shouldRedirect: false
+    shouldRedirect: false,
+    error: {}
   };
 
   changetoSignupPageHandler = event => {
@@ -85,7 +86,10 @@ class Auth extends Component {
       });
   };
   render() {
-    if (this.state.shouldRedirect === true) {
+    if (
+      this.state.shouldRedirect === true ||
+      this.props.shouldRedirect === true
+    ) {
       return <Redirect to="/products" />;
     }
     const formElementsArray = [];
@@ -134,7 +138,8 @@ class Auth extends Component {
 }
 const mapStateToProps = state => {
   return {
-    hasError: state.auth.hasError
+    hasError: state.auth.hasError,
+    shouldRedirect: state.auth.shouldRedirect
   };
 };
 const mapDispatchToProps = dispatch => {

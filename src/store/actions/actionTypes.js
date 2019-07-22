@@ -7,3 +7,6 @@ export const LOGIN_FAILED = "LOGIN_FAILED";
 export const IS_AUTHENTICATED = "IS_AUTHENTICATED";
 export const GET_SHOPPINGLIST = "GET_SHOPPINGLIST";
 export const ADD_TO_CART = "ADD_TO_CART";
+export const SET_USER = "SET_USER";
+export const SET_CALLBACK_LINK = "SET_CALLBACK_LINK";
+export const SET_USER_FAILED = "SET_USER_FAILED";

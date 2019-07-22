@@ -11,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import productReducer from "./store/reducers/products";
 import authReducer from "./store/reducers/auth";
 import shoppingCartReducer from "./store/reducers/shoppingCart";
+import userReducer from "./store/reducers/user";
 const composeEnhancers =
   process.env.NODE_ENV === "development"
     ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
@@ -18,7 +19,8 @@ const composeEnhancers =
 const rootReducer = combineReducers({
   product: productReducer,
   auth: authReducer,
-  shoppingCart: shoppingCartReducer
+  shoppingCart: shoppingCartReducer,
+  user: userReducer
 });
 const store = createStore(
   rootReducer,

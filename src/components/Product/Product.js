@@ -9,7 +9,8 @@ class Product extends Component {
   state = {
     quantity: 1,
     currentSelection: "Frequency",
-    frequency: 0
+    frequency: 0,
+    showOptions: false
   };
   addToCart = event => {
     event.preventDefault();
@@ -18,8 +19,8 @@ class Product extends Component {
       this.props.addToCartHandler(
         this.props.productId,
         this.state.quantity,
-        this.state.frequency,
-        firebase.auth().currentUser.uid
+        this.props.name,
+        this.state.frequency
       );
     }
   };
@@ -30,6 +31,12 @@ class Product extends Component {
       currentSelection: name
     });
   };
+
+  toggleOptionsHandler = () => {
+    console.log("here" + this.state.showOptions);
+    this.setState({ showOptions: !this.state.showOptions });
+  };
+
   render() {
     return (
       <div className="container">
@@ -49,6 +56,8 @@ class Product extends Component {
               <Select
                 selectHandler={this.selectHandler}
                 currentSelection={this.state.currentSelection}
+                toggleOptionsHandler={this.toggleOptionsHandler}
+                showOptions={this.state.showOptions}
               />
             </div>
 
@@ -67,8 +76,8 @@ class Product extends Component {
 }
 const mapDispatchToProps = dispatch => {
   return {
-    addToCartHandler: (itemId, quantity, frequency, userId) =>
-      dispatch(actions.addToCart(itemId, quantity, frequency, userId))
+    addToCartHandler: (itemId, quantity, itemName, frequency) =>
+      dispatch(actions.addToCart(itemId, quantity, itemName, frequency))
   };
 };
 export default connect(

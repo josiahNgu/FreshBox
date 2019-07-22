@@ -1,16 +1,18 @@
 import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
 const initialState = {
-  user: null,
   isAuthenticated: false,
   shouldRedirect: false,
   hasError: false,
-  signupError: []
+  signupError: {},
+  user: null,
+  callbackLink: "/"
 };
 
 const loginSuccess = (state, action) => {
   return updateObject(state, {
     isAuthenticated: true,
+    shouldRedirect: true,
     user: action.user
   });
 };
@@ -21,7 +23,8 @@ const signupUser = (state, action) => {
     shouldRedirect: true
   });
 };
-const loginFailed = state => {
+const loginFailed = (state, action) => {
+  console.log(action.errors);
   return updateObject(state, {
     hasError: true
   });
@@ -36,6 +39,16 @@ const setAuthentication = (state, action) => {
     isAuthenticated: action.isAuthenticated
   });
 };
+const setUserData = (state, action) => {
+  return updateObject(state, {
+    user: action.user
+  });
+};
+const setCallbackLink = (state, action) => {
+  return updateObject(state, {
+    callbackLink: action.callbackLink
+  });
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCESS:
@@ -48,6 +61,10 @@ const reducer = (state = initialState, action) => {
       return signupFailed(state, action);
     case actionTypes.IS_AUTHENTICATED:
       return setAuthentication(state, action);
+    case actionTypes.SET_USER:
+      return setUserData(state, action);
+    case actionTypes.SET_CALLBACK_LINK:
+      return setCallbackLink(state, action);
     default:
       return state;
   }

@@ -14,6 +14,9 @@
   height: 42px;
   margin: 10px;
 }
+.hidden {
+  display: none;
+}
 #options-view-button {
   position: absolute;
   top: 0;

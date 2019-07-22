@@ -25,7 +25,7 @@ class Products extends Component {
     // const products = <Product name={this.props.products.itemName} />;
     return (
       <div className="container">
-        <div className="">{productsArray}</div>
+        <div className=""> {productsArray} </div>
       </div>
     );
   }

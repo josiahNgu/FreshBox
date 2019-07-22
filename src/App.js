@@ -9,7 +9,6 @@ import Products from "./container/Products/Products";
 import Signup from "./container/Auth/Signup/Signup";
 import ShoppingCart from "./container/ShoppingCart/ShoppingCart";
 import Account from "./container/Account/Account";
-import firebase from "firebase/app";
 import * as actions from "./store/actions/index";
 class App extends Component {
   constructor() {
@@ -23,18 +22,11 @@ class App extends Component {
   }
 
   checkAuthStatus = () => {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        this.setState({
-          isAuthenticated: true
-        });
-        this.props.updateUserReducer(user);
-      } else {
-        this.setState({
-          isAuthenticated: false
-        });
-      }
-    });
+    if (localStorage.getItem("idToken") !== null) {
+      this.setState({
+        isAuthenticated: true
+      });
+    }
   };
 
   render() {

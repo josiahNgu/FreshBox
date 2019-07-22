@@ -1,5 +1,5 @@
-import { db } from "../../components/Firebase/index";
 import * as actionTypes from "./actionTypes";
+import axios from "../../axios";
 export const loadProducts = products => {
   return {
     type: actionTypes.GET_PRODUCTS,
@@ -9,18 +9,17 @@ export const loadProducts = products => {
 };
 export const initProducts = () => {
   return dispatch =>
-    db
-      .collection("products")
-      .get()
+    axios
+      .get("/products")
       .then(res => {
-        const data = res.docs.map(doc => {
-          console.log(doc.id);
+        console.log(res);
+        const data = res.data.map(doc => {
           return {
             id: doc.id,
-            itemName: doc.data().itemName,
-            price: doc.data().price,
-            category: doc.data().category,
-            description: doc.data().description
+            itemName: doc.itemName,
+            price: doc.price,
+            category: doc.category,
+            description: doc.description
           };
         });
         dispatch(loadProducts(data));

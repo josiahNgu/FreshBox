@@ -11,7 +11,7 @@ class ShoppingItem extends Component {
               <h5 className="product_title">{this.props.itemName}</h5>
             </div>
             <div>
-              <span>Quantity: {this.props.quantity}</span>
+              <span>Frequency: {this.props.frequency}</span>
             </div>
             <p>RM {this.props.price * this.props.quantity}</p>
           </div>
