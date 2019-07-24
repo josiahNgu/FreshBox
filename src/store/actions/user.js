@@ -23,6 +23,11 @@ export const getAuthenticatedUserData = () => {
         dispatch(setUserData(res.data.userData.credentials));
       })
       .catch(err => {
-        dispatch(getUserDataFailed(err.data));
+        console.log(err.response);
+        if (err.response.status.toString() === "403") {
+          // localStorage.removeItem("tokenId");
+          window.location.reload();
+        }
+        dispatch(getUserDataFailed(err.response.data));
       });
 };

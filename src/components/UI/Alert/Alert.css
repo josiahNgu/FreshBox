@@ -1,0 +1,9 @@
+.Alert {
+  font: inherit;
+  background-color: #8051dc;
+  color: white;
+  border-radius: 10px;
+  font-weight: 500;
+  padding: 5px;
+  margin: 5px;
+}

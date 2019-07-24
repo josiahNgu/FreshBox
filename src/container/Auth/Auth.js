@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Input from "../../components/UI/Input/Input";
+import Alert from "../../components/UI/Alert/Alert";
 import "./Auth.css";
 import * as actions from "../../store/actions/index";
 import { withRouter } from "react-router-dom";
@@ -113,11 +114,15 @@ class Auth extends Component {
     );
 
     return (
-      <div className="Auth container col-xs-12">
+      <div className="Auth">
         <div className="AuthForm">
-          <span>
-            {this.props.hasError ? "Incorrect username or password" : null}
-          </span>
+          <div className={this.props.hasError ? "Block" : "Hidden"}>
+            <Alert
+              message={
+                this.props.hasError ? "Incorrect username or password" : null
+              }
+            />
+          </div>
           {form}
           <hr />
           <button className="FacebookButton" onClick={this.authWithFacebook}>

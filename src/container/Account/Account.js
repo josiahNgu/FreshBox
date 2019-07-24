@@ -9,11 +9,9 @@ class Account extends Component {
   componentDidMount() {
     this.props.getUserData();
   }
-  //   // username: {this.props.user.displayName} <br />
-  //   // email: {this.props.user.email}
-  //   // phone number: {this.props.user.phoneNumber}
-  //   // <br />
-  //   // <button onClick={this.logout}>Logout</button>
+  logout = () => {
+    localStorage.removeItem("idToken");
+  };
   render() {
     let userData = <Spinner />;
     if (this.props.user) {
@@ -27,6 +25,7 @@ class Account extends Component {
     return (
       <div>
         {userData} <br />
+        <button onClick={this.logout()}>Logout</button>
       </div>
     );
   }

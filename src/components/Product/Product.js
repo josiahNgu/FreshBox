@@ -1,7 +1,6 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { Component } from "react";
 import "./Product.scss";
-import stockImage from "../../misc/Scott Facial Tissue.jpg";
-import firebase from "firebase/app";
 import Select from "../UI/Select/Select";
 import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
@@ -39,12 +38,12 @@ class Product extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="">
         <div className="product col-sm-12 row">
           <div className="col-sm-6">
-            <img alt="stock image" src={stockImage} />
+            <img src={this.props.imageURL} alt="product image" />
           </div>
-          <div className="col-sm-6">
+          <div className="col-sm-12 col-md-6 text-justify">
             <div>
               <h5 className="product_title">{this.props.name}</h5>
             </div>

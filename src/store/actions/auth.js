@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes";
-import axios from "axios";
+import axios from "../../axios";
 export const loginSuccess = () => {
   if (localStorage.getItem("idToken") !== null) {
     return {
@@ -26,6 +26,9 @@ export const setCallbackLink = callbackLink => {
     callbackLink
   };
 };
+export const logout = () => {
+  return;
+};
 export const login = (email, password) => {
   const user = {
     email: email,
@@ -34,10 +37,7 @@ export const login = (email, password) => {
   console.log(user);
   return dispatch => {
     axios
-      .post(
-        "https://us-central1-subscriptionservice-f776d.cloudfunctions.net/api/auth",
-        user
-      )
+      .post("/auth", user)
       .then(res => {
         setAuthorizationHeader(res.data.token);
         dispatch(getUserData());

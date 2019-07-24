@@ -6,6 +6,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh;
+  background-image: linear-gradient(
+    to top,
+    #bdc2e8 0%,
+    #bdc2e8 1%,
+    #e6dee9 100%
+  );
 }
 
 .AuthForm {
@@ -69,4 +76,10 @@
   color: black;
   text-align: center;
   box-sizing: border-box;
+}
+.Hidden {
+  display: none;
+}
+.Block {
+  display: block;
 }

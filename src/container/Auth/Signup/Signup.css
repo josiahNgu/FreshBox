@@ -9,6 +9,13 @@
   box-sizing: border-box;
   height: 100%;
   display: grid;
+  background-image: linear-gradient(to top, #dfe9f3 0%, white 100%);
+}
+.Hidden {
+  display: none;
+}
+.Block {
+  display: block;
 }
 @media (min-width: 600px) {
   .Signup {

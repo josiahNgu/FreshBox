@@ -18,7 +18,6 @@ const loginSuccess = (state, action) => {
 };
 const signupUser = (state, action) => {
   return updateObject(state, {
-    user: action.newUser,
     isAuthenticated: true,
     shouldRedirect: true
   });
@@ -49,6 +48,7 @@ const setCallbackLink = (state, action) => {
     callbackLink: action.callbackLink
   });
 };
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.LOGIN_SUCCESS:

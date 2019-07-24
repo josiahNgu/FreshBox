@@ -19,7 +19,8 @@ export const initProducts = () => {
             itemName: doc.itemName,
             price: doc.price,
             category: doc.category,
-            description: doc.description
+            description: doc.description,
+            imageURL: doc.imageURL
           };
         });
         dispatch(loadProducts(data));

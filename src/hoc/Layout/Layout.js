@@ -18,10 +18,12 @@ class Layout extends React.Component {
   render() {
     return (
       <Aux>
-        <Toolbar
-          drawerToggleClicked={this.sideDrawerToggleHandler}
-          isAuth={this.props.isAuthenticated}
-        />
+        <Aux>
+          <Toolbar
+            drawerToggleClicked={this.sideDrawerToggleHandler}
+            isAuth={this.props.isAuthenticated}
+          />
+        </Aux>
         <SideDrawer
           closed={this.sideDrawerClosedHandler}
           open={this.state.showSideDrawer}

@@ -18,14 +18,17 @@ class Products extends Component {
           name={product.itemName}
           price={product.price}
           description={product.description}
+          imageURL={product.imageURL}
         />
       ));
     }
 
     // const products = <Product name={this.props.products.itemName} />;
     return (
-      <div className="container">
-        <div className=""> {productsArray} </div>
+      <div className="container ">
+        <div className="col-sm-12">
+          {this.props.isLoading ? <Spinner /> : productsArray}
+        </div>
       </div>
     );
   }
@@ -33,7 +36,8 @@ class Products extends Component {
 const mapStateToProps = state => {
   return {
     products: state.product.products,
-    fetchSuccess: state.product.fetchDataFinished
+    fetchSuccess: state.product.fetchDataFinished,
+    isLoading: state.product.isAddingToCart
   };
 };
 const mapDispatchToProps = dispatch => {
