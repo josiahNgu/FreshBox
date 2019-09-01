@@ -1,0 +1,17 @@
+.Card {
+  margin: auto;
+  width: 400px;
+  background-color: #e9ece5;
+  border-radius: 0.7rem;
+  padding: 20px;
+}
+.PromptPayment {
+  min-height: 20vh;
+}
+.Payment {
+  min-height: 100vh;
+  background-color: #fafafa;
+}
+.CardSection {
+  min-height: 60vh;
+}

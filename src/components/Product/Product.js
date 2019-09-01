@@ -1,39 +1,27 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React, { Component } from "react";
 import "./Product.scss";
-import Select from "../UI/Select/Select";
+import Input from "../UI/Input/Input";
 import * as actions from "../../store/actions/index";
 import { connect } from "react-redux";
 class Product extends Component {
   state = {
-    quantity: 1,
-    currentSelection: "Frequency",
-    frequency: 0,
+    selectedQuantity: 1,
     showOptions: false
   };
   addToCart = event => {
     event.preventDefault();
     console.log("here");
-    if (this.state.frequency !== 0 && this.state.quantity !== 0) {
+    if (this.state.selectedQuantity !== 0) {
       this.props.addToCartHandler(
         this.props.productId,
-        this.state.quantity,
-        this.props.name,
-        this.state.frequency
+        this.state.selectedQuantity,
+        this.props.name
       );
     }
   };
-  selectHandler = (name, value) => {
-    console.log(name + "value" + value);
-    this.setState({
-      frequency: value,
-      currentSelection: name
-    });
-  };
-
-  toggleOptionsHandler = () => {
-    console.log("here" + this.state.showOptions);
-    this.setState({ showOptions: !this.state.showOptions });
+  inputChangedHandler = event => {
+    this.setState({ selectedQuantity: event.target.value });
   };
 
   render() {
@@ -48,24 +36,23 @@ class Product extends Component {
               <h5 className="product_title">{this.props.name}</h5>
             </div>
             <div>
-              <span>{this.props.description}</span>
-              <span>Quantity</span>
+              <p>{this.props.description}</p>
             </div>
-            <div>
-              <Select
-                selectHandler={this.selectHandler}
-                currentSelection={this.state.currentSelection}
-                toggleOptionsHandler={this.toggleOptionsHandler}
-                showOptions={this.state.showOptions}
-              />
+            <div className="row">
+              <div className="col-sm-2">
+                <p>Quantity:</p>
+              </div>
+              <div className="col-sm-10">
+                <Input
+                  elementTypes="quantityInput"
+                  placeholder="1"
+                  changed={this.inputChangedHandler}
+                />
+              </div>
             </div>
 
-            <button
-              onClick={this.addToCart}
-              href=""
-              className="product_ATC_Button"
-            >
-              Add To Cart | RM {this.props.price}
+            <button onClick={this.addToCart} className="product_ATC_Button">
+              Add To Cart | RM {this.props.price.toFixed(2)}
             </button>
           </div>
         </div>

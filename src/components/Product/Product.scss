@@ -23,8 +23,8 @@
 
 .product img {
   padding: 2em;
-  width: 18em;
-  height: 18em;
+  width: 15em;
+  height: 15em;
   border-radius: 10px;
 }
 
@@ -69,4 +69,8 @@
 .customSelect {
   color: white;
   background-color: black;
+}
+
+.QuantityInput {
+  border: 10px black;
 }

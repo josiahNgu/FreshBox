@@ -126,7 +126,7 @@ class Auth extends Component {
           {form}
           <hr />
           <button className="FacebookButton" onClick={this.authWithFacebook}>
-            Login in with Facebook
+            Login with Facebook
           </button>
           <br />
           <button className="GoogleButton" onClick={this.authWithGoogle}>

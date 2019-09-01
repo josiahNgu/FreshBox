@@ -3,9 +3,6 @@ import { connect } from "react-redux";
 import Spinner from "../../components/UI/Spinner/Spinner";
 import * as actions from "../../store/actions/index";
 class Account extends Component {
-  // logout = () => {
-  //   return firebase.auth().signOut();
-  // };
   componentDidMount() {
     this.props.getUserData();
   }
@@ -25,7 +22,7 @@ class Account extends Component {
     return (
       <div>
         {userData} <br />
-        <button onClick={this.logout()}>Logout</button>
+        <button onClick={this.logout}>Logout</button>
       </div>
     );
   }

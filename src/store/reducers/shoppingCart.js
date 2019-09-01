@@ -3,7 +3,9 @@ import { updateObject } from "../utility";
 const initialState = {
   shoppingList: null,
   fetchDataFinished: true,
-  isAddingToCart: false
+  isAddingToCart: false,
+  totalPrice: 0,
+  isCheckingOut: false
 };
 const getShoppingList = (state, action) => {
   return updateObject(state, {
@@ -21,6 +23,16 @@ const addingToCart = (state, action) => {
     isAddingToCart: action.isLoading
   });
 };
+const setTotalPrice = (state, action) => {
+  return updateObject(state, {
+    totalPrice: action.totalPrice
+  });
+};
+const setIsCheckingOut = (state, action) => {
+  return updateObject(state, {
+    isCheckingOut: action.isCheckingOut
+  });
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_SHOPPINGLIST:
@@ -29,6 +41,10 @@ const reducer = (state = initialState, action) => {
       return updateShoppingList(state, action);
     case actionTypes.IS_ADDING_TO_CART:
       return addingToCart(state, action);
+    case actionTypes.TOTAL_PRICE:
+      return setTotalPrice(state, action);
+    case actionTypes.IS_CHECKING_OUT:
+      return setIsCheckingOut(state, action);
     default:
       return state;
   }

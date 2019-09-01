@@ -9,6 +9,8 @@ import Products from "./container/Products/Products";
 import Signup from "./container/Auth/Signup/Signup";
 import ShoppingCart from "./container/ShoppingCart/ShoppingCart";
 import Account from "./container/Account/Account";
+import Checkout from "./container/Checkout/Checkout";
+import Payment from "./container/Payment/Payment";
 import * as actions from "./store/actions/index";
 class App extends Component {
   constructor() {
@@ -35,6 +37,7 @@ class App extends Component {
         <Route path="/auth" component={Auth} />
         <Route path="/signup" component={Signup} />
         <Route path="/products" component={Products} />
+        <Route path="/shoppingCart" component={ShoppingCart} />
         <Route path="/" exact component={Homepage} />
         <Redirect to="/" />
       </Switch>
@@ -50,6 +53,18 @@ class App extends Component {
         </Switch>
       );
     }
+    if (this.props.isCheckout) {
+      routes = (
+        <Switch>
+          <Route path="/auth" component={Auth} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/products" component={Products} />
+          <Route path="/shoppingCart" component={ShoppingCart} />
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/payment" component={Payment} />
+        </Switch>
+      );
+    }
     return (
       <Layout isAuthenticated={this.state.isAuthenticated}>{routes}</Layout>
     );
@@ -57,7 +72,8 @@ class App extends Component {
 }
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
+    isCheckout: state.shoppingCart.isCheckingOut
   };
 };
 const mapDispatchToProps = dispatch => {

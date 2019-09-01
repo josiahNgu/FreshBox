@@ -2,7 +2,11 @@ import React from "react";
 import "./Input.scss";
 const input = props => {
   let inputElement = null;
-  let inputClasses = ["FormInput"];
+  let inputClasses = ["FormInput", "Input"];
+  let cardClasses = ["Input_Card"];
+  let quantityInput = ["QuantityInputBox"];
+  let shippingInput = ["FormInput", "ShippingInput", "col-md-6"];
+  let cardClassesRow = ["Input_Card_Row"];
   let validationError = null;
   if (props.invalid && props.shouldValidate && props.touched) {
     inputClasses.push("Invalid");
@@ -23,6 +27,47 @@ const input = props => {
         />
       );
       break;
+    case "cardInput":
+      inputElement = (
+        <input
+          className={cardClasses.join(" ")}
+          value={props.value}
+          {...props.elementConfig}
+          onChange={props.changed}
+        />
+      );
+      break;
+    case "cardInputRow":
+      inputElement = (
+        <input
+          className={cardClassesRow.join(" ")}
+          value={props.value}
+          {...props.elementConfig}
+          onChange={props.changed}
+        />
+      );
+      break;
+    case "shippingInput":
+      inputElement = (
+        <input
+          className={shippingInput.join(" ")}
+          value={props.value}
+          {...props.elementConfig}
+          onChange={props.changed}
+        />
+      );
+      break;
+    case "quantityInput":
+      inputElement = (
+        <input
+          className={quantityInput.join(" ")}
+          type="number"
+          min="1"
+          placeholder={props.placeholder}
+          onChange={props.changed}
+        />
+      );
+      break;
     default:
       inputElement = (
         <input
@@ -34,7 +79,7 @@ const input = props => {
       );
   }
   return (
-    <div className="Input">
+    <div>
       {inputElement}
       {validationError}
     </div>

@@ -25,7 +25,7 @@ export const getAuthenticatedUserData = () => {
       .catch(err => {
         console.log(err.response);
         if (err.response.status.toString() === "403") {
-          // localStorage.removeItem("tokenId");
+          localStorage.removeItem("tokenId");
           window.location.reload();
         }
         dispatch(getUserDataFailed(err.response.data));

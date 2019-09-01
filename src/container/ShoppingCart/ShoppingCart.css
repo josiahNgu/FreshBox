@@ -1,0 +1,11 @@
+.ShoppingCart {
+  min-height: 100vh;
+  background-color: whitesmoke;
+}
+.ShoppingCartList {
+  min-height: 70vh;
+}
+.Header {
+  margin: auto;
+  padding: 10px;
+}

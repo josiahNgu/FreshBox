@@ -150,11 +150,11 @@ class Signup extends Component {
       </form>
     );
     return (
-      <div className="container col-sm-10 Signup">
-        <div className={this.state.showAlert ? "Block" : "Hidden"}>
+      <div className="Signup">
+        <div className={this.state.showAlert ? "Block " : "Hidden "}>
           <Alert message={this.state.errorMessage} />
         </div>
-        {form}
+        <div className="SignupForm">{form}</div>
       </div>
     );
   }
