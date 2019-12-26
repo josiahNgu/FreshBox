@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Input from "../../components/UI/Input/Input";
 import CartSummary from "../../components/CartSummary/CartSummary";
-import "./Checkout.scss";
+import "./Checkout.css";
 class Checkout extends Component {
   state = {
     deliveryOptions: {

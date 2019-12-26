@@ -1,29 +1,33 @@
 @import url("https://fonts.googleapis.com/css?family=Karla:400,700&display=swap");
 
-.Auth {
-  font-family: "Karla" sans-serif;
-  padding-top: 100px;
-  margin: 0 auto;
+#Auth {
+  margin-top: 4rem;
+  font-family: "Karla"sans-serif;
+  margin: auto;
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
   height: 100vh;
-  background-image: linear-gradient(
-    to top,
-    #bdc2e8 0%,
-    #bdc2e8 1%,
-    #e6dee9 100%
-  );
 }
 
-.AuthForm {
-  font-family: "Karla" sans-serif;
-  margin: 0px auto;
+
+#Auth .loginBackground {
+  flex: 2;
+  /* background-color: red; */
+  background: url('../../misc/login_background.jpg') no-repeat center center/cover;
+
+}
+
+#Auth .AuthForm {
+  flex: 2;
+  font-family: "Karla"sans-serif;
+  margin: auto;
   text-align: center;
   padding: 10px;
 }
+
 .Header {
-  font-family: "Karla" sans-serif;
+  font-family: "Karla"sans-serif;
   color: #0808088e;
 }
 
@@ -45,11 +49,13 @@
   text-align: center;
   transition: all 0.2s;
 }
+
 .SubmitButton:hover {
   color: white;
   background-color: black;
   text-decoration: none;
 }
+
 .FacebookButton {
   display: inline-block;
   padding: 0.5em 1.2em;
@@ -78,9 +84,17 @@
   text-align: center;
   box-sizing: border-box;
 }
-.Hidden {
-  display: none;
+
+.login_hidden {
+  display: hidden;
+  visibility: hidden;
+  margin: auto;
+  height: 1rem;
 }
-.Block {
+
+.login_block {
   display: block;
+  max-width: 500px;
+  text-align: center;
+  margin: auto;
 }

@@ -5,6 +5,7 @@ import "./Auth.css";
 import * as actions from "../../store/actions/index";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import backgroundImage from "../../misc/login_background.jpg";
 import firebase from "firebase/app";
 import "firebase/auth";
 import { Redirect } from "react-router-dom";
@@ -99,7 +100,7 @@ class Auth extends Component {
     }
     let form = (
       <form onSubmit={this.submitHandler}>
-        <h5 className="Header">Sign In</h5>
+        <h5 className="Header">Sign In to Account</h5>
         {formElementsArray.map(formElement => (
           <Input
             key={formElement.id}
@@ -114,9 +115,9 @@ class Auth extends Component {
     );
 
     return (
-      <div className="Auth">
+      <section id="Auth">
         <div className="AuthForm">
-          <div className={this.props.hasError ? "Block" : "Hidden"}>
+          <div className={this.props.hasError ? "login_block" : "login_hidden"}>
             <Alert
               message={
                 this.props.hasError ? "Incorrect username or password" : null
@@ -137,7 +138,8 @@ class Auth extends Component {
             <p onClick={this.changetoSignupPageHandler}>Sign up here</p>
           </div>
         </div>
-      </div>
+        <div className="loginBackground"></div>
+      </section>
     );
   }
 }

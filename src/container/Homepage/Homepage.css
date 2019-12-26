@@ -1,14 +1,64 @@
 #homepage-main {
-  background-color: #a8cce8;
+  background-color: #d896ff;
   min-height: 100vh;
   overflow: hidden;
   position: relative;
   height: calc(100vh - 10px);
+  animation: backgroundColor 6s infinite alternate;
+}
 
+@keyframes backgroundColor {
+  to {
+    background-color: #660066;
+  }
 }
 
 #homepage-main .homepage-content h3 {
   color: #b07cda;
+  font-size: 4rem;
+  animation: dropFromTop 2s forwards 1s ease;
+}
+
+@keyframes dropFromTop {
+  0% {
+    transform: translateY(-1200px);
+  }
+
+  50% {
+    transform: translateY(-800px);
+  }
+
+  75% {
+    transform: translateY(200px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+#homepage-main .homepage-content p {
+  color: white;
+  text-align: center;
+  animation: slideToCenter 2s forwards ease;
+}
+
+@keyframes slideToCenter {
+  0% {
+    transform: translateX(-1200px);
+  }
+
+  50% {
+    transform: translateX(-800px);
+  }
+
+  75% {
+    transform: translateX(200px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
 }
 
 #homepage-main .homepage-content {
@@ -17,4 +67,19 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+}
+
+.homepage-content .shop_link a {
+  text-decoration: none;
+  color: black;
+  font-size: 1.2rem;
+  display: block;
+  background: white;
+  padding: 0.6rem;
+  transition: background 3s ease;
+}
+
+.homepage-content .shop_link a:hover {
+  background: black;
+  color: white;
 }
