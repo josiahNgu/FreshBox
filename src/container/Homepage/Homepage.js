@@ -1,15 +1,12 @@
 import React, { Component } from "react";
-import Select from "../../components/UI/Select/Select";
-import Spinner from "../../components/UI/Spinner/Spinner";
-import ShoppingCartIcon from "../../components/UI/ShoppingCartIcon/ShoppingCartIcon";
+import "./Homepage.css";
 class Homepage extends Component {
   render() {
     return (
-      <div>
-        <Select />
-        <Spinner />
-        <ShoppingCartIcon />
-      </div>
+      <main>
+        <h3>Cardbox</h3>
+        <p>Repetition Made Easy !</p>
+      </main>
     );
   }
 }
