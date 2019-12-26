@@ -1,0 +1,17 @@
+#homepage-main {
+    background-color: #A8CCE8;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#homepage-main .homepage-content h3 {
+    color: #B07cda;
+}
+
+#homepage-main .homepage-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}

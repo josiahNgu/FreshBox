@@ -4,9 +4,7 @@
   list-style: none;
   display: flex;
   align-items: center;
-  height: 100%;
   justify-content: flex-end;
-  flex-flow: column;
 }
 
 @media (min-width: 500px) {
