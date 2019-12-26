@@ -29,7 +29,7 @@ class Layout extends React.Component {
           open={this.state.showSideDrawer}
           isAuth={this.props.isAuthenticated}
         />
-        <main className="Content">{this.props.children}</main>
+        <main>{this.props.children}</main>
       </Aux>
     );
   }

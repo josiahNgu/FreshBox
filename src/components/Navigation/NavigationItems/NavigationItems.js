@@ -5,28 +5,38 @@ import ShoppingCartIcon from "../../UI/ShoppingCartIcon/ShoppingCartIcon";
 import "./NavigationItems.css";
 const navigationItems = props => {
   let navigationLinks = (
-    <React.Fragment>
+    <ul>
       <NavigationItem link="/products">PRODUCTS</NavigationItem>
-      <NavigationItem link="/shoppingCart">
-        <ShoppingCartIcon />
-      </NavigationItem>
+      <NavigationItem link="/shoppingCart">Cart</NavigationItem>
       <NavigationItem link="/auth">LOGIN</NavigationItem>
       <NavigationItem link="/signup">JOIN</NavigationItem>
-    </React.Fragment>
+    </ul>
   );
   if (props.isAuthenticated) {
     navigationLinks = (
-      <React.Fragment>
-        <NavigationItem link="/products">PRODUCTS</NavigationItem>
-        <NavigationItem link="/shoppingCart">Cart</NavigationItem>
-        <NavigationItem link="/account">My Account</NavigationItem>
-      </React.Fragment>
+      <ul>
+        {/* <li>
+          <NavigationItem link="/">CardBox</NavigationItem>
+        </li> */}
+        <li>
+          <NavigationItem link="/products">Products</NavigationItem>
+        </li>
+        <li>
+          <NavigationItem link="/shoppingCart">Cart</NavigationItem>
+        </li>
+        <li>
+          <NavigationItem link="/account">My Account</NavigationItem>
+        </li>
+      </ul>
     );
   }
   return (
-    <ul className="NavigationItems">
-      <li>{navigationLinks}</li>
-    </ul>
+    <nav id="NavigationItems">
+      <h3>
+        <a href="/">CardBox</a>
+      </h3>
+      {navigationLinks}
+    </nav>
   );
 };
 

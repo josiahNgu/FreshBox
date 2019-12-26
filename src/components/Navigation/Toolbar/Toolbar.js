@@ -6,13 +6,9 @@ import DrawerToggle from "../SideDrawer/DrawerToggle/DrawerToggle";
 const toolbar = props => (
   <header className="Toolbar">
     <DrawerToggle clicked={props.drawerToggleClicked} />
-    {/* <div className="Logo">
-      <Logo />
-    </div> */}
-    <div className="DesktopOnly">CardBox</div>
-    <nav className="DesktopOnly ToolbarContainer">
+    <div className="DesktopOnly ToolbarContainer">
       <NavigationItems isAuthenticated={props.isAuth} />
-    </nav>
+    </div>
   </header>
 );
 export default toolbar;

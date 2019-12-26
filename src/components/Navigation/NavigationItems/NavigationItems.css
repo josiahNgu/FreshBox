@@ -1,14 +1,29 @@
-.NavigationItems {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+#NavigationItems {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
-@media (min-width: 500px) {
+#NavigationItems ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+#NavigationItems ul li {
+  list-style: none;
+}
+
+#NavigationItems a {
+  color: black;
+  text-decoration: none;
+}
+
+/* @media (min-width: 500px) {
   .NavigationItems {
     flex-flow: row;
-  }
 }
+}
+
+*/
