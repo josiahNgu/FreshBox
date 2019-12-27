@@ -1,5 +1,5 @@
 #homepage-main {
-  background-color: #d896ff;
+  background-color: var(--primary-color);
   min-height: 100vh;
   overflow: hidden;
   position: relative;
@@ -9,12 +9,12 @@
 
 @keyframes backgroundColor {
   to {
-    background-color: #660066;
+    background-color: var(--dark-color);
   }
 }
 
 #homepage-main .homepage-content h3 {
-  color: #b07cda;
+  color: var(--secondary-color);
   font-size: 4rem;
   animation: dropFromTop 2s forwards 1s ease;
 }

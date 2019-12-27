@@ -9,17 +9,14 @@
   font-family: "Karla"sans-serif;
   padding: 12px 15px;
   background-color: transparent;
-  border-bottom: 2px solid black;
-  width: 250px;
-
+  border: 2px solid gainsboro;
+  width: 400px;
   margin-bottom: 15px;
 }
 
 .FormInput:focus {
-
-  border-bottom-color: #cfb53b;
-  transition: all .5s ease;
-
+  border-color: var(--secondary-color);
+  transition: border 1.5s ease;
 }
 
 input {

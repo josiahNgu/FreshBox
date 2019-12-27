@@ -7,7 +7,7 @@ class Homepage extends Component {
       <main id="homepage-main">
         <div class="homepage-content">
           <h3>Cardbox</h3>
-          <p>Repetition Made Easy ! Never runs out of household supply again</p>
+          <p>Repetition Made Easy! Never runs out of household supply again</p>
           <div class="shop_link">
             <Link to="/products">Shop Now</Link>
           </div>

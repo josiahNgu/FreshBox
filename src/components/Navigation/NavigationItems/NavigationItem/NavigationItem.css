@@ -29,7 +29,7 @@
   .NavigationItem a:hover,
   .NavigationItem a:active,
   .NavigationItem a.active {
-    border-bottom: 2px solid black;
+    border-bottom: 2px solid var(--dark-color);
     color: black;
   }
 }

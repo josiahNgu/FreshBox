@@ -7,7 +7,7 @@ const navigationItems = props => {
   let navigationLinks = (
     <ul>
       <NavigationItem link="/products">PRODUCTS</NavigationItem>
-      <NavigationItem link="/shoppingCart">Cart</NavigationItem>
+      <NavigationItem link="/shoppingCart">CART</NavigationItem>
       <NavigationItem link="/auth">LOGIN</NavigationItem>
       <NavigationItem link="/signup">JOIN</NavigationItem>
     </ul>
@@ -22,10 +22,10 @@ const navigationItems = props => {
           <NavigationItem link="/products">Products</NavigationItem>
         </li>
         <li>
-          <NavigationItem link="/shoppingCart">Cart</NavigationItem>
+          <NavigationItem link="/shoppingCart">CART</NavigationItem>
         </li>
         <li>
-          <NavigationItem link="/account">My Account</NavigationItem>
+          <NavigationItem link="/account">Account</NavigationItem>
         </li>
       </ul>
     );

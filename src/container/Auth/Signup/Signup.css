@@ -1,32 +1,48 @@
 @import url("https://fonts.googleapis.com/css?family=Karla:400,700&display=swap");
 
-.Signup {
+#Signup {
   text-align: center;
   width: 100vw;
   height: 100vh;
   border: 1px solid white;
-  padding-top: 100px;
-  box-sizing: border-box;
-  display: grid;
-  background-image: linear-gradient(
-    to top,
-    #bdc2e8 0%,
-    #bdc2e8 1%,
-    #e6dee9 100%
-  );
+  margin: auto;
+  display: flex;
 }
-.SignupForm {
-  margin: 0px auto;
-  font-family: "Karla" sans-serif;
+
+#Signup .signupForm {
+  margin: auto;
+  flex: 1;
+  font-family: "Karla", sans-serif;
   text-align: center;
-  padding: 10px;
 }
+
+#Signup .signup_info {
+  flex: 1;
+  display: flex;
+  height: 100%;
+  background-color: #6c33a3;
+  background-image: linear-gradient(316deg, #6c33a3 0%, #8241b8 74%);
+
+}
+
+#Signup .signup_info p,
+#Signup .signup_info h1 {
+  margin: auto;
+  color: white;
+}
+
+#Signup .signup_info h1 {
+  font-size: 3rem;
+}
+
 .Hidden {
   display: none;
 }
+
 .Block {
   display: block;
 }
+
 /* @media (min-width: 600px) {
   .Signup {
     width: 500px;

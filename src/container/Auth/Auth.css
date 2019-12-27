@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Karla:400,700&display=swap");
 
 #Auth {
-  margin-top: 4rem;
   font-family: "Karla"sans-serif;
   margin: auto;
   display: flex;
@@ -28,7 +27,8 @@
 
 .Header {
   font-family: "Karla"sans-serif;
-  color: #0808088e;
+  color: var(--dark-color);
+  font-size: 2rem;
 }
 
 /* @media (min-width: 600px) {
@@ -36,23 +36,22 @@
     width: 500px;
   }
 } */
-.SubmitButton {
+.signIn_button {
   display: inline-block;
-  padding: 0.5em 1.2em;
-  border: 0.1em solid black;
-  /* margin: 0 0.3em 0.3em 0; */
-  box-sizing: border-box;
+  padding: 0.8rem 1.2em;
+  width: 250px;
   text-decoration: none;
   font-family: "Karla", sans-serif;
   font-weight: 700;
-  color: black;
+  color: white;
+  background: var(--dark-color);
   text-align: center;
-  transition: all 0.2s;
+  transition: all 1s;
 }
 
-.SubmitButton:hover {
+.signIn_button:hover {
   color: white;
-  background-color: black;
+  background-color: var(--secondary-color);
   text-decoration: none;
 }
 

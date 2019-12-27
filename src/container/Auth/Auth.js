@@ -110,7 +110,7 @@ class Auth extends Component {
             changed={event => this.inputChangedHandler(event, formElement.id)}
           />
         ))}
-        <button className="SubmitButton">Submit</button>
+        <button className="signIn_button">Sign In</button>
       </form>
     );
 

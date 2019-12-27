@@ -13,7 +13,7 @@ class Signup extends Component {
       name: {
         elementType: "input",
         elementConfig: {
-          placeholder: "What should we call you?",
+          placeholder: "Name",
           type: "name"
         },
         value: "",
@@ -40,7 +40,7 @@ class Signup extends Component {
       password: {
         elementType: "input",
         elementConfig: {
-          placeholder: "Password(min. 6 characters)",
+          placeholder: "Password (min. 6 characters)",
           type: "password"
         },
         value: "",
@@ -150,11 +150,15 @@ class Signup extends Component {
       </form>
     );
     return (
-      <div className="Signup">
-        <div className={this.state.showAlert ? "Block " : "Hidden "}>
+      <div id="Signup">
+        {/* <div className={this.state.showAlert ? "Block" : "login_hidden "}>
           <Alert message={this.state.errorMessage} />
+        </div> */}
+        <div className="signupForm">{form}</div>
+        <div className="signup_info">
+          <h1>Hello,Friend! </h1>
+          <p>Enter your details and start journey with us!</p>
         </div>
-        <div className="SignupForm">{form}</div>
       </div>
     );
   }

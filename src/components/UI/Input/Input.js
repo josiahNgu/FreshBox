@@ -1,5 +1,5 @@
 import React from "react";
-import "./Input.scss";
+import "./Input.css";
 const input = props => {
   let inputElement = null;
   let inputClasses = ["FormInput", "Input"];
