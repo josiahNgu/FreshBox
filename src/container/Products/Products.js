@@ -13,7 +13,7 @@ class Products extends Component {
     let productsArray = <Spinner />;
     if (this.props.fetchSuccess) {
       productsArray = this.props.products.map(product => (
-        <div className="col-md-4">
+        <div className="col-md-4 col-lg-3">
           <Product
             className="product_content"
             key={product.id}
@@ -31,7 +31,7 @@ class Products extends Component {
     return (
       // <Route path={ `${props.match.url}/:location` }
       // component={ ContactInfo }/>
-      <section className="row col-md-12">
+      <section id="products_page" className="row col-md-12">
         {this.props.isLoading ? <Spinner /> : productsArray}
       </section>
     );

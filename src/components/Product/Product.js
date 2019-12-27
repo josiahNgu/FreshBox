@@ -23,36 +23,18 @@ class Product extends Component {
   inputChangedHandler = event => {
     this.setState({ selectedQuantity: event.target.value });
   };
+  viewMore = () => {
+    console.log("clicked");
+  };
 
   render() {
     return (
-      <div className="product col-sm-12 row">
-        <div className="col-sm-6">
-          <img src={this.props.imageURL} alt="product image" />
-        </div>
-        <div className="col-sm-12 col-md-6 text-justify">
-          <div>
-            <h5 className="product_title">{this.props.name}</h5>
-          </div>
-          <div>
-            <p>{this.props.description}</p>
-          </div>
-          <div className="row">
-            <div className="col-sm-2">
-              <p>Quantity:</p>
-            </div>
-            <div className="col-sm-10">
-              <Input
-                elementTypes="quantityInput"
-                placeholder="1"
-                changed={this.inputChangedHandler}
-              />
-            </div>
-          </div>
-
-          <button onClick={this.addToCart} className="product_ATC_Button">
-            Add To Cart | RM {this.props.price.toFixed(2)}
-          </button>
+      <div className="product col-sm-12 dark_text" onClick={this.viewMore}>
+        <img src={this.props.imageURL} alt="product image" />
+        <p className="product_show_more">View</p>
+        <div>
+          <h5 className="product_title">{this.props.name}</h5>
+          <p className="text_center">${this.props.price}</p>
         </div>
       </div>
     );

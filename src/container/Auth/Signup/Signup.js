@@ -143,7 +143,7 @@ class Signup extends Component {
             shouldValidate={formElement.config.validation}
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
-            errorMwssage={formElement.config.errorMessage}
+            errorMessage={formElement.config.errorMessage}
             touched={formElement.config.touched}
             changed={event => this.inputChangedHandler(event, formElement.id)}
           />

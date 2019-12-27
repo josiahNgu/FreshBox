@@ -8,6 +8,14 @@
   margin: 0;
 }
 
+.text_center {
+  text-align: center;
+}
+
+.dark_text {
+  color: var(--dark-color);
+}
+
 /* 
 .App-header {
   background-color: #282c34;
