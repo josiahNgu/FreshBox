@@ -26,35 +26,33 @@ class Product extends Component {
 
   render() {
     return (
-      <div className="">
-        <div className="product col-sm-12 row">
-          <div className="col-sm-6">
-            <img src={this.props.imageURL} alt="product image" />
+      <div className="product col-sm-12 row">
+        <div className="col-sm-6">
+          <img src={this.props.imageURL} alt="product image" />
+        </div>
+        <div className="col-sm-12 col-md-6 text-justify">
+          <div>
+            <h5 className="product_title">{this.props.name}</h5>
           </div>
-          <div className="col-sm-12 col-md-6 text-justify">
-            <div>
-              <h5 className="product_title">{this.props.name}</h5>
+          <div>
+            <p>{this.props.description}</p>
+          </div>
+          <div className="row">
+            <div className="col-sm-2">
+              <p>Quantity:</p>
             </div>
-            <div>
-              <p>{this.props.description}</p>
+            <div className="col-sm-10">
+              <Input
+                elementTypes="quantityInput"
+                placeholder="1"
+                changed={this.inputChangedHandler}
+              />
             </div>
-            <div className="row">
-              <div className="col-sm-2">
-                <p>Quantity:</p>
-              </div>
-              <div className="col-sm-10">
-                <Input
-                  elementTypes="quantityInput"
-                  placeholder="1"
-                  changed={this.inputChangedHandler}
-                />
-              </div>
-            </div>
+          </div>
 
-            <button onClick={this.addToCart} className="product_ATC_Button">
-              Add To Cart | RM {this.props.price.toFixed(2)}
-            </button>
-          </div>
+          <button onClick={this.addToCart} className="product_ATC_Button">
+            Add To Cart | RM {this.props.price.toFixed(2)}
+          </button>
         </div>
       </div>
     );

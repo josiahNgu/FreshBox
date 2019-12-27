@@ -1,0 +1,9 @@
+.product_content {
+    display: flex;
+    height: 100%;
+    background-color: red;
+}
+
+.each_product {
+    flex: 2;
+}

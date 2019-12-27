@@ -138,7 +138,7 @@ class Auth extends Component {
             <p onClick={this.changetoSignupPageHandler}>Sign up here</p>
           </div>
         </div>
-        <div className="loginBackground"></div>
+        <div className="loginBackground DesktopOnly"></div>
       </section>
     );
   }
