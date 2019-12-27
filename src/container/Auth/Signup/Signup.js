@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from "react-router-dom";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
 import Alert from "../../../components/UI/Alert/Alert";
@@ -122,7 +123,8 @@ class Signup extends Component {
   };
   render() {
     if (this.props.shouldRedirect) {
-      this.props.history.push("/products");
+      // <Redirect to="/account" />;
+      this.props.history.replace("/account");
     }
     let form = <Spinner />;
     const formElementsArray = [];
@@ -150,16 +152,22 @@ class Signup extends Component {
       </form>
     );
     return (
+      // <React.Fragment>
+      //   <div
+      //     className={
+      //       this.props.errorMessage ? "signup_block" : "signup_hidden "
+      //     }
+      //   >
+      //     <Alert message={this.state.errorMessage} />
+      //   </div>
       <div id="Signup">
-        {/* <div className={this.state.showAlert ? "Block" : "login_hidden "}>
-          <Alert message={this.state.errorMessage} />
-        </div> */}
         <div className="signupForm">{form}</div>
         <div className="signup_info ">
           <h1>Hello,Friend! </h1>
           <p>Enter your details and start journey with us!</p>
         </div>
       </div>
+      // </React.Fragment>
     );
   }
 }

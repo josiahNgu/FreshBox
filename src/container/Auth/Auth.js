@@ -5,10 +5,10 @@ import "./Auth.css";
 import * as actions from "../../store/actions/index";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import backgroundImage from "../../misc/login_background.jpg";
 import firebase from "firebase/app";
 import "firebase/auth";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
+
 import {
   GoogleProvider,
   FacebookProvider
@@ -73,27 +73,23 @@ class Auth extends Component {
         console.log(err);
       });
   };
-  authWithGoogle = () => {
-    console.log("auth With Facebook");
-    firebase
+  async authWithGoogle(event) {
+    event.preventDefault();
+    console.log("auth With google");
+    await firebase
       .auth()
       .signInWithPopup(GoogleProvider)
       .then(result => {
         console.log(result);
+        this.props.history.push("/account");
         this.setState({ shouldRedirect: true });
         this.props.thirdPartyLogin(result);
       })
       .catch(err => {
         console.log(err);
       });
-  };
+  }
   render() {
-    if (
-      this.state.shouldRedirect === true ||
-      this.props.shouldRedirect === true
-    ) {
-      return <Redirect to="/products" />;
-    }
     const formElementsArray = [];
     for (let key in this.state.formElements) {
       formElementsArray.push({ id: key, config: this.state.formElements[key] });

@@ -36,11 +36,11 @@
   font-size: 3rem;
 }
 
-.Hidden {
+.signup_hidden {
   display: none;
 }
 
-.Block {
+.signup_block {
   display: block;
 }
 

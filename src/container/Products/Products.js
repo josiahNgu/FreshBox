@@ -29,6 +29,8 @@ class Products extends Component {
 
     // const products = <Product name={this.props.products.itemName} />;
     return (
+      // <Route path={ `${props.match.url}/:location` }
+      // component={ ContactInfo }/>
       <section className="row col-md-12">
         {this.props.isLoading ? <Spinner /> : productsArray}
       </section>

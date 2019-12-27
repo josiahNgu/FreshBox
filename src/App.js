@@ -42,7 +42,7 @@ class App extends Component {
         <Redirect to="/" />
       </Switch>
     );
-    if (this.state.isAuthenticated) {
+    if (this.props.isAuthenticated) {
       routes = (
         <Switch>
           <Route path="/" exact component={Homepage} />
