@@ -1,5 +1,8 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
+import firebase from "firebase/app";
+import "firebase/auth";
+import { Redirect } from "react-router-dom";
 export const loginSuccess = () => {
   if (localStorage.getItem("idToken") !== null) {
     return {
@@ -7,11 +10,12 @@ export const loginSuccess = () => {
     };
   }
 };
+
 export const loginFailed = error => {
   return {
     type: actionTypes.LOGIN_FAILED,
-    hasError: true,
-    errors: error
+    errors: error,
+    hasError: true
   };
 };
 export const setUserData = user => {
@@ -46,7 +50,9 @@ export const login = (email, password) => {
         dispatch(loginSuccess(localStorage.getItem("idToken")));
       })
       .catch(err => {
-        dispatch(loginFailed(err.data));
+        dispatch(
+          loginFailed("There was an error while log in. Please try again")
+        );
       });
   };
 };
@@ -73,4 +79,32 @@ const setAuthorizationHeader = token => {
   const FirebaseIdToken = `Bearer:${token}`;
   localStorage.setItem("idToken", token);
   axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
+};
+export const googleAuth = () => {
+  const GoogleProvider = new firebase.auth.GoogleAuthProvider();
+  console.log("here");
+  let user = null;
+  // firebase.auth().signInWithRedirect(GoogleProvider);
+  firebase
+    .auth()
+    .signInWithPopup(GoogleProvider)
+    .then(result => {
+      const token = result.credential.accessToken;
+      console.log("result :", result);
+      const expirationDate = new Date(
+        new Date().getTime() + result.credential.expiresIn * 1000
+      );
+
+      user = result.user;
+      localStorage.setItem("idToken", token);
+      localStorage.setItem("expirationDate", expirationDate);
+      // <Redirect to="/account" />;
+      // dispatch(setUserData, user);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  return dispatch => {
+    dispatch(setUserData(user));
+  };
 };

@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap');
+
+#product_details {
+    font-family: 'Raleway', sans-serif;
+    padding-top: 5rem;
+}
+
+#product_details .item_description h3 {
+    font-weight: 700;
+}

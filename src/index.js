@@ -22,6 +22,7 @@ const rootReducer = combineReducers({
   shoppingCart: shoppingCartReducer,
   user: userReducer
 });
+// For example, if you use Firebase for your app, you’ll need to get that set up as your app is first mounting.
 const store = createStore(
   rootReducer,
   composeEnhancers(applyMiddleware(thunk))

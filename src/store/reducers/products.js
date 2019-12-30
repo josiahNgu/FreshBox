@@ -2,7 +2,9 @@ import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
 const initialState = {
   products: null,
-  fetchDataFinished: false
+  productDetails: null,
+  fetchDataFinished: false,
+  fetchIndividualDataFinished: false
 };
 const getProducts = (state, action) => {
   return updateObject(state, {
@@ -10,10 +12,18 @@ const getProducts = (state, action) => {
     fetchDataFinished: action.fetchDataFinished
   });
 };
+const getProductDetails = (state, action) => {
+  return updateObject(state, {
+    productDetails: action.productDetails,
+    fetchIndividualDataFinished: action.fetchIndividualDataFinished
+  });
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_PRODUCTS:
       return getProducts(state, action);
+    case actionTypes.GET_PRODUCT_DETAILS:
+      return getProductDetails(state, action);
     default:
       return state;
   }

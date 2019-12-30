@@ -3,17 +3,27 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import Product from "../../components/Product/Product";
 import Spinner from "../../components/UI/Spinner/Spinner";
+import { history } from "react-router-dom";
 import "./Products.css";
 class Products extends Component {
+  constructor(props) {
+    super(props);
+  }
   componentDidMount() {
     this.props.onInitProducts();
   }
-
+  redirectToProductDetails = SKUid => {
+    this.props.history.push(`/products/ref/${SKUid}`);
+  };
   render() {
     let productsArray = <Spinner />;
     if (this.props.fetchSuccess) {
       productsArray = this.props.products.map(product => (
-        <div className="col-md-4 col-lg-3">
+        <div
+          className="col-md-4 col-lg-3"
+          key={product.id}
+          onClick={() => this.redirectToProductDetails(product.id)}
+        >
           <Product
             className="product_content"
             key={product.id}

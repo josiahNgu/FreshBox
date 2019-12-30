@@ -21,15 +21,9 @@ const navigationItems = props => {
         {/* <li>
           <NavigationItem link="/">CardBox</NavigationItem>
         </li> */}
-        <li>
-          <NavigationItem link="/products">Products</NavigationItem>
-        </li>
-        <li>
-          <NavigationItem link="/shoppingCart">CART</NavigationItem>
-        </li>
-        <li>
-          <NavigationItem link="/account">Account</NavigationItem>
-        </li>
+        <NavigationItem link="/products">Products</NavigationItem>
+        <NavigationItem link="/shoppingCart">CART</NavigationItem>
+        <NavigationItem link="/account">Account</NavigationItem>
       </ul>
     );
   }

@@ -1,10 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Londrina+Outline&display=swap');
+
 #homepage-main {
-  background-color: var(--primary-color);
+  background-color: black;
   min-height: 100vh;
   overflow: hidden;
   position: relative;
   height: calc(100vh - 10px);
-  animation: backgroundColor 6s infinite alternate;
+  /* animation: backgroundColor 6s infinite alternate; */
 }
 
 @keyframes backgroundColor {
@@ -13,28 +15,15 @@
   }
 }
 
-#homepage-main .homepage-content h3 {
-  color: var(--secondary-color);
-  font-size: 4rem;
-  animation: dropFromTop 2s forwards 1s ease;
-}
-
-@keyframes dropFromTop {
-  0% {
-    transform: translateY(-1200px);
-  }
-
-  50% {
-    transform: translateY(-800px);
-  }
-
-  75% {
-    transform: translateY(200px);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
+#homepage-main .homepage-content h1 {
+  color: var(--primary-color);
+  font-family: 'Londrina Outline', cursive;
+  font-size: 6rem;
+  text-shadow:
+    0 0 10px var(--secondary-color),
+    0 0 20px firebrick,
+    0 0 40px maroon,
+    0 0 80px darkorchid;
 }
 
 #homepage-main .homepage-content p {
@@ -71,15 +60,15 @@
 
 .homepage-content .shop_link a {
   text-decoration: none;
-  color: black;
+  color: white;
   font-size: 1.2rem;
   display: block;
-  background: white;
+  background: var(--dark-color);
   padding: 0.6rem;
   transition: background 3s ease;
 }
 
 .homepage-content .shop_link a:hover {
-  background: black;
-  color: white;
+  background: var(--secondary-color);
+  /* color: black; */
 }

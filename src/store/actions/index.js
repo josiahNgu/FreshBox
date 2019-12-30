@@ -1,5 +1,11 @@
-export { initProducts } from "./products";
-export { login, loginSuccess, authenticationStatus, logout } from "./auth";
+export { initProducts, initProductDetails } from "./products";
+export {
+  login,
+  loginSuccess,
+  authenticationStatus,
+  logout,
+  googleAuth
+} from "./auth";
 export { signup } from "./signup";
 export {
   initShoppingList,

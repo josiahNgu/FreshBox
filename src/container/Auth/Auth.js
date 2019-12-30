@@ -5,8 +5,7 @@ import "./Auth.css";
 import * as actions from "../../store/actions/index";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import firebase from "firebase/app";
-import "firebase/auth";
+
 // import { Redirect } from "react-router-dom";
 
 import {
@@ -60,35 +59,22 @@ class Auth extends Component {
     );
   };
   authWithFacebook = () => {
-    console.log("auth With Facebook");
-    firebase
-      .auth()
-      .signInWithPopup(FacebookProvider)
-      .then(result => {
-        console.log(result);
-        this.setState({ shouldRedirect: true });
-        this.props.thirdPartyLogin(result);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    // console.log("auth With Facebook");
+    // firebase
+    //   .auth()
+    //   .signInWithPopup(FacebookProvider)
+    //   .then(result => {
+    //     console.log(result);
+    //     this.setState({ shouldRedirect: true });
+    //     this.props.thirdPartyLogin(result);
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
-  async authWithGoogle(event) {
+  authWithGoogle = event => {
     event.preventDefault();
-    console.log("auth With google");
-    await firebase
-      .auth()
-      .signInWithPopup(GoogleProvider)
-      .then(result => {
-        console.log(result);
-        this.props.history.push("/account");
-        this.setState({ shouldRedirect: true });
-        this.props.thirdPartyLogin(result);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+  };
   render() {
     const formElementsArray = [];
     for (let key in this.state.formElements) {
@@ -126,7 +112,7 @@ class Auth extends Component {
             Login with Facebook
           </button>
           <br />
-          <button className="GoogleButton" onClick={this.authWithGoogle}>
+          <button className="GoogleButton" onClick={this.props.googleAuth}>
             Sign in with Google
           </button>
           <div>
@@ -148,7 +134,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     login: (email, password) => dispatch(actions.login(email, password)),
-    thirdPartyLogin: user => dispatch(actions.loginSuccess(user))
+    googleAuth: () => dispatch(actions.googleAuth)
+    // thirdPartyLogin: type => dispatch(actions.thirdPartyLogin(type))
   };
 };
 export default withRouter(

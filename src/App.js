@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import Homepage from "./container/Homepage/Homepage";
 import { connect } from "react-redux";
+import jwtDecode from "jwt-decode";
 import "./App.css";
 import Layout from "./hoc/Layout/Layout";
 import Auth from "./container/Auth/Auth";
@@ -11,33 +12,22 @@ import ShoppingCart from "./container/ShoppingCart/ShoppingCart";
 import Account from "./container/Account/Account";
 import Checkout from "./container/Checkout/Checkout";
 import Payment from "./container/Payment/Payment";
+import ProductDetails from "./components/Product/ProductDetails/ProductDetails";
 import * as actions from "./store/actions/index";
+
+const token = localStorage.getItem("idToken");
+if (token) {
+  actions.getAuthenticatedUserData();
+}
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      isAuthenticated: false
-    };
-  }
-  componentDidMount() {
-    this.checkAuthStatus();
-  }
-
-  checkAuthStatus = () => {
-    if (localStorage.getItem("idToken") !== null) {
-      this.setState({
-        isAuthenticated: true
-      });
-    }
-  };
-
   render() {
     let routes = (
       <Switch>
         <Route path="/auth" component={Auth} />
         <Route path="/signup" component={Signup} />
+        <Route path="/products/ref/:productId" component={ProductDetails} />
         <Route path="/products" component={Products} />
-        <Route path="/shoppingCart" component={ShoppingCart} />
+        {/* <Route path="/shoppingCart" component={ProductDetails} /> */}
         <Route path="/" exact component={Homepage} />
         <Redirect to="/" />
       </Switch>
@@ -53,34 +43,17 @@ class App extends Component {
         </Switch>
       );
     }
-    if (this.props.isCheckout) {
-      routes = (
-        <Switch>
-          <Route path="/auth" component={Auth} />
-          <Route path="/signup" component={Signup} />
-          <Route path="/products" component={Products} />
-          <Route path="/shoppingCart" component={ShoppingCart} />
-          <Route path="/checkout" component={Checkout} />
-          <Route path="/payment" component={Payment} />
-        </Switch>
-      );
-    }
-    return (
-      <Layout isAuthenticated={this.state.isAuthenticated}>{routes}</Layout>
-    );
+    return <Layout>{routes}</Layout>;
   }
 }
 const mapStateToProps = state => {
   return {
-    isAuthenticated: state.auth.isAuthenticated,
-    isCheckout: state.shoppingCart.isCheckingOut
+    isAuthenticated: state.auth.isAuthenticated
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    changeAuthenticationStatus: status =>
-      dispatch(actions.authenticationStatus(status)),
-    updateUserReducer: user => dispatch(actions.loginSuccess(user))
+    getUserData: () => dispatch(actions.getAuthenticatedUserData())
   };
 };
 export default withRouter(

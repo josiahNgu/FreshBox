@@ -16,6 +16,10 @@
   color: var(--dark-color);
 }
 
+.bold_text {
+  font-weight: bold;
+}
+
 /* 
 .App-header {
   background-color: #282c34;

@@ -7,6 +7,13 @@ export const loadProducts = products => {
     fetchDataFinished: true
   };
 };
+const loadProductDetails = productDetails => {
+  return {
+    type: actionTypes.GET_PRODUCT_DETAILS,
+    productDetails: productDetails,
+    fetchIndividualDataFinished: true
+  };
+};
 export const initProducts = () => {
   return dispatch =>
     axios
@@ -19,7 +26,6 @@ export const initProducts = () => {
             itemName: doc.itemName,
             price: doc.price,
             category: doc.category,
-            description: doc.description,
             imageURL: doc.imageURL
           };
         });
@@ -27,5 +33,23 @@ export const initProducts = () => {
       })
       .catch(err => {
         console.log(err);
+      });
+};
+export const initProductDetails = id => {
+  return dispatch =>
+    axios
+      .get(`/products/${id}`)
+      .then(doc => {
+        const data = {
+          id: doc.data.id,
+          itemName: doc.data.itemName,
+          price: doc.data.price,
+          imageURL: doc.data.imageURL,
+          description: doc.data.description
+        };
+        dispatch(loadProductDetails(data));
+      })
+      .catch(err => {
+        console.error(err);
       });
 };

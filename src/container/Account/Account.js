@@ -6,6 +6,7 @@ class Account extends Component {
   componentDidMount() {
     this.props.getUserData();
   }
+
   logout = () => {
     localStorage.removeItem("idToken");
   };

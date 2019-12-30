@@ -6,6 +6,7 @@ const initialState = {
   hasError: false,
   signupError: {},
   user: null,
+  token: "",
   callbackLink: "/"
 };
 
@@ -48,6 +49,12 @@ const setCallbackLink = (state, action) => {
     callbackLink: action.callbackLink
   });
 };
+const setToken = (state, action) => {
+  console.log("action.token :", action.token);
+  return updateObject(state, {
+    token: action.token
+  });
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
@@ -65,6 +72,8 @@ const reducer = (state = initialState, action) => {
       return setUserData(state, action);
     case actionTypes.SET_CALLBACK_LINK:
       return setCallbackLink(state, action);
+    case actionTypes.SET_TOKEN:
+      return setToken(state, action);
     default:
       return state;
   }

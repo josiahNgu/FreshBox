@@ -2,7 +2,8 @@ import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
 const initialState = {
   user: null,
-  fetchDataFinished: false
+  fetchDataFinished: false,
+  err: ""
 };
 const setUser = (state, action) => {
   return updateObject(state, {
@@ -12,7 +13,8 @@ const setUser = (state, action) => {
 };
 const setUserFailed = (state, action) => {
   return updateObject(state, {
-    fetchDataFinished: false
+    fetchDataFinished: false,
+    err: action.err
   });
 };
 const reducer = (state = initialState, action) => {
