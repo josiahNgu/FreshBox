@@ -39,34 +39,11 @@ class ShoppingCart extends Component {
       shoppingCart = "Your shopping Bag is empty";
     }
     return (
-      <div className="ShoppingCart">
-        <div className="text-center">
-          <p className="Header">YOUR SHOPPING BAG</p>
-          <p>Total Cost : ${totalPrice}</p>
+      <div class="container col-md-12 shopping_cart">
+        <div className="row">
+          <div className="shopping_cart_list col-md-8">{shoppingCart}</div>
+          <div className="payment_option col-md-4">TOTAL:</div>
         </div>
-        <div className="row container">
-          <div className="col-sm-4">
-            <p>SECURE SHOPPING</p>
-            <p>
-              We accept all major credit and debit cards. Visa, MasterCard,
-              American Express and Paypal
-            </p>
-          </div>
-          <div className="col-sm-4">
-            <p>PAYMENT OPTIONS</p>
-            <p>
-              We accept all major credit and debit cards. Visa, MasterCard,
-              American Express and Paypal
-            </p>
-          </div>
-        </div>
-        <div className="ShoppingCartList">{shoppingCart}</div>
-        <CartSummary
-          shipping="economy"
-          buttonText="Proceed to Checkout"
-          orderPrice={totalPrice.toFixed(2)}
-          clicked={this.routeCheckoutPage}
-        />
       </div>
     );
   }

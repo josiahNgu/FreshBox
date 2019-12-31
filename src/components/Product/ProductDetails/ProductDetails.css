@@ -8,3 +8,31 @@
 #product_details .item_description h3 {
     font-weight: 700;
 }
+
+#product_details img {
+    max-height: 90vh;
+}
+
+#product_details .back_btn {
+    border: none;
+    text-decoration: underline;
+    background-color: transparent;
+    margin: 0 0 2rem 2rem;
+}
+
+#product_details .ATC_btn {
+    padding: 0.8rem 1.2em;
+    width: 150px;
+    font-family: "Karla", sans-serif;
+    font-weight: 700;
+    color: white;
+    background: var(--dark-color);
+    text-align: center;
+    transition: all 1s;
+}
+
+#product_details .ATC_btn:hover {
+    color: white;
+    background-color: var(--secondary-color);
+    text-decoration: none;
+}

@@ -10,21 +10,34 @@ class ProductDetails extends Component {
     } = this.props;
     this.props.onInItProductDetails(params.productId);
   }
-
+  goBack = () => {
+    this.props.history.goBack();
+  };
+  addToCart = () => {
+    console.log("clicked");
+  };
   render() {
     let canvas = <Spinner />;
     if (this.props.productDetails) {
       canvas = (
-        <div className="row" id="product_details">
-          <img
-            className="col-md-6"
-            src={this.props.productDetails.imageURL}
-            alt="product"
-          />
-          <div className=" item_description col-md-6">
-            <h3>{this.props.productDetails.itemName}</h3>
-            <p className="bold_text">$ {this.props.productDetails.price}</p>
-            <p>{this.props.productDetails.description}</p>
+        <div id="product_details">
+          <button onClick={this.goBack} className="back_btn">
+            &laquo; Back
+          </button>
+          <div className="row ">
+            <img
+              className="col-md-6"
+              src={this.props.productDetails.imageURL}
+              alt="product"
+            />
+            <div className=" item_description col-md-6">
+              <h3>{this.props.productDetails.itemName}</h3>
+              <p className="bold_text">$ {this.props.productDetails.price}</p>
+              <p>{this.props.productDetails.description}</p>
+              <button className="ATC_btn" onClick={this.addToCart}>
+                Add To Cart
+              </button>
+            </div>
           </div>
         </div>
       );

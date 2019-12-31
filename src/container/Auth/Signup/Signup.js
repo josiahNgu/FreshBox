@@ -162,7 +162,7 @@ class Signup extends Component {
       //   </div>
       <div id="Signup">
         <div className="signupForm">{form}</div>
-        <div className="signup_info ">
+        <div className="signup_info DesktopOnly ">
           <h1>Hello,Friend! </h1>
           <p>Enter your details and start journey with us!</p>
         </div>

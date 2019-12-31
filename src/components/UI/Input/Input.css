@@ -10,7 +10,7 @@
   padding: 12px 15px;
   background-color: transparent;
   border: 2px solid gainsboro;
-  width: 400px;
+  width: 370px;
   margin-bottom: 15px;
 }
 
@@ -24,7 +24,7 @@ input {
   border: none;
 }
 
-.Invalid {
+/* .Invalid {
 
   .FormInput,
   &:focus,
@@ -33,7 +33,7 @@ input {
     border-bottom-color: #D8000C;
   }
 
-}
+} */
 
 .ValidationError {
   color: #D8000C;
@@ -57,17 +57,16 @@ input {
   margin-bottom: 15px;
 }
 
-.ShippingInput {
+/* .ShippingInput {
   border: 1px solid gray;
-
   text .FormInput,
   &:focus,
   &::before,
   &::after {
     border-bottom-color: gray;
-  }
-
+  } 
 }
+*/
 
 .QuantityInputBox {
   border: 1px solid black;

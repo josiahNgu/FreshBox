@@ -1,10 +1,16 @@
-.ShoppingCart {
-  min-height: 100vh;
-  background-color: whitesmoke;
+.shopping_cart {
+  padding-top: 4rem;
 }
-.ShoppingCartList {
-  min-height: 70vh;
+
+.shopping_cart_list {
+  min-height: calc(100vh - 4rem);
 }
+
+.payment_option {
+  color: white;
+  background-image: linear-gradient(316deg, #6c33a3 0%, #8241b8 74%)
+}
+
 .Header {
   margin: auto;
   padding: 10px;

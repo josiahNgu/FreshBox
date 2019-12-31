@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import Homepage from "./container/Homepage/Homepage";
 import { connect } from "react-redux";
-import jwtDecode from "jwt-decode";
 import "./App.css";
 import Layout from "./hoc/Layout/Layout";
 import Auth from "./container/Auth/Auth";
@@ -27,7 +26,10 @@ class App extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/products/ref/:productId" component={ProductDetails} />
         <Route path="/products" component={Products} />
-        {/* <Route path="/shoppingCart" component={ProductDetails} /> */}
+        <Route path="/shoppingCart" component={ShoppingCart} />
+        <Route path="/checkout" component={Checkout} />
+        <Route path="/payment" component={Payment} />
+
         <Route path="/" exact component={Homepage} />
         <Redirect to="/" />
       </Switch>
