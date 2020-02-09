@@ -24,17 +24,6 @@ input {
   border: none;
 }
 
-/* .Invalid {
-
-  .FormInput,
-  &:focus,
-  &::before,
-  &::after {
-    border-bottom-color: #D8000C;
-  }
-
-} */
-
 .ValidationError {
   color: #D8000C;
 }
@@ -56,17 +45,6 @@ input {
   width: 150px;
   margin-bottom: 15px;
 }
-
-/* .ShippingInput {
-  border: 1px solid gray;
-  text .FormInput,
-  &:focus,
-  &::before,
-  &::after {
-    border-bottom-color: gray;
-  } 
-}
-*/
 
 .QuantityInputBox {
   border: 1px solid black;

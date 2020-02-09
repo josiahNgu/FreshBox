@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Karla:400,700&display=swap");
+
 .App {
   text-align: center;
 }
@@ -6,6 +8,8 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: "Karla", sans-serif;
+
 }
 
 .text_center {
@@ -20,18 +24,36 @@
   font-weight: bold;
 }
 
-/* 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-} */
+.pt_1 {
+  padding-top: 1rem;
+}
 
-/* .App-link {
-  color: #61dafb;
-} */
+.pt_4 {
+  padding-top: 4rem;
+}
+
+.primary_button {
+  display: inline-block;
+  padding: 0.5rem;
+  width: 130px;
+  text-decoration: none;
+  font-family: "Karla", sans-serif;
+  font-weight: 700;
+  color: white;
+  background: var(--dark-color);
+  text-align: center;
+  transition: all 1s;
+}
+
+.secondary_button {
+  display: inline-block;
+  padding: 0.5rem;
+  width: 130px;
+  text-decoration: none;
+  font-family: "Karla", sans-serif;
+  font-weight: 700;
+  color: black;
+  background: white;
+  text-align: center;
+  transition: all 1s;
+}

@@ -1,11 +1,11 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
-import { logout } from "./index";
-export const loadShoppingList = data => {
-  console.log(data);
+export const loadShoppingList = (data, totalPrice) => {
+  console.log("dataofCart", data);
   return {
     type: actionTypes.GET_SHOPPINGLIST,
     shoppingList: data,
+    totalPrice: totalPrice,
     fetchDataFinished: true,
     isLoading: false
   };
@@ -29,38 +29,34 @@ const setTotalPrice = totalPrice => {
   };
 };
 
-export const addToCart = (itemId, quantity, itemName, frequency) => {
-  console.log(itemId, quantity, itemName, frequency);
+export const addToCart = (itemId, quantity, deliveryOptions) => {
+  console.log(itemId, quantity, deliveryOptions);
   const addItem = {
     itemId: itemId,
     quantity: quantity,
-    itemName: itemName,
-    frequency: frequency
+    deliveryOptions: deliveryOptions
   };
   return dispatch => {
     dispatch(addingToCart());
-    if (localStorage.getItem("idToken") === null) {
-      let updateShoppingList = [];
-      if (localStorage.getItem("shoppingList")) {
-        updateShoppingList = JSON.parse(localStorage.getItem("shoppingList"));
-      }
-      updateShoppingList.push(addItem);
-      localStorage.setItem("shoppingList", JSON.stringify(updateShoppingList));
-      dispatch(initLocalShoppingList());
-    } else {
-      const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;
-      axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
-
-      dispatch(addingToCart());
-      axios
-        .post("/shoppingCart", addItem)
-        .then(() => initShoppingList())
-        .catch(err => console.log(err));
+    //   if (localStorage.getItem("idToken") === null) {
+    let updateShoppingList = [];
+    if (localStorage.getItem("shoppingList")) {
+      updateShoppingList = JSON.parse(localStorage.getItem("shoppingList"));
     }
+    updateShoppingList.push(addItem);
+    localStorage.setItem("shoppingList", JSON.stringify(updateShoppingList));
+    //     dispatch(initLocalShoppingList());
+    //   } else {
+    //     const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;
+    //     axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
+
+    //     dispatch(addingToCart());
+    //     axios
+    //       .post("/shoppingCart", addItem)
+    //       .then(() => initShoppingList())
+    //       .catch(err => console.log(err));
+    //   }
   };
-};
-export const authenticationFailed = () => {
-  logout();
 };
 
 export const initShoppingList = () => {
@@ -89,15 +85,16 @@ export const initShoppingList = () => {
         }
       });
 };
-const localStorageShoppingList = (ref, quantity) => {
+const localStorageShoppingList = (ref, quantity, frequency) => {
   return axios
-    .get(`/products/ref/${ref}`)
+    .get(`/products/${ref}`)
     .then(res => {
       return {
         price: res.data.price,
         itemName: res.data.itemName,
         imageURL: res.data.imageURL,
-        quantity: quantity
+        quantity: quantity,
+        frequency: frequency
       };
     })
     .then(data => {
@@ -105,23 +102,35 @@ const localStorageShoppingList = (ref, quantity) => {
     });
 };
 
-/*TODO:fix why can't set localStorage outside of the loop */
+/*TODO:fix why can't set localStorage outside of the loop because js read line by line and dont wait for async */
 export const initLocalShoppingList = () => {
-  localStorage.removeItem("updatedSC");
+  localStorage.removeItem("updatedSL");
   let updatedSL = [];
+  let totalPrice = 0;
   return dispatch => {
     const localShoppingList = JSON.parse(localStorage.getItem("shoppingList"));
-    for (let i = 0; i < localShoppingList.length; i++) {
-      localStorageShoppingList(
-        localShoppingList[i].itemId,
-        localShoppingList[i].quantity
+    let promises = localShoppingList.map(item => {
+      return localStorageShoppingList(
+        item.itemId,
+        item.quantity,
+        item.deliveryOptions
       ).then(data => {
         updatedSL.push(data);
-        localStorage.setItem("updatedSC", JSON.stringify(updatedSL));
+        totalPrice += data.quantity * data.price;
       });
-    }
-    console.log("updatedSC", JSON.parse(localStorage.getItem("updatedSC")));
-    // dispatch(loadShoppingList());
+    });
+    Promise.all(promises).then(() => {
+      dispatch(loadShoppingList(updatedSL, totalPrice.toFixed(2)));
+    });
+    //  for (let i = 0; i < localShoppingList.length; i++) {
+    //   localStorageShoppingList(
+    //     localShoppingList[i].itemId,
+    //     localShoppingList[i].quantity
+    //   ).then(data => {
+    //     updatedSL.push(data);
+    //   });
+    //   localStorage.setItem("updatedSL", JSON.stringify(updatedSL));
+    // }
   };
 };
 const itemPrice = (ref, quantity) => {

@@ -2,15 +2,17 @@ import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
 const initialState = {
   shoppingList: null,
-  fetchDataFinished: true,
+  fetchDataFinished: false,
   isAddingToCart: false,
   totalPrice: 0,
-  isCheckingOut: false
+  isCheckingOut: false,
+  fetchCartDone: false
 };
 const getShoppingList = (state, action) => {
   return updateObject(state, {
     shoppingList: action.shoppingList,
-    fetchDataFinished: action.fetchDataFinished
+    totalPrice: action.totalPrice,
+    fetchDataFinished: true
   });
 };
 const updateShoppingList = (state, action) => {

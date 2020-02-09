@@ -1,6 +1,8 @@
 .Checkout {
   min-height: 100vh;
   background-color: whitesmoke;
+  text-align: center;
+
 }
 
 
@@ -14,7 +16,6 @@
 .ShippingForm {
   margin: auto;
   padding-top: 20px;
-  text-align: center;
   color: gray;
   min-height: 70vh;
 }

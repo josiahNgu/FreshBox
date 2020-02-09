@@ -3,7 +3,16 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import "./ProductDetails.css";
 import Spinner from "../../UI/Spinner/Spinner";
+import Input from "../../UI/Input/Input";
 class ProductDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      deliveryOptions: "1",
+      quantity: "1"
+    };
+    this.handleChange = this.handleChange.bind(this);
+  }
   componentDidMount() {
     const {
       match: { params }
@@ -14,7 +23,18 @@ class ProductDetails extends Component {
     this.props.history.goBack();
   };
   addToCart = () => {
-    console.log("clicked");
+    this.props.addProductToCart(
+      this.props.productDetails.id,
+      this.state.quantity,
+      this.state.deliveryOptions
+    );
+    // if(localStorage.getItem("shoppingList"))
+  };
+  handleChange = event => {
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value
+    });
   };
   render() {
     let canvas = <Spinner />;
@@ -34,6 +54,22 @@ class ProductDetails extends Component {
               <h3>{this.props.productDetails.itemName}</h3>
               <p className="bold_text">$ {this.props.productDetails.price}</p>
               <p>{this.props.productDetails.description}</p>
+              <label>Quantity</label>
+              <Input
+                elementTypes="quantityInput"
+                name="quantity"
+                placeholder="1"
+                changed={this.handleChange}
+              />
+              <select
+                name="deliveryOptions"
+                value="f"
+                onChange={this.handleChange}
+              >
+                <option value="1">Every Month</option>
+                <option value="2">Every 2 Month</option>
+                <option value="3">Every 3 Month</option>
+              </select>
               <button className="ATC_btn" onClick={this.addToCart}>
                 Add To Cart
               </button>
@@ -53,7 +89,10 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = dispatch => {
   return {
-    onInItProductDetails: itemId => dispatch(actions.initProductDetails(itemId))
+    onInItProductDetails: itemId =>
+      dispatch(actions.initProductDetails(itemId)),
+    addProductToCart: (itemId, quantity, deliveryOptions) =>
+      dispatch(actions.addToCart(itemId, quantity, deliveryOptions))
   };
 };
 export default connect(

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Input from "../../components/UI/Input/Input";
-import CartSummary from "../../components/CartSummary/CartSummary";
+// import CartSummary from "../../components/CartSummary/CartSummary";
 import "./Checkout.css";
 class Checkout extends Component {
   state = {
@@ -91,10 +91,10 @@ class Checkout extends Component {
   };
   render() {
     return (
-      <div className="Checkout ">
+      <main className="Checkout pt_4 ">
         <div className=" container">
           <div className="col-md-6 Delivery">
-            <h5>DELIVERY</h5>
+            <h5>DELIVERY METHOD</h5>
             <input type="checkbox" />
             <span className="col-md-8">
               Standard Delivery 3-5 business days
@@ -112,9 +112,8 @@ class Checkout extends Component {
             </span>
             <br />
           </div>
-
           <div className="ShippingForm ">
-            <h5>ADDRESS</h5>
+            <h5>SHIPPING ADDRESS</h5>
             <label>Full Name</label>
             {this.shippingInputGenerator("shippingName")}
             <label>Street</label>
@@ -125,15 +124,12 @@ class Checkout extends Component {
             {this.shippingInputGenerator("state")}
             <label>Zip</label>
             {this.shippingInputGenerator("zip")}
-            <label>Phone </label>
           </div>
+          <button className="primary_button" onClick={this.routePaymentPage}>
+            Next
+          </button>
         </div>
-        <CartSummary
-          shipping="economy"
-          buttonText="PROCCEED TO PAYMENT"
-          clicked={this.routePaymentPage}
-        />
-      </div>
+      </main>
     );
   }
 }

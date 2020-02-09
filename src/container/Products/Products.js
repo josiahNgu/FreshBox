@@ -6,9 +6,9 @@ import Spinner from "../../components/UI/Spinner/Spinner";
 import { history } from "react-router-dom";
 import "./Products.css";
 class Products extends Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   componentDidMount() {
     this.props.onInitProducts();
   }

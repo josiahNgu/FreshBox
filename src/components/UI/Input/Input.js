@@ -5,7 +5,7 @@ const input = props => {
   let inputClasses = ["FormInput", "Input"];
   let cardClasses = ["Input_Card"];
   let quantityInput = ["QuantityInputBox"];
-  let shippingInput = ["FormInput", "ShippingInput", "col-md-6"];
+  let shippingInput = ["FormInput", "ShippingInput", "col-md-6", "dark_text"];
   let cardClassesRow = ["Input_Card_Row"];
   let validationError = null;
   if (props.invalid && props.shouldValidate && props.touched) {
@@ -63,6 +63,7 @@ const input = props => {
           className={quantityInput.join(" ")}
           type="number"
           min="1"
+          name={props.name}
           placeholder={props.placeholder}
           onChange={props.changed}
         />
