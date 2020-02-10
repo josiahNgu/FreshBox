@@ -9,6 +9,7 @@
   border: 2px solid gainsboro;
   width: 370px;
   margin-bottom: 15px;
+  border-radius: 5px;
 }
 
 .FormInput:focus {

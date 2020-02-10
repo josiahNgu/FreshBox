@@ -1,13 +1,14 @@
 .Card {
   margin: auto;
   width: 400px;
-  background-color: black;
+  background-color: white;
   border-radius: 0.7rem;
   padding: 20px;
   color: gold;
 }
 
 .Payment {
+  color: white;
   min-height: 96vh;
 }
 

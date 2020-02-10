@@ -4,11 +4,9 @@ import * as actions from "../../store/actions/index";
 import ShoppingList from "../../components/ShoppingList/ShoppingList";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
-import {} from "@fortawesome/free-solid-svg-icons";
+// import {} from "@fortawesome/free-solid-svg-icons";
 import "./Payment.css";
-// import CartSummary from "../../components/CartSummary/CartSummary";
 import Input from "../../components/UI/Input/Input";
-import ShoppingCart from "../ShoppingCart/ShoppingCart";
 class Payment extends React.Component {
   state = {
     cardElements: {
@@ -72,36 +70,38 @@ class Payment extends React.Component {
   };
   render() {
     return (
-      <div className="Payment pt_4 row">
-        <div className="col-md-6 shoppingList">
-          <ShoppingList />
-        </div>
-        <div className="CardSection  col-md-6">
-          <h5>CREDIT/DEBIT CARD PAYMENT</h5>
-          <div className="Card">
-            <FontAwesomeIcon icon={faCreditCard} />
-            <div className="row">
-              <div className="col-sm-12">
-                <label>Card Number</label>
-                {this.cardInputGenerator("cardNumber")}
-              </div>
-              <div className="col-sm-12">
-                <label>Full Name</label>
-                {this.cardInputGenerator("nameOnCard")}
-              </div>
-              <div className="col-sm-6">
-                <label>Good Thru</label>
-                {this.cardInputGenerator("expDate")}
-              </div>
-              <div className="col-sm-6">
-                <label>CVC</label>
-                {this.cardInputGenerator("cvc")}
+      <main className="Payment pt_4 container-fluid ">
+        <div className="row">
+          <div className="col-md-6 shoppingList">
+            <ShoppingList />
+          </div>
+          <div className="CardSection gradient_background  col-md-6">
+            <h5>CREDIT/DEBIT CARD PAYMENT</h5>
+            <div className="Card">
+              <FontAwesomeIcon icon={faCreditCard} />
+              <div className="row">
+                <div className="col-sm-12">
+                  <label>Card Number</label>
+                  {this.cardInputGenerator("cardNumber")}
+                </div>
+                <div className="col-sm-12">
+                  <label>Full Name</label>
+                  {this.cardInputGenerator("nameOnCard")}
+                </div>
+                <div className="col-sm-6">
+                  <label>Good Thru</label>
+                  {this.cardInputGenerator("expDate")}
+                </div>
+                <div className="col-sm-6">
+                  <label>CVC</label>
+                  {this.cardInputGenerator("cvc")}
+                </div>
               </div>
             </div>
+            <button>Place Order</button>
           </div>
-          <button>Place Order</button>
         </div>
-      </div>
+      </main>
     );
   }
 }
