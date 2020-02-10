@@ -15,10 +15,10 @@ class ShoppingCart extends Component {
     return (
       <div className="container col-md-12 shopping_cart">
         <div className="row">
-          <div className="col-md-8">
+          <div className="col-md-8 shoppingList">
             <ShoppingList />
           </div>
-          <div className="payment_option text-center pt_1 col-md-4">
+          <div className="payment_option gradient_background text-center pt_1 col-md-4">
             <h3>TOTAL: {this.props.totalPrice}</h3>
             <button
               className="secondary_button"

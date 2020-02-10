@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Input from "../../components/UI/Input/Input";
-// import CartSummary from "../../components/CartSummary/CartSummary";
+import ShoppingList from "../../components/ShoppingList/ShoppingList";
 import "./Checkout.css";
 class Checkout extends Component {
   state = {
@@ -70,6 +70,7 @@ class Checkout extends Component {
       }
     };
     this.setState({ shippingDetails: updatedField });
+    console.log(this.state.shippingDetails.zip);
   };
   submitHandler = event => {
     event.preventDefault();
@@ -92,42 +93,50 @@ class Checkout extends Component {
   render() {
     return (
       <main className="Checkout pt_4 ">
-        <div className=" container">
-          <div className="col-md-6 Delivery">
-            <h5>DELIVERY METHOD</h5>
-            <input type="checkbox" />
-            <span className="col-md-8">
-              Standard Delivery 3-5 business days
-            </span>
-            <span className="col-md-4">
-              {this.state.deliveryOptions.standard.price}
-            </span>
-            <br />
-            <input type="checkbox" />
-            <span className="col-md-8">
-              Economy Delivery 5-10 business days
-            </span>
-            <span className="col-md-4">
-              {this.state.deliveryOptions.economy.price}
-            </span>
-            <br />
+        <div className="  row">
+          <div className="col-md-12 col-lg-4 shoppingList">
+            <ShoppingList />
           </div>
-          <div className="ShippingForm ">
-            <h5>SHIPPING ADDRESS</h5>
-            <label>Full Name</label>
-            {this.shippingInputGenerator("shippingName")}
-            <label>Street</label>
-            {this.shippingInputGenerator("street")}
-            <label>City</label>
-            {this.shippingInputGenerator("city")}
-            <label>State</label>
-            {this.shippingInputGenerator("state")}
-            <label>Zip</label>
-            {this.shippingInputGenerator("zip")}
+          <div className="col-md-12 col-lg-8 gradient_background checkout_form">
+            <div className="Delivery">
+              <h5>DELIVERY METHOD</h5>
+              <input type="checkbox" />
+              <span className="col-md-8">
+                Standard Delivery 3-5 business days
+              </span>
+              <span className="col-md-4">
+                {this.state.deliveryOptions.standard.price}
+              </span>
+              <br />
+              <input type="checkbox" />
+              <span className="col-md-8">
+                Economy Delivery 5-10 business days
+              </span>
+              <span className="col-md-4">
+                {this.state.deliveryOptions.economy.price}
+              </span>
+              <br />
+            </div>
+            <div className="ShippingForm ">
+              <h5>SHIPPING ADDRESS</h5>
+              <label>Full Name</label>
+              {this.shippingInputGenerator("shippingName")}
+              <label>Street</label>
+              {this.shippingInputGenerator("street")}
+              <label>City</label>
+              {this.shippingInputGenerator("city")}
+              <label>State</label>
+              {this.shippingInputGenerator("state")}
+              <label>Zip</label>
+              {this.shippingInputGenerator("zip")}
+            </div>
+            <button
+              className="secondary_button"
+              onClick={this.routePaymentPage}
+            >
+              Next
+            </button>
           </div>
-          <button className="primary_button" onClick={this.routePaymentPage}>
-            Next
-          </button>
         </div>
       </main>
     );

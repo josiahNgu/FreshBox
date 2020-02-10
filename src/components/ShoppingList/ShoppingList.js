@@ -7,10 +7,13 @@ class ShoppingList extends Component {
   componentDidMount() {
     this.props.initLocalShoppingCart();
   }
+  deleteItem = index => {
+    console.log("index", index);
+  };
+  state = {};
   render() {
     let shoppingCart = <Spinner />;
     if (this.props.shoppingList) {
-      console.log(this.props.shoppingList.length);
       shoppingCart = this.props.shoppingList.map((item, index) => (
         <ShoppingCartItem
           key={index}
@@ -21,7 +24,7 @@ class ShoppingList extends Component {
           price={item.price}
           quantity={item.quantity}
           // TODO: FIX ABILITY TO DELETE ITEM
-          // deleteItem={item.itemId.b=>this.deleteItem(item.itemId)}
+          deleteItem={() => this.deleteItem(index)}
         />
       ));
     } else {

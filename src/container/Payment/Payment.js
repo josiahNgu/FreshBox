@@ -32,10 +32,10 @@ class Payment extends React.Component {
       },
       expDate: {
         label: "Good Thru",
-        elementType: "cardInputRow",
+        elementType: "cardInputDate",
         elementConfig: {
           placeholder: "01/2022",
-          type: "text"
+          type: "month"
         },
         value: ""
       },
@@ -73,10 +73,10 @@ class Payment extends React.Component {
   render() {
     return (
       <div className="Payment pt_4 row">
-        <div className="col-md-6">
+        <div className="col-md-6 shoppingList">
           <ShoppingList />
         </div>
-        <div className="CardSection col-md-6">
+        <div className="CardSection  col-md-6">
           <h5>CREDIT/DEBIT CARD PAYMENT</h5>
           <div className="Card">
             <FontAwesomeIcon icon={faCreditCard} />
@@ -99,6 +99,7 @@ class Payment extends React.Component {
               </div>
             </div>
           </div>
+          <button>Place Order</button>
         </div>
       </div>
     );

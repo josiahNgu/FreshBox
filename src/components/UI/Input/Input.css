@@ -1,14 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Karla:400,700&display=swap");
 
-.Input {
-  padding: 10px 10px;
-}
 
 .FormInput {
   font-weight: 400;
   font-family: "Karla"sans-serif;
   padding: 12px 15px;
-  background-color: transparent;
+  background-color: white;
   border: 2px solid gainsboro;
   width: 370px;
   margin-bottom: 15px;
@@ -30,17 +27,31 @@ input {
 
 .Input_Card {
   font-weight: 400;
+  color: white;
   font-family: "Karla"sans-serif;
   background-color: transparent;
-  border-bottom: 2px solid gray;
+  border-bottom: 2px solid gold;
   width: 350px;
   margin-bottom: 15px;
+}
+
+.Input_Card::-webkit-outer-spin-button,
+.Input_Card::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0;
+  /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+  /* Firefox */
 }
 
 .Input_Card_Row {
   font-weight: 400;
   font-family: "Karla"sans-serif;
-  background-color: transparent;
+  background-color: white;
   border-bottom: 2px solid gray;
   width: 150px;
   margin-bottom: 15px;

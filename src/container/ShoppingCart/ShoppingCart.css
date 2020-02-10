@@ -1,14 +1,12 @@
 .shopping_cart {
   padding-top: 4rem;
+  max-height: calc(100vh - 4rem);
+
 }
 
-.shopping_cart_list {
-  min-height: calc(100vh - 4rem);
-}
 
 .payment_option {
   color: white;
-  background-image: linear-gradient(316deg, #6c33a3 0%, #8241b8 74%)
 }
 
 .Header {

@@ -47,6 +47,16 @@ const input = props => {
         />
       );
       break;
+    case "cardInputDate":
+      inputElement = (
+        <input
+          className={cardClassesRow.join(" ")}
+          value={props.value}
+          {...props.elementConfig}
+          onChange={props.changed}
+        />
+      );
+      break;
     case "shippingInput":
       inputElement = (
         <input

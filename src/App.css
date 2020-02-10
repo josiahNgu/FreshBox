@@ -57,3 +57,13 @@
   text-align: center;
   transition: all 1s;
 }
+
+.shoppingList {
+  overflow-y: auto;
+  height: 96vh;
+  position: relative;
+}
+
+.gradient_background {
+  background-image: linear-gradient(316deg, #6c33a3 0%, #8241b8 74%)
+}

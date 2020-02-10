@@ -5,17 +5,20 @@
 
 }
 
+.checkout_form {
+  background-color: var(--dark-color);
+}
 
 .Delivery {
   min-height: 10vh;
   margin: auto;
   padding: 20px;
-  color: gray;
+  color: white;
 }
 
 .ShippingForm {
   margin: auto;
   padding-top: 20px;
-  color: gray;
+  color: white;
   min-height: 70vh;
 }
