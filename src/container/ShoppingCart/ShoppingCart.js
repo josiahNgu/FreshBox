@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/index";
 import ShoppingList from "../../components/ShoppingList/ShoppingList";
 import "./ShoppingCart.css";
 class ShoppingCart extends Component {
@@ -18,7 +17,7 @@ class ShoppingCart extends Component {
           <div className="col-md-8 shoppingList">
             <ShoppingList />
           </div>
-          <div className="payment_option gradient_background text-center pt_1 col-md-4">
+          <div className="payment_option gradient_background  text-center pt_1 col-md-4">
             <h3>TOTAL: {this.props.totalPrice}</h3>
             <button
               className="secondary_button"

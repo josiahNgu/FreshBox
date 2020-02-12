@@ -1,17 +1,12 @@
-.Card {
-  margin: auto;
-  width: 400px;
-  background-color: white;
-  border-radius: 0.7rem;
-  padding: 20px;
-  color: gold;
-}
-
 .Payment {
-  color: white;
-  min-height: 96vh;
+  background-color: whitesmoke;
+  /* min-height: 96vh; */
 }
 
-.CardSection {
-  min-height: 60vh;
+.card_section {
+  height: calc(100vh - 4rem);
+  margin: auto;
+  padding-top: 20px;
+  color: white;
+
 }

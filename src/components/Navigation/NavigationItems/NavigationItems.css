@@ -20,10 +20,16 @@
   text-decoration: none;
 }
 
-/* @media (min-width: 500px) {
-  .NavigationItems {
-    flex-flow: row;
-}
-}
+@media (max-width: 425px) {
+  #NavigationItems {
+    display: block;
+  }
 
-*/
+  #NavigationItems .nav_links ul {
+    flex-direction: column;
+  }
+
+  #NavigationItems ul li {
+    padding: 10px;
+  }
+}

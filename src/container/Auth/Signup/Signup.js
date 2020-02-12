@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
+// import { Redirect } from "react-router-dom";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
-import Alert from "../../../components/UI/Alert/Alert";
+// import Alert from "../../../components/UI/Alert/Alert";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import { checkValidity } from "../../../store/utility";
@@ -148,7 +148,7 @@ class Signup extends Component {
             changed={event => this.inputChangedHandler(event, formElement.id)}
           />
         ))}
-        <button className="SubmitButton">Submit</button>
+        <button className="primary_button">Submit</button>
       </form>
     );
     return (

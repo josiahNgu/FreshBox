@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./ShoppingItem.css";
 function displayFrequency(option) {
   let displayText = "Every Month";

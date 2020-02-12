@@ -41,7 +41,6 @@
   padding: 0.5rem;
   width: 130px;
   text-decoration: none;
-  font-family: "Karla", sans-serif;
   font-weight: 700;
   color: white;
   background: var(--dark-color);
@@ -54,16 +53,23 @@
   padding: 0.5rem;
   width: 130px;
   text-decoration: none;
-  font-family: "Karla", sans-serif;
+  border: none;
   font-weight: 700;
   color: black;
-  background: white;
+  background-color: white;
   text-align: center;
   transition: all 1s;
 }
 
-
 .gradient_background {
-  /* background-image: linear-gradient(316deg, #6c33a3 0%, #8241b8 74%) */
-  background-color: #9966cc;
+  background-image: linear-gradient(316deg, #6c33a3 0%, #8241b8 74%)
+    /* background-color: #9966cc; */
+}
+
+.back_btn {
+  border: none;
+  /* padding-top: 4rem; */
+  text-decoration: underline;
+  background-color: transparent;
+  margin: 0 0 2rem 2rem;
 }

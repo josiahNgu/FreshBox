@@ -16,3 +16,6 @@ export const TOTAL_PRICE = "TOTAL_PRICE";
 export const IS_CHECKING_OUT = "IS_CHECKING_OUT";
 export const SET_TOKEN = "SET_TOKEN";
 export const GET_PRODUCT_DETAILS = "GET_PRODUCT_DETAILS";
+export const DELETE_ITEM = "DELETE_ITEM";
+export const SHIPPING_ADDRESS = "SHIPPING_ADDRESS";
+export const CARD_INFO = "CARD_INFO";

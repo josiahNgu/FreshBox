@@ -2,12 +2,18 @@ import React from "react";
 import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import ShoppingList from "../../components/ShoppingList/ShoppingList";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
-// import {} from "@fortawesome/free-solid-svg-icons";
-import "./Payment.css";
 import Input from "../../components/UI/Input/Input";
+import "./Payment.css";
 class Payment extends React.Component {
+  componentDidMount() {
+    console.log("this.props.shippingStatus :", this.props.shippingStatus);
+    if (this.props.shippingStatus === 0) {
+      console.log("here");
+      const path = "/checkout";
+      this.props.history.push(path);
+    }
+  }
+
   state = {
     cardElements: {
       cardNumber: {
@@ -21,7 +27,7 @@ class Payment extends React.Component {
       },
       nameOnCard: {
         label: "Full Name",
-        elementType: "cardInput",
+        elementType: "input",
         elementConfig: {
           placeholder: "Turing Lee",
           type: "text"
@@ -39,7 +45,7 @@ class Payment extends React.Component {
       },
       cvc: {
         label: "CVC",
-        elementType: "cardInputRow",
+        elementType: "input",
         elementConfig: {
           placeholder: "XXX",
           type: "password"
@@ -68,49 +74,76 @@ class Payment extends React.Component {
       />
     );
   };
+  submitCardForm = () => {
+    const cardForm = {
+      cardNumber: this.state.cardElements.cardNumber.value,
+      nameOnCard: this.state.cardElements.nameOnCard.value,
+      cvc: this.state.cardElements.cvc.value,
+      expDate: this.state.cardElements.expDate.value
+    };
+    this.props.cardForm(cardForm);
+  };
+  routeToCheckout = () => {
+    this.props.history.push("/checkout");
+  };
+
   render() {
     return (
       <main className="Payment pt_4 container-fluid ">
         <div className="row">
           <div className="col-md-6 shoppingList">
+            <button onClick={this.routeToCheckout} className="back_btn">
+              &laquo; Back
+            </button>
             <ShoppingList />
           </div>
-          <div className="CardSection gradient_background  col-md-6">
-            <h5>CREDIT/DEBIT CARD PAYMENT</h5>
-            <div className="Card">
-              <FontAwesomeIcon icon={faCreditCard} />
-              <div className="row">
-                <div className="col-sm-12">
-                  <label>Card Number</label>
-                  {this.cardInputGenerator("cardNumber")}
-                </div>
-                <div className="col-sm-12">
-                  <label>Full Name</label>
-                  {this.cardInputGenerator("nameOnCard")}
-                </div>
-                <div className="col-sm-6">
-                  <label>Good Thru</label>
-                  {this.cardInputGenerator("expDate")}
-                </div>
-                <div className="col-sm-6">
-                  <label>CVC</label>
-                  {this.cardInputGenerator("cvc")}
+          <div className=" gradient_background text-center  col-md-6">
+            <section className="card_section">
+              <h5>CREDIT/DEBIT CARD PAYMENT</h5>
+              <div className="">
+                <div className="row">
+                  <div className="col-sm-12">
+                    <label>Card Number</label>
+                    {this.cardInputGenerator("cardNumber")}
+                  </div>
+                  <div className="col-sm-12">
+                    <label>Full Name</label>
+                    {this.cardInputGenerator("nameOnCard")}
+                  </div>
+                  <div className="col-sm-12">
+                    <label>Good Thru</label>
+                    {this.cardInputGenerator("expDate")}
+                  </div>
+                  <div className="col-sm-12">
+                    <label>CVC</label>
+                    {this.cardInputGenerator("cvc")}
+                  </div>
                 </div>
               </div>
-            </div>
-            <button>Place Order</button>
+              <button
+                className="secondary_button"
+                onClick={this.submitCardForm}
+              >
+                Place Order
+              </button>
+            </section>
           </div>
         </div>
       </main>
     );
   }
 }
+const mapStateToProps = state => {
+  return {
+    shippingStatus: state.payment.shippingInfoCompleted
+  };
+};
 const mapDispatchToProps = dispatch => {
   return {
-    initPaypal: () => dispatch(actions.initPaypal())
+    cardForm: cardForm => dispatch(actions.cardForm(cardForm))
   };
 };
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Payment);

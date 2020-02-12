@@ -1,6 +1,8 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Input from "../../components/UI/Input/Input";
 import ShoppingList from "../../components/ShoppingList/ShoppingList";
+import * as actions from "../../store/actions/index";
 import "./Checkout.css";
 class Checkout extends Component {
   state = {
@@ -15,7 +17,7 @@ class Checkout extends Component {
     shippingDetails: {
       shippingName: {
         label: "Full Name",
-        elementType: "shippingInput",
+        elementType: "input",
         elementConfig: {
           placeholder: "John Turing",
           type: "text"
@@ -24,7 +26,7 @@ class Checkout extends Component {
       },
       street: {
         label: "Street",
-        elementType: "shippingInput",
+        elementType: "input",
         elementConfig: {
           placeholder: "O st",
           type: "text"
@@ -33,7 +35,7 @@ class Checkout extends Component {
       },
       city: {
         label: "City",
-        elementType: "shippingInput",
+        elementType: "input",
         elementConfig: {
           placeholder: "Lincoln",
           type: "text"
@@ -42,7 +44,7 @@ class Checkout extends Component {
       },
       state: {
         label: "State",
-        elementType: "shippingInput",
+        elementType: "input",
         elementConfig: {
           placeholder: "Nebraska",
           type: "text"
@@ -51,10 +53,10 @@ class Checkout extends Component {
       },
       zip: {
         label: "Zip",
-        elementType: "shippingInput",
+        elementType: "input",
         elementConfig: {
           placeholder: "68503",
-          type: "text"
+          type: "number"
         },
         value: ""
       }
@@ -73,6 +75,18 @@ class Checkout extends Component {
   };
   submitHandler = event => {
     event.preventDefault();
+  };
+  submitShippingForm = () => {
+    const shippingForm = {
+      fullName: this.state.shippingDetails.shippingName.value,
+      street: this.state.shippingDetails.street.value,
+      city: this.state.shippingDetails.city.value,
+      state: this.state.shippingDetails.state.value,
+      zip: this.state.shippingDetails.zip.value
+    };
+    console.log("shippingForm :", shippingForm);
+    this.props.shippingAddress(shippingForm);
+    this.routePaymentPage();
   };
   routePaymentPage = () => {
     const path = "/payment";
@@ -112,7 +126,7 @@ class Checkout extends Component {
             </div>
             <button
               className="secondary_button"
-              onClick={this.routePaymentPage}
+              onClick={this.submitShippingForm}
             >
               Next
             </button>
@@ -122,5 +136,13 @@ class Checkout extends Component {
     );
   }
 }
-
-export default Checkout;
+const mapDispatchToProps = dispatch => {
+  return {
+    shippingAddress: shippingInfo =>
+      dispatch(actions.shippingAddressForm(shippingInfo))
+  };
+};
+export default connect(
+  null,
+  mapDispatchToProps
+)(Checkout);

@@ -61,15 +61,16 @@ class ProductDetails extends Component {
                 placeholder="1"
                 changed={this.handleChange}
               />
-              <select
+              {/* <select
                 name="deliveryOptions"
-                value="f"
+                value=""
                 onChange={this.handleChange}
               >
                 <option value="1">Every Month</option>
                 <option value="2">Every 2 Month</option>
                 <option value="3">Every 3 Month</option>
-              </select>
+              </select> */}
+              <br />
               <button className="ATC_btn" onClick={this.addToCart}>
                 Add To Cart
               </button>

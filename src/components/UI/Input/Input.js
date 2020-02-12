@@ -3,10 +3,7 @@ import "./Input.css";
 const input = props => {
   let inputElement = null;
   let inputClasses = ["FormInput", "Input"];
-  let cardClasses = ["Input_Card"];
   let quantityInput = ["QuantityInputBox"];
-  let shippingInput = ["FormInput", "ShippingInput", "col-md-6", "dark_text"];
-  let cardClassesRow = ["Input_Card_Row"];
   let validationError = null;
   if (props.invalid && props.shouldValidate && props.touched) {
     inputClasses.push("Invalid");
@@ -27,50 +24,22 @@ const input = props => {
         />
       );
       break;
-    case "cardInput":
-      inputElement = (
-        <input
-          className={cardClasses.join(" ")}
-          value={props.value}
-          {...props.elementConfig}
-          onChange={props.changed}
-        />
-      );
-      break;
-    case "cardInputRow":
-      inputElement = (
-        <input
-          className={cardClassesRow.join(" ")}
-          value={props.value}
-          {...props.elementConfig}
-          onChange={props.changed}
-        />
-      );
-      break;
-    case "cardInputDate":
-      inputElement = (
-        <input
-          className={cardClassesRow.join(" ")}
-          value={props.value}
-          {...props.elementConfig}
-          onChange={props.changed}
-        />
-      );
-      break;
-    case "shippingInput":
-      inputElement = (
-        <input
-          className={shippingInput.join(" ")}
-          value={props.value}
-          {...props.elementConfig}
-          onChange={props.changed}
-        />
-      );
-      break;
     case "quantityInput":
       inputElement = (
         <input
           className={quantityInput.join(" ")}
+          type="number"
+          min="1"
+          name={props.name}
+          placeholder={props.placeholder}
+          onChange={props.changed}
+        />
+      );
+      break;
+    case "numberInput":
+      inputElement = (
+        <input
+          className={inputClasses.join(" ")}
           type="number"
           min="1"
           name={props.name}

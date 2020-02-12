@@ -11,6 +11,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import productReducer from "./store/reducers/products";
 import authReducer from "./store/reducers/auth";
 import shoppingCartReducer from "./store/reducers/shoppingCart";
+import paymentReducer from "./store/reducers/payment";
 import userReducer from "./store/reducers/user";
 const composeEnhancers =
   process.env.NODE_ENV === "development"
@@ -20,7 +21,8 @@ const rootReducer = combineReducers({
   product: productReducer,
   auth: authReducer,
   shoppingCart: shoppingCartReducer,
-  user: userReducer
+  user: userReducer,
+  payment: paymentReducer
 });
 // For example, if you use Firebase for your app, you’ll need to get that set up as your app is first mounting.
 const store = createStore(

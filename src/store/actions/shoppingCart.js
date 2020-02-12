@@ -1,7 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
 export const loadShoppingList = (data, totalPrice) => {
-  console.log("dataofCart", data);
   return {
     type: actionTypes.GET_SHOPPINGLIST,
     shoppingList: data,
@@ -58,7 +57,15 @@ export const addToCart = (itemId, quantity, deliveryOptions) => {
     //   }
   };
 };
-
+export const deleteItem = (index, totalPrice) => {
+  return dispatch => {
+    dispatch(getTotalPrice());
+    dispatch({
+      type: actionTypes.DELETE_ITEM,
+      deleteIndex: index
+    });
+  };
+};
 export const initShoppingList = () => {
   const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;
   axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
@@ -102,7 +109,6 @@ const localStorageShoppingList = (ref, quantity, frequency) => {
     });
 };
 
-/*TODO:fix why can't set localStorage outside of the loop because js read line by line and dont wait for async */
 export const initLocalShoppingList = () => {
   localStorage.removeItem("updatedSL");
   let updatedSL = [];
@@ -122,15 +128,6 @@ export const initLocalShoppingList = () => {
     Promise.all(promises).then(() => {
       dispatch(loadShoppingList(updatedSL, totalPrice.toFixed(2)));
     });
-    //  for (let i = 0; i < localShoppingList.length; i++) {
-    //   localStorageShoppingList(
-    //     localShoppingList[i].itemId,
-    //     localShoppingList[i].quantity
-    //   ).then(data => {
-    //     updatedSL.push(data);
-    //   });
-    //   localStorage.setItem("updatedSL", JSON.stringify(updatedSL));
-    // }
   };
 };
 const itemPrice = (ref, quantity) => {
@@ -150,22 +147,9 @@ export const getTotalPrice = () => {
   const localShoppingList = JSON.parse(localStorage.getItem("shoppingList"));
   let totalPrice = 0;
   return dispatch => {
-    for (let i = 0; i < localShoppingList.length; i++) {
-      // eslint-disable-next-line no-loop-func
-      itemPrice(
-        localShoppingList[i].itemId,
-        localShoppingList[i].quantity
-      ).then(
-        // eslint-disable-next-line no-loop-func
-        data => {
-          totalPrice = totalPrice + data;
-          console.log("totalPrice", totalPrice.toFixed(2));
-        }
-      );
-    }
+    localShoppingList.map(item => {
+      totalPrice += item.price;
+    });
     dispatch(setTotalPrice(totalPrice.toFixed(2)));
-
-    // return dispatch => {
-    //   dispatch(setTotalPrice(totalPrice.toFixed(2)));
   };
 };

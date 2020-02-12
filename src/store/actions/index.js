@@ -12,7 +12,8 @@ export {
   initLocalShoppingList,
   addToCart,
   getTotalPrice,
-  isCheckingOut
+  isCheckingOut,
+  deleteItem
 } from "./shoppingCart";
-export { initPaypal } from "./payment";
+export { shippingAddressForm, cardForm } from "./payment";
 export { getAuthenticatedUserData } from "./user";

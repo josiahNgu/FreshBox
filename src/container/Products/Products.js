@@ -3,12 +3,8 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import Product from "../../components/Product/Product";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import { history } from "react-router-dom";
 import "./Products.css";
 class Products extends Component {
-  // constructor(props) {
-  //   super(props);
-  // }
   componentDidMount() {
     this.props.onInitProducts();
   }
@@ -36,11 +32,7 @@ class Products extends Component {
         </div>
       ));
     }
-
-    // const products = <Product name={this.props.products.itemName} />;
     return (
-      // <Route path={ `${props.match.url}/:location` }
-      // component={ ContactInfo }/>
       <section id="products_page" className="row col-md-12">
         {this.props.isLoading ? <Spinner /> : productsArray}
       </section>

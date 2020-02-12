@@ -31,11 +31,7 @@
   font-size: 2rem;
 }
 
-/* @media (min-width: 600px) {
-  .Auth {
-    width: 500px;
-  }
-} */
+
 .signIn_button {
   display: inline-block;
   padding: 0.8rem 1.2em;
@@ -96,4 +92,18 @@
   max-width: 500px;
   text-align: center;
   margin: auto;
+}
+
+@media (max-width: 425px) {
+  #Auth .AuthForm {
+    padding: 0;
+  }
+
+  #Auth {
+    height: 80vh;
+  }
+
+  .Header {
+    padding: 0;
+  }
 }

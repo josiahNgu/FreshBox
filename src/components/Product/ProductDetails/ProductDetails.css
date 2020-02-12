@@ -2,7 +2,7 @@
 
 #product_details {
     font-family: 'Raleway', sans-serif;
-    padding-top: 5rem;
+    padding-top: 4rem;
 }
 
 #product_details .item_description h3 {
@@ -35,4 +35,10 @@
     color: white;
     background-color: var(--secondary-color);
     text-decoration: none;
+}
+
+@media(max-width:425px) {
+    #product_details {
+        padding-top: 0;
+    }
 }

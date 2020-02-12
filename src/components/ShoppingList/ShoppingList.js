@@ -6,10 +6,15 @@ import ShoppingCartItem from "../ShoppingItem/ShoppingItem";
 import * as actions from "../../store/actions/index";
 class ShoppingList extends Component {
   componentDidMount() {
-    this.props.initLocalShoppingCart();
+    if (localStorage.getItem("shoppingList")) {
+      this.props.initLocalShoppingCart();
+    }
   }
   deleteItem = index => {
-    console.log("index", index);
+    let oldList = JSON.parse(localStorage.getItem("shoppingList"));
+    oldList.splice(index, 1);
+    localStorage.setItem("shoppingList", JSON.stringify(oldList));
+    this.props.deleteItem(index);
   };
   state = {};
   render() {
@@ -24,7 +29,6 @@ class ShoppingList extends Component {
           frequency={item.frequency}
           price={item.price}
           quantity={item.quantity}
-          // TODO: FIX ABILITY TO DELETE ITEM
           deleteItem={() => this.deleteItem(index)}
         />
       ));
@@ -32,7 +36,7 @@ class ShoppingList extends Component {
       if (localStorage.getItem("shoppingList")) {
         shoppingCart = <Spinner />;
       } else {
-        shoppingCart = "Your shopping Bag is empty";
+        shoppingCart = <p>Your shopping cart is empty</p>;
       }
     }
     return <div className="shopping_cart_list ">{shoppingCart}</div>;
@@ -47,7 +51,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     initLocalShoppingCart: () => dispatch(actions.initLocalShoppingList()),
-    getTotalPrice: () => dispatch(actions.getTotalPrice())
+    getTotalPrice: () => dispatch(actions.getTotalPrice()),
+    deleteItem: index => dispatch(actions.deleteItem(index))
   };
 };
 export default connect(

@@ -12,6 +12,13 @@
   border-radius: 5px;
 }
 
+@media (max-width: 425px) {
+  .FormInput {
+    width: 90%;
+    padding: 8px 0;
+  }
+}
+
 .FormInput:focus {
   border-color: var(--secondary-color);
   transition: border 1.5s ease;
@@ -28,10 +35,10 @@ input {
 
 .Input_Card {
   font-weight: 400;
-  color: white;
+  color: black;
   font-family: "Karla"sans-serif;
   background-color: transparent;
-  border-bottom: 2px solid gold;
+  border-bottom: 2px solid var(--dark-color);
   width: 350px;
   margin-bottom: 15px;
 }
@@ -53,7 +60,7 @@ input[type=number] {
   font-weight: 400;
   font-family: "Karla"sans-serif;
   background-color: white;
-  border-bottom: 2px solid gray;
+  border-bottom: 2px solid var(--dark-color);
   width: 150px;
   margin-bottom: 15px;
 }

@@ -2,7 +2,6 @@ import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
 import firebase from "firebase/app";
 import "firebase/auth";
-import { Redirect } from "react-router-dom";
 export const loginSuccess = () => {
   if (localStorage.getItem("idToken") !== null) {
     return {

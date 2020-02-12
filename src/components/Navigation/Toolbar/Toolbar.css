@@ -12,12 +12,16 @@
   padding-bottom: 0;
 }
 
-
-
-
-
 @media (max-width: 499px) {
   .DesktopOnly {
     display: none;
+  }
+
+  .Toolbar {
+    background-color: black;
+    height: 4rem;
+    top: 0;
+    position: -webkit-sticky;
+    position: sticky;
   }
 }

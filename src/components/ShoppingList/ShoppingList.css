@@ -3,3 +3,9 @@
     height: calc(100vh - 4rem);
     position: relative;
 }
+
+@media(max-width:425px) {
+    .shoppingList {
+        overflow-y: hidden;
+    }
+}

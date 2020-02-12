@@ -1,7 +1,17 @@
-import axios from "../../axios";
+import * as actionTypes from "./actionTypes";
 
-export const initPaypal = () => {
-  return dispatch => {
-    axios.post("/payment").then(data => console.log(data));
+const setShippingAddress = info => {
+  return {
+    type: actionTypes.SHIPPING_ADDRESS,
+    shippingInfo: info
+  };
+};
+export const shippingAddressForm = shippingInfo => {
+  return dispatch => dispatch(setShippingAddress(shippingInfo));
+};
+export const cardForm = cardInfo => {
+  return {
+    type: actionTypes.CARD_INFO,
+    cardInfo: cardInfo
   };
 };

@@ -1,8 +1,6 @@
 .Alert {
-  /* font: inherit; */
-  background-color: #8051dc;
+  background-color: red;
   color: white;
-  border-radius: 10px;
   font-weight: 500;
   width: 100%;
   padding: 5px;

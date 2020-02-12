@@ -6,7 +6,7 @@ const initialState = {
   isAddingToCart: false,
   totalPrice: 0,
   isCheckingOut: false,
-  fetchCartDone: false
+  deleteIndex: null
 };
 const getShoppingList = (state, action) => {
   return updateObject(state, {
@@ -35,6 +35,22 @@ const setIsCheckingOut = (state, action) => {
     isCheckingOut: action.isCheckingOut
   });
 };
+const deleteItem = (state, action) => {
+  const updatedSL = [
+    ...state.shoppingList.slice(0, action.deleteIndex),
+    ...state.shoppingList.slice(action.deleteIndex + 1)
+  ];
+  let totalPrice = 0;
+  updatedSL.forEach(item => {
+    totalPrice += item.price * item.quantity;
+  });
+  return updateObject(state, {
+    ...state,
+    shoppingList: updatedSL,
+    deleteIndex: action.deleteIndex,
+    totalPrice: totalPrice
+  });
+};
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.GET_SHOPPINGLIST:
@@ -47,6 +63,8 @@ const reducer = (state = initialState, action) => {
       return setTotalPrice(state, action);
     case actionTypes.IS_CHECKING_OUT:
       return setIsCheckingOut(state, action);
+    case actionTypes.DELETE_ITEM:
+      return deleteItem(state, action);
     default:
       return state;
   }

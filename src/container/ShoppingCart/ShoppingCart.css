@@ -1,15 +1,25 @@
 .shopping_cart {
   padding-top: 4rem;
-  max-height: calc(100vh - 4rem);
-
+  min-height: 100vh;
+  background-color: whitesmoke;
 }
 
 
 .payment_option {
   color: white;
+
 }
 
-.Header {
-  margin: auto;
-  padding: 10px;
+@media(max-width:425px) {
+
+  .shoppingList {
+    height: 100%;
+  }
+
+  .payment_option {
+    z-index: 1;
+    top: 1;
+    padding: 10px;
+    position: -webkit-sticky;
+  }
 }

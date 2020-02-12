@@ -1,6 +1,5 @@
 import React from "react";
 import NavigationItem from "./NavigationItem/NavigationItem";
-import ShoppingCartIcon from "../../UI/ShoppingCartIcon/ShoppingCartIcon";
 
 import "./NavigationItems.css";
 const navigationItems = props => {
@@ -29,10 +28,10 @@ const navigationItems = props => {
   }
   return (
     <nav id="NavigationItems">
-      <h3>
+      <h3 className="DesktopOnly">
         <a href="/">CardBox</a>
       </h3>
-      {navigationLinks}
+      <div className="nav_links">{navigationLinks}</div>
     </nav>
   );
 };
