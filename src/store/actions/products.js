@@ -19,7 +19,6 @@ export const initProducts = () => {
     axios
       .get("/products")
       .then(res => {
-        console.log(res);
         const data = res.data.map(doc => {
           return {
             id: doc.id,
