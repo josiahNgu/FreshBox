@@ -1,9 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,700&display=swap');
 
-#product_details {
-    font-family: 'Raleway', sans-serif;
-    padding-top: 4rem;
-}
 
 #product_details .item_description h3 {
     font-weight: 700;
@@ -13,7 +9,12 @@
     max-height: 90vh;
 }
 
+.disabled {
+    background-color: black;
+}
+
 #product_details .back_btn {
+    padding-top: 3rem;
     border: none;
     text-decoration: underline;
     background-color: transparent;
@@ -35,6 +36,12 @@
     color: white;
     background-color: var(--secondary-color);
     text-decoration: none;
+}
+
+#product_details .ATC_btn:disabled {
+    background-color: black;
+    color: #ffff;
+    pointer-events: none;
 }
 
 @media(max-width:425px) {

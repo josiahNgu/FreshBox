@@ -13,10 +13,14 @@ class Account extends Component {
   render() {
     let userData = <Spinner />;
     if (this.props.user) {
+      console.log(
+        "this.props.user.data.userData :",
+        this.props.user.data.userData
+      );
       userData = (
         <React.Fragment>
-          <h1>userName: {this.props.user.displayName}</h1>
-          <h1>email:{this.props.user.email}</h1>
+          <h1>userName: {this.props.user.data.userData.displayName}</h1>
+          <h1>email:{this.props.user.data.userData.email}</h1>
         </React.Fragment>
       );
     }

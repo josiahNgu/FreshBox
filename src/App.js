@@ -14,11 +14,15 @@ import Payment from "./container/Payment/Payment";
 import ProductDetails from "./components/Product/ProductDetails/ProductDetails";
 import * as actions from "./store/actions/index";
 
-const token = localStorage.getItem("idToken");
-if (token) {
-  actions.getAuthenticatedUserData();
-}
 class App extends Component {
+  componentDidMount() {
+    const token = localStorage.getItem("idToken");
+    if (token) {
+      console.log("check token");
+      this.props.getUserData();
+    }
+  }
+
   render() {
     let routes = (
       <Switch>
@@ -29,7 +33,6 @@ class App extends Component {
         <Route path="/shoppingCart" component={ShoppingCart} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/payment" component={Payment} />
-
         <Route path="/" exact component={Homepage} />
         <Redirect to="/" />
       </Switch>
@@ -37,15 +40,20 @@ class App extends Component {
     if (this.props.isAuthenticated) {
       routes = (
         <Switch>
-          <Route path="/" exact component={Homepage} />
-          <Route path="/products" component={Products} />
           <Route path="/account" component={Account} />
+          <Route path="/products/ref/:productId" component={ProductDetails} />
+          <Route path="/products" component={Products} />
           <Route path="/shoppingCart" component={ShoppingCart} />
+          <Route path="/checkout" component={Checkout} />
+          <Route path="/payment" component={Payment} />
+          <Route path="/" exact component={Homepage} />
           <Redirect to="/" />
         </Switch>
       );
     }
-    return <Layout>{routes}</Layout>;
+    return (
+      <Layout isAuthenticated={this.props.isAuthenticated}>{routes}</Layout>
+    );
   }
 }
 const mapStateToProps = state => {

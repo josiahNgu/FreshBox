@@ -1,4 +1,5 @@
 import * as actionTypes from "./actionTypes";
+import axios from "../../axios";
 
 const setShippingAddress = info => {
   return {
@@ -14,4 +15,21 @@ export const cardForm = cardInfo => {
     type: actionTypes.CARD_INFO,
     cardInfo: cardInfo
   };
+};
+export const placeOrder = (userOrder, shippingInfo, cardInfo) => {
+  const order = {
+    userOrder: userOrder,
+    shippingInfo: shippingInfo,
+    cardInfo: cardInfo
+  };
+  console.log("order :", order);
+  return dispatch =>
+    axios
+      .post("/order", order)
+      .then(res => {
+        console.log("res :", res);
+      })
+      .catch(err => {
+        console.log("err :", err);
+      });
 };

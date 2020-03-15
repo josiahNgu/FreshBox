@@ -1,15 +1,15 @@
 import React, { Component } from "react";
-// import { Redirect } from "react-router-dom";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Input/Input";
-// import Alert from "../../../components/UI/Alert/Alert";
+import Alert from "../../../components/UI/Alert/Alert";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import { checkValidity } from "../../../store/utility";
 import "./Signup.css";
 class Signup extends Component {
   state = {
-    errorMessage: "",
+    errorMessage: null,
+    propsErrorMessage: null,
     formElements: {
       name: {
         elementType: "input",
@@ -63,6 +63,14 @@ class Signup extends Component {
     },
     showAlert: false
   };
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.errorMessage !== this.props.errorMessage) {
+      this.setState({
+        propsErrorMessage: JSON.stringify(this.props.errorMessage)
+      });
+    }
+  }
+
   matchPassword = (confirmPassword, password) => {
     if (confirmPassword === password) {
       return true;
@@ -152,22 +160,31 @@ class Signup extends Component {
       </form>
     );
     return (
-      // <React.Fragment>
-      //   <div
-      //     className={
-      //       this.props.errorMessage ? "signup_block" : "signup_hidden "
-      //     }
-      //   >
-      //     <Alert message={this.state.errorMessage} />
-      //   </div>
-      <div id="Signup">
-        <div className="signupForm">{form}</div>
-        <div className="signup_info DesktopOnly ">
-          <h1>Hello,Friend! </h1>
-          <p>Enter your details and start journey with us!</p>
+      <main className="pt_4">
+        <div
+          className={
+            this.state.propsErrorMessage ? "signup_error" : "signup_hidden"
+          }
+        >
+          <Alert message={this.state.propsErrorMessage} />
         </div>
-      </div>
-      // </React.Fragment>
+        <div id="Signup">
+          <div className="signupForm">
+            <div
+              className={
+                this.state.errorMessage ? "signup_block" : "signup_hidden"
+              }
+            >
+              <Alert message={this.state.errorMessage} />
+            </div>
+            {form}
+          </div>
+          <div className="signup_info DesktopOnly ">
+            <h1>Hello,Friend! </h1>
+            <p>Enter your details and start journey with us!</p>
+          </div>
+        </div>
+      </main>
     );
   }
 }

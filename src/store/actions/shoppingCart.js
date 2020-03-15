@@ -27,7 +27,12 @@ const setTotalPrice = totalPrice => {
     totalPrice: totalPrice
   };
 };
-
+const addToCartFinished = () => {
+  return {
+    type: actionTypes.IS_ADDING_TO_CART,
+    isLoading: false
+  };
+};
 export const addToCart = (itemId, quantity, deliveryOptions) => {
   console.log(itemId, quantity, deliveryOptions);
   const addItem = {
@@ -44,17 +49,9 @@ export const addToCart = (itemId, quantity, deliveryOptions) => {
     }
     updateShoppingList.push(addItem);
     localStorage.setItem("shoppingList", JSON.stringify(updateShoppingList));
-    //     dispatch(initLocalShoppingList());
-    //   } else {
-    //     const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;
-    //     axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
-
-    //     dispatch(addingToCart());
-    //     axios
-    //       .post("/shoppingCart", addItem)
-    //       .then(() => initShoppingList())
-    //       .catch(err => console.log(err));
-    //   }
+    setTimeout(() => {
+      dispatch(addToCartFinished());
+    }, 3000);
   };
 };
 export const deleteItem = (index, totalPrice) => {
@@ -97,6 +94,7 @@ const localStorageShoppingList = (ref, quantity, frequency) => {
     .get(`/products/${ref}`)
     .then(res => {
       return {
+        itemId: res.data.id,
         price: res.data.price,
         itemName: res.data.itemName,
         imageURL: res.data.imageURL,

@@ -1,13 +1,10 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
-import firebase from "firebase/app";
-import "firebase/auth";
+// import "firebase/auth";
 export const loginSuccess = () => {
-  if (localStorage.getItem("idToken") !== null) {
-    return {
-      type: actionTypes.LOGIN_SUCCESS
-    };
-  }
+  return {
+    type: actionTypes.LOGIN_SUCCESS
+  };
 };
 
 export const loginFailed = error => {
@@ -37,16 +34,13 @@ export const login = (email, password) => {
     email: email,
     password: password
   };
-  console.log(user);
   return dispatch => {
     axios
       .post("/auth", user)
       .then(res => {
         setAuthorizationHeader(res.data.token);
-        dispatch(getUserData());
-        // history.push("/products");
-        // dispatch(setCallbackLink(callbackLink));
-        dispatch(loginSuccess(localStorage.getItem("idToken")));
+        // dispatch(getUserData());
+        dispatch(loginSuccess());
       })
       .catch(err => {
         dispatch(
@@ -76,34 +70,19 @@ export const authenticationStatus = status => {
 };
 const setAuthorizationHeader = token => {
   const FirebaseIdToken = `Bearer:${token}`;
+  console.log("token :", token);
   localStorage.setItem("idToken", token);
   axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
 };
 export const googleAuth = () => {
-  const GoogleProvider = new firebase.auth.GoogleAuthProvider();
-  console.log("here");
-  let user = null;
-  // firebase.auth().signInWithRedirect(GoogleProvider);
-  firebase
-    .auth()
-    .signInWithPopup(GoogleProvider)
-    .then(result => {
-      const token = result.credential.accessToken;
-      console.log("result :", result);
-      const expirationDate = new Date(
-        new Date().getTime() + result.credential.expiresIn * 1000
-      );
-
-      user = result.user;
-      localStorage.setItem("idToken", token);
-      localStorage.setItem("expirationDate", expirationDate);
-      // <Redirect to="/account" />;
-      // dispatch(setUserData, user);
-    })
-    .catch(err => {
-      console.log(err);
-    });
   return dispatch => {
-    dispatch(setUserData(user));
+    axios
+      .post("/auth/google")
+      .then(res => {
+        console.log("res :", res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 };

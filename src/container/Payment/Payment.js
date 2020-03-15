@@ -81,7 +81,11 @@ class Payment extends React.Component {
       cvc: this.state.cardElements.cvc.value,
       expDate: this.state.cardElements.expDate.value
     };
-    this.props.cardForm(cardForm);
+    this.props.placeOrder(
+      this.props.userOrder,
+      this.props.shippingForm,
+      cardForm
+    );
   };
   routeToCheckout = () => {
     this.props.history.push("/checkout");
@@ -135,12 +139,15 @@ class Payment extends React.Component {
 }
 const mapStateToProps = state => {
   return {
-    shippingStatus: state.payment.shippingInfoCompleted
+    shippingStatus: state.payment.shippingInfoCompleted,
+    shippingForm: state.payment.shippingInfo,
+    userOrder: state.shoppingCart.shoppingList
   };
 };
 const mapDispatchToProps = dispatch => {
   return {
-    cardForm: cardForm => dispatch(actions.cardForm(cardForm))
+    placeOrder: (userOrder, shippingForm, cardForm) =>
+      dispatch(actions.placeOrder(userOrder, shippingForm, cardForm))
   };
 };
 export default connect(

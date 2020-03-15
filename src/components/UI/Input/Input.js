@@ -7,11 +7,20 @@ const input = props => {
   let validationError = null;
   if (props.invalid && props.shouldValidate && props.touched) {
     inputClasses.push("Invalid");
-    validationError = (
-      <p className="ValidationError">
-        Please enter a valid {props.currentElement}
-      </p>
-    );
+    if (props.currentElement === "password") {
+      validationError = (
+        <p className="ValidationError">
+          Enter a combination of at least 6 numbers, letters, and a special
+          characters (like ! and #)
+        </p>
+      );
+    } else {
+      validationError = (
+        <p className="ValidationError">
+          Please enter a valid {props.currentElement}
+        </p>
+      );
+    }
   }
   switch (props.elementTypes) {
     case "input":
@@ -60,8 +69,8 @@ const input = props => {
   }
   return (
     <div>
-      {inputElement}
       {validationError}
+      {inputElement}
     </div>
   );
 };

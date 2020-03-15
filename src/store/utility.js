@@ -28,6 +28,5 @@ export const checkValidity = (value, rules) => {
     const passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
     isValid = passwordPattern.test(value) && isValid;
   }
-  console.log("isValid", isValid);
   return isValid;
 };

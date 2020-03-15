@@ -1,7 +1,7 @@
 #Signup {
   text-align: center;
   width: 100vw;
-  height: 100vh;
+  height: 93.8vh;
   border: 1px solid white;
   margin: auto;
   top: 4rem;
@@ -11,7 +11,6 @@
 #Signup .signupForm {
   margin: auto;
   flex: 1;
-  font-family: "Karla", sans-serif;
   text-align: center;
 }
 
@@ -34,12 +33,25 @@
   font-size: 3rem;
 }
 
+.signup_error {
+  display: block;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
+}
+
 .signup_hidden {
   display: none;
+  visibility: hidden;
+  margin: auto;
+  height: 1rem;
 }
 
 .signup_block {
   display: block;
+  max-width: 500px;
+  text-align: center;
+  margin: auto;
 }
 
 @media (max-width: 499px) {

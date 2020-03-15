@@ -13,14 +13,12 @@ const initialState = {
 const loginSuccess = (state, action) => {
   return updateObject(state, {
     isAuthenticated: true,
-    shouldRedirect: true,
     user: action.user
   });
 };
 const signupUser = (state, action) => {
   return updateObject(state, {
-    isAuthenticated: true,
-    shouldRedirect: true
+    isAuthenticated: true
   });
 };
 const loginFailed = (state, action) => {

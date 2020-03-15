@@ -13,7 +13,12 @@ const getUserDataFailed = err => {
     err: err
   };
 };
-
+const setAuthenticationStatus = () => {
+  return {
+    type: actionTypes.IS_AUTHENTICATED,
+    isAuthenticated: true
+  };
+};
 export const getAuthenticatedUserData = () => {
   const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;
   axios.defaults.headers.common["authorization"] = FirebaseIdToken;
@@ -24,14 +29,15 @@ export const getAuthenticatedUserData = () => {
     axios
       .get("/user")
       .then(res => {
-        console.log(res.data.userData.credentials);
-        dispatch(setUserData(res.data.userData.credentials));
+        console.log(res);
+        dispatch(setUserData(res));
+        dispatch(setAuthenticationStatus());
       })
       .catch(err => {
         console.log(err);
         if (err.response.status.toString() === "403") {
-          // localStorage.removeItem("tokenId");
-          // window.location.reload();
+          localStorage.removeItem("tokenId");
+          window.location.reload();
         }
         dispatch(getUserDataFailed(err.response.data));
       });

@@ -15,5 +15,5 @@ export {
   isCheckingOut,
   deleteItem
 } from "./shoppingCart";
-export { shippingAddressForm, cardForm } from "./payment";
+export { shippingAddressForm, cardForm, placeOrder } from "./payment";
 export { getAuthenticatedUserData } from "./user";

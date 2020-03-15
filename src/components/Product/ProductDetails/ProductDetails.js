@@ -3,13 +3,15 @@ import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
 import "./ProductDetails.css";
 import Spinner from "../../UI/Spinner/Spinner";
+import Alert from "../../UI/Alert/Alert";
 import Input from "../../UI/Input/Input";
 class ProductDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
       deliveryOptions: "1",
-      quantity: "1"
+      quantity: "1",
+      addToCart: false
     };
     this.handleChange = this.handleChange.bind(this);
   }
@@ -19,6 +21,14 @@ class ProductDetails extends Component {
     } = this.props;
     this.props.onInItProductDetails(params.productId);
   }
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.isLoading !== this.props.isLoading) {
+      this.setState({
+        addToCart: this.props.isLoading
+      });
+    }
+  }
+
   goBack = () => {
     this.props.history.goBack();
   };
@@ -28,7 +38,9 @@ class ProductDetails extends Component {
       this.state.quantity,
       this.state.deliveryOptions
     );
-    // if(localStorage.getItem("shoppingList"))
+    this.setState({
+      addToCart: true
+    });
   };
   handleChange = event => {
     const { name, value } = event.target;
@@ -38,9 +50,14 @@ class ProductDetails extends Component {
   };
   render() {
     let canvas = <Spinner />;
+    let styles = "ATC_btn";
+    let message = "adding item to cart";
     if (this.props.productDetails) {
       canvas = (
-        <div id="product_details">
+        <div id="product_details" className="pt_4">
+          <div id="alert" className={this.props.isLoading ? "show" : "hidden"}>
+            <Alert message="Adding item to cart !" type="success" />
+          </div>
           <button onClick={this.goBack} className="back_btn">
             &laquo; Back
           </button>
@@ -71,7 +88,11 @@ class ProductDetails extends Component {
                 <option value="3">Every 3 Month</option>
               </select> */}
               <br />
-              <button className="ATC_btn" onClick={this.addToCart}>
+              <button
+                className={styles}
+                disabled={this.props.isLoading}
+                onClick={this.addToCart}
+              >
                 Add To Cart
               </button>
             </div>
@@ -85,7 +106,7 @@ class ProductDetails extends Component {
 const mapStateToProps = state => {
   return {
     productDetails: state.product.productDetails,
-    isLoading: state.product.isAddingToCart
+    isLoading: state.shoppingCart.isAddingToCart
   };
 };
 const mapDispatchToProps = dispatch => {

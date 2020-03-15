@@ -32,7 +32,6 @@ class Auth extends Component {
         value: ""
       }
     },
-    shouldRedirect: false,
     error: {}
   };
 
@@ -72,8 +71,9 @@ class Auth extends Component {
     //     console.log(err);
     //   });
   };
-  authWithGoogle = event => {
-    event.preventDefault();
+  authWithGoogle = () => {
+    console.log("here");
+    this.props.googleAuth();
   };
   render() {
     const formElementsArray = [];
@@ -112,7 +112,7 @@ class Auth extends Component {
             Login with Facebook
           </button>
           <br />
-          <button className="GoogleButton" onClick={this.props.googleAuth}>
+          <button className="GoogleButton" onClick={this.authWithGoogle}>
             Sign in with Google
           </button>
           <div>
@@ -127,8 +127,8 @@ class Auth extends Component {
 }
 const mapStateToProps = state => {
   return {
-    hasError: state.auth.hasError,
-    shouldRedirect: state.auth.shouldRedirect
+    hasError: state.auth.hasError
+    // shouldRedirect: state.auth.shouldRedirect
   };
 };
 const mapDispatchToProps = dispatch => {
