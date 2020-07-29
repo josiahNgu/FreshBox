@@ -1,4 +1,14 @@
-.account {
-  top: 4rem;
+.account_container {
   position: absolute;
+  display: grid;
+  width: 100%;
+  grid-template-columns: 1fr 3fr;
+  grid-column-gap: 5rem;
+  grid-template-areas: "sidebar main_info";
+}
+.sidebar {
+  grid-area: sidebar;
+}
+.main_info {
+  grid-area: main_info;
 }

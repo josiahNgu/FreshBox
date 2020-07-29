@@ -36,10 +36,11 @@ export const getAuthenticatedUserData = () => {
       })
       .catch((err) => {
         console.log(err);
-        if (err.response.status.toString() === "403") {
-          localStorage.removeItem("tokenId");
-          window.location.reload();
-        }
+        // if (err.response.status.toString() === "403") {
+        //   localStorage.removeItem("idToken");
+        //   window.location.reload();
+        // }
+        localStorage.removeItem("idToken");
         dispatch(getUserDataFailed(err.response.data));
       });
   };

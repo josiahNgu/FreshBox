@@ -23,10 +23,16 @@ class Account extends Component {
       };
     }
     return (
-      <div className="account">
+      <div className="pt_4">
         <h2>My Account</h2>
-        <AccountSideBar />
-        <AccountInfo userInfo={userData} /> <br />
+        <div className="account_container pt_4">
+          <section className="sidebar">
+            <AccountSideBar />
+          </section>
+          <aside className="main_info">
+            <AccountInfo userInfo={userData} /> <br />
+          </aside>
+        </div>
         <button className="PrimaryButton" onClick={this.logout}>
           Logout
         </button>
