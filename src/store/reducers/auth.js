@@ -7,50 +7,52 @@ const initialState = {
   signupError: {},
   user: null,
   token: "",
-  callbackLink: "/"
+  loginSuccess: false,
+  callbackLink: "/",
 };
 
 const loginSuccess = (state, action) => {
   return updateObject(state, {
     isAuthenticated: true,
-    user: action.user
+    user: action.user,
+    loginSuccess: true,
   });
 };
 const signupUser = (state, action) => {
   return updateObject(state, {
-    isAuthenticated: true
+    isAuthenticated: true,
   });
 };
 const loginFailed = (state, action) => {
   console.log(action.errors);
   return updateObject(state, {
-    hasError: true
+    hasError: true,
   });
 };
 const signupFailed = (state, action) => {
   return updateObject(state, {
-    signupError: action.errorMessage
+    signupError: action.errorMessage,
   });
 };
 const setAuthentication = (state, action) => {
   return updateObject(state, {
-    isAuthenticated: action.isAuthenticated
+    isAuthenticated: action.isAuthenticated,
   });
 };
 const setUserData = (state, action) => {
   return updateObject(state, {
-    user: action.user
+    user: action.user,
   });
 };
 const setCallbackLink = (state, action) => {
   return updateObject(state, {
-    callbackLink: action.callbackLink
+    callbackLink: action.callbackLink,
   });
 };
 const setToken = (state, action) => {
   console.log("action.token :", action.token);
   return updateObject(state, {
-    token: action.token
+    token: action.token,
   });
 };
 

@@ -29,11 +29,10 @@ class App extends Component {
         <Route path="/signup" component={Signup} />
         <Route path="/products/ref/:productId" component={ProductDetails} />
         <Route path="/products" component={Products} />
-        <Route path="/shoppingCart" component={ShoppingCart} />
+        <Route path="/shoppingCart" render={() => <ShoppingCart />} />
         <Route path="/checkout" component={Checkout} />
         <Route path="/payment" component={Payment} />
-        <Route path="/" exact component={Homepage} />
-        <Redirect to="/" />
+        <Route path="/" exact component={Homepage} /> <Redirect to="/" />
       </Switch>
     );
     if (this.props.isAuthenticated) {
@@ -51,23 +50,18 @@ class App extends Component {
       );
     }
     return (
-      <Layout isAuthenticated={this.props.isAuthenticated}>{routes}</Layout>
+      <Layout isAuthenticated={this.props.isAuthenticated}> {routes} </Layout>
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    isAuthenticated: state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated,
   };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getUserData: () => dispatch(actions.getAuthenticatedUserData())
+    getUserData: () => dispatch(actions.getAuthenticatedUserData()),
   };
 };
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(App)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));

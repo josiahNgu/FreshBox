@@ -7,7 +7,7 @@ class ShoppingCart extends Component {
     const path = "/checkout";
     this.props.history.push(path);
   };
-  deleteItem = itemId => {
+  deleteItem = (itemId) => {
     console.log("itemId :", itemId);
   };
   render() {
@@ -31,10 +31,11 @@ class ShoppingCart extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state, ownProps) => {
   return {
     shoppingList: state.shoppingCart.shoppingList,
-    totalPrice: state.shoppingCart.totalPrice
+    totalPrice: state.shoppingCart.totalPrice,
+    cookie: ownProps.cookies,
   };
 };
 export default connect(mapStateToProps)(ShoppingCart);

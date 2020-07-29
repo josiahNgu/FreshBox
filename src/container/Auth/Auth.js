@@ -3,15 +3,9 @@ import Input from "../../components/UI/Input/Input";
 import Alert from "../../components/UI/Alert/Alert";
 import "./Auth.css";
 import * as actions from "../../store/actions/index";
-import { withRouter } from "react-router-dom";
+import { withRouter, Router } from "react-router-dom";
 import { connect } from "react-redux";
 
-// import { Redirect } from "react-router-dom";
-
-import {
-  GoogleProvider,
-  FacebookProvider
-} from "../../components/Firebase/index";
 class Auth extends Component {
   state = {
     formElements: {
@@ -19,23 +13,23 @@ class Auth extends Component {
         elementType: "input",
         elementConfig: {
           placeholder: "Email",
-          type: "email"
+          type: "email",
         },
-        value: ""
+        value: "",
       },
       password: {
         elementType: "input",
         elementConfig: {
           placeholder: "Password",
-          type: "password"
+          type: "password",
         },
-        value: ""
-      }
+        value: "",
+      },
     },
-    error: {}
+    error: {},
   };
 
-  changetoSignupPageHandler = event => {
+  changetoSignupPageHandler = (event) => {
     event.preventDefault();
     console.log("here");
     this.props.history.push("/signup");
@@ -45,36 +39,19 @@ class Auth extends Component {
       ...this.state.formElements,
       [elementName]: {
         ...this.state.formElements[elementName],
-        value: event.target.value
-      }
+        value: event.target.value,
+      },
     };
     this.setState({ formElements: updatedField });
   };
-  submitHandler = event => {
+  submitHandler = (event) => {
     event.preventDefault();
     this.props.login(
       this.state.formElements["email"].value,
       this.state.formElements["password"].value
     );
   };
-  authWithFacebook = () => {
-    // console.log("auth With Facebook");
-    // firebase
-    //   .auth()
-    //   .signInWithPopup(FacebookProvider)
-    //   .then(result => {
-    //     console.log(result);
-    //     this.setState({ shouldRedirect: true });
-    //     this.props.thirdPartyLogin(result);
-    //   })
-    //   .catch(err => {
-    //     console.log(err);
-    //   });
-  };
-  authWithGoogle = () => {
-    console.log("here");
-    this.props.googleAuth();
-  };
+
   render() {
     const formElementsArray = [];
     for (let key in this.state.formElements) {
@@ -83,19 +60,21 @@ class Auth extends Component {
     let form = (
       <form onSubmit={this.submitHandler}>
         <h5 className="Header">Sign In to Account</h5>
-        {formElementsArray.map(formElement => (
+        {formElementsArray.map((formElement) => (
           <Input
             key={formElement.id}
             elementTypes={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
-            changed={event => this.inputChangedHandler(event, formElement.id)}
+            changed={(event) => this.inputChangedHandler(event, formElement.id)}
           />
         ))}
         <button className="signIn_button">Sign In</button>
       </form>
     );
-
+    if (this.props.loginSuccess) {
+      Router.push("/account");
+    }
     return (
       <section id="Auth">
         <div className="AuthForm">
@@ -108,13 +87,7 @@ class Auth extends Component {
           </div>
           {form}
           <hr />
-          <button className="FacebookButton" onClick={this.authWithFacebook}>
-            Login with Facebook
-          </button>
-          <br />
-          <button className="GoogleButton" onClick={this.authWithGoogle}>
-            Sign in with Google
-          </button>
+
           <div>
             Don't have an account?
             <p onClick={this.changetoSignupPageHandler}>Sign up here</p>
@@ -125,22 +98,15 @@ class Auth extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    hasError: state.auth.hasError
-    // shouldRedirect: state.auth.shouldRedirect
+    hasError: state.auth.hasError,
+    loginSuccess: state.auth.loginSuccess,
   };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     login: (email, password) => dispatch(actions.login(email, password)),
-    googleAuth: () => dispatch(actions.googleAuth)
-    // thirdPartyLogin: type => dispatch(actions.thirdPartyLogin(type))
   };
 };
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(Auth)
-);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Auth));

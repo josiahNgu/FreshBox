@@ -1,11 +1,5 @@
 export { initProducts, initProductDetails } from "./products";
-export {
-  login,
-  loginSuccess,
-  authenticationStatus,
-  logout,
-  googleAuth
-} from "./auth";
+export { login, loginSuccess, authenticationStatus, logout } from "./auth";
 export { signup } from "./signup";
 export {
   initShoppingList,
@@ -13,7 +7,7 @@ export {
   addToCart,
   getTotalPrice,
   isCheckingOut,
-  deleteItem
+  deleteItem,
 } from "./shoppingCart";
 export { shippingAddressForm, cardForm, placeOrder } from "./payment";
 export { getAuthenticatedUserData } from "./user";
