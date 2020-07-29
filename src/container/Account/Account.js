@@ -7,7 +7,11 @@ import * as actions from "../../store/actions/index";
 import "./Account.css";
 class Account extends Component {
   componentDidMount() {
-    this.props.getUserData();
+    if (localStorage.getItem("idToken")) {
+      this.props.getUserData();
+    } else {
+      window.location.reload();
+    }
   }
 
   logout = () => {
@@ -32,10 +36,10 @@ class Account extends Component {
           <aside className="main_info">
             <AccountInfo userInfo={userData} /> <br />
           </aside>
+          <button className="PrimaryButton" onClick={this.logout}>
+            Logout
+          </button>
         </div>
-        <button className="PrimaryButton" onClick={this.logout}>
-          Logout
-        </button>
       </div>
     );
   }

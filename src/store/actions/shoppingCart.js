@@ -6,31 +6,31 @@ export const loadShoppingList = (data, totalPrice) => {
     shoppingList: data,
     totalPrice: totalPrice,
     fetchDataFinished: true,
-    isLoading: false
+    isLoading: false,
   };
 };
 const addingToCart = () => {
   return {
     type: actionTypes.IS_ADDING_TO_CART,
-    isLoading: true
+    isLoading: true,
   };
 };
 export const isCheckingOut = () => {
   return {
     type: actionTypes.IS_CHECKING_OUT,
-    isCheckingOut: true
+    isCheckingOut: true,
   };
 };
-const setTotalPrice = totalPrice => {
+const setTotalPrice = (totalPrice) => {
   return {
     type: actionTypes.TOTAL_PRICE,
-    totalPrice: totalPrice
+    totalPrice: totalPrice,
   };
 };
 const addToCartFinished = () => {
   return {
     type: actionTypes.IS_ADDING_TO_CART,
-    isLoading: false
+    isLoading: false,
   };
 };
 export const addToCart = (itemId, quantity, deliveryOptions) => {
@@ -38,9 +38,9 @@ export const addToCart = (itemId, quantity, deliveryOptions) => {
   const addItem = {
     itemId: itemId,
     quantity: quantity,
-    deliveryOptions: deliveryOptions
+    deliveryOptions: deliveryOptions,
   };
-  return dispatch => {
+  return (dispatch) => {
     dispatch(addingToCart());
     //   if (localStorage.getItem("idToken") === null) {
     let updateShoppingList = [];
@@ -55,33 +55,34 @@ export const addToCart = (itemId, quantity, deliveryOptions) => {
   };
 };
 export const deleteItem = (index, totalPrice) => {
-  return dispatch => {
+  return (dispatch) => {
     dispatch(getTotalPrice());
     dispatch({
       type: actionTypes.DELETE_ITEM,
-      deleteIndex: index
+      deleteIndex: index,
     });
   };
 };
 export const initShoppingList = () => {
   const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;
   axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
-  return dispatch =>
+  return (dispatch) =>
     axios
       .get("/shoppingCart")
-      .then(res => {
+      .then((res) => {
         console.log(res);
-        const data = res.data.map(detail => {
+        const data = res.data.map((detail) => {
           return {
             itemId: detail.itemId,
             itemName: detail.itemName,
-            frequency: detail.frequency,
-            imageURL: detail.imageURL
+            quantity: detail.quantity,
+            price: detail.price,
+            imageURL: detail.imageURL,
           };
         });
         dispatch(loadShoppingList(data));
       })
-      .catch(err => {
+      .catch((err) => {
         console.log("err.response.status", err.response.status);
         if (err.response.status.toString() === "403") {
           // authenticationFailed();
@@ -92,17 +93,17 @@ export const initShoppingList = () => {
 const localStorageShoppingList = (ref, quantity, frequency) => {
   return axios
     .get(`/products/${ref}`)
-    .then(res => {
+    .then((res) => {
       return {
         itemId: res.data.id,
         price: res.data.price,
         itemName: res.data.itemName,
         imageURL: res.data.imageURL,
         quantity: quantity,
-        frequency: frequency
+        frequency: frequency,
       };
     })
-    .then(data => {
+    .then((data) => {
       return data;
     });
 };
@@ -111,14 +112,14 @@ export const initLocalShoppingList = () => {
   localStorage.removeItem("updatedSL");
   let updatedSL = [];
   let totalPrice = 0;
-  return dispatch => {
+  return (dispatch) => {
     const localShoppingList = JSON.parse(localStorage.getItem("shoppingList"));
-    let promises = localShoppingList.map(item => {
+    let promises = localShoppingList.map((item) => {
       return localStorageShoppingList(
         item.itemId,
         item.quantity,
         item.deliveryOptions
-      ).then(data => {
+      ).then((data) => {
         updatedSL.push(data);
         totalPrice += data.quantity * data.price;
       });
@@ -131,21 +132,21 @@ export const initLocalShoppingList = () => {
 const itemPrice = (ref, quantity) => {
   return axios
     .get(`/products/ref/${ref}`)
-    .then(res => {
+    .then((res) => {
       return {
         price: res.data.price,
-        quantity: quantity
+        quantity: quantity,
       };
     })
-    .then(data => {
+    .then((data) => {
       return data.price * data.quantity;
     });
 };
 export const getTotalPrice = () => {
   const localShoppingList = JSON.parse(localStorage.getItem("shoppingList"));
   let totalPrice = 0;
-  return dispatch => {
-    localShoppingList.map(item => {
+  return (dispatch) => {
+    localShoppingList.map((item) => {
       totalPrice += item.price;
     });
     dispatch(setTotalPrice(totalPrice.toFixed(2)));
