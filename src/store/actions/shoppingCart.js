@@ -42,16 +42,17 @@ export const addToCart = (itemId, quantity, deliveryOptions) => {
   };
   return (dispatch) => {
     dispatch(addingToCart());
-    //   if (localStorage.getItem("idToken") === null) {
-    let updateShoppingList = [];
-    if (localStorage.getItem("shoppingList")) {
-      updateShoppingList = JSON.parse(localStorage.getItem("shoppingList"));
+    if (localStorage.getItem("idToken") === null) {
+      let updateShoppingList = [];
+      if (localStorage.getItem("shoppingList")) {
+        updateShoppingList = JSON.parse(localStorage.getItem("shoppingList"));
+      }
+      updateShoppingList.push(addItem);
+      localStorage.setItem("shoppingList", JSON.stringify(updateShoppingList));
+      setTimeout(() => {
+        dispatch(addToCartFinished());
+      }, 3000);
     }
-    updateShoppingList.push(addItem);
-    localStorage.setItem("shoppingList", JSON.stringify(updateShoppingList));
-    setTimeout(() => {
-      dispatch(addToCartFinished());
-    }, 3000);
   };
 };
 export const deleteItem = (index, totalPrice) => {
@@ -62,6 +63,10 @@ export const deleteItem = (index, totalPrice) => {
       deleteIndex: index,
     });
   };
+};
+export const deleteLoggedInUserItem = (itemId) => {
+  const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;
+  axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
 };
 export const initShoppingList = () => {
   const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;

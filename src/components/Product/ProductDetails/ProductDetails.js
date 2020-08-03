@@ -11,20 +11,20 @@ class ProductDetails extends Component {
     this.state = {
       deliveryOptions: "1",
       quantity: "1",
-      addToCart: false
+      addToCart: false,
     };
     this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
     const {
-      match: { params }
+      match: { params },
     } = this.props;
     this.props.onInItProductDetails(params.productId);
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.isLoading !== this.props.isLoading) {
       this.setState({
-        addToCart: this.props.isLoading
+        addToCart: this.props.isLoading,
       });
     }
   }
@@ -39,13 +39,13 @@ class ProductDetails extends Component {
       this.state.deliveryOptions
     );
     this.setState({
-      addToCart: true
+      addToCart: true,
     });
   };
-  handleChange = event => {
+  handleChange = (event) => {
     const { name, value } = event.target;
     this.setState({
-      [name]: value
+      [name]: value,
     });
   };
   render() {
@@ -54,31 +54,33 @@ class ProductDetails extends Component {
     let message = "adding item to cart";
     if (this.props.productDetails) {
       canvas = (
-        <div id="product_details" className="pt_4">
+        <div id="product_details">
           <div id="alert" className={this.props.isLoading ? "show" : "hidden"}>
             <Alert message="Adding item to cart !" type="success" />
           </div>
-          <button onClick={this.goBack} className="back_btn">
-            &laquo; Back
-          </button>
-          <div className="row ">
+
+          <div className=" product_content pt_4">
+            <button onClick={this.goBack} className="back_btn">
+              &laquo; Back
+            </button>
             <img
-              className="col-md-6"
+              className=""
               src={this.props.productDetails.imageURL}
               alt="product"
             />
-            <div className=" item_description col-md-6">
-              <h3>{this.props.productDetails.itemName}</h3>
-              <p className="bold_text">$ {this.props.productDetails.price}</p>
-              <p>{this.props.productDetails.description}</p>
-              <label>Quantity</label>
-              <Input
-                elementTypes="quantityInput"
-                name="quantity"
-                placeholder="1"
-                changed={this.handleChange}
-              />
-              {/* <select
+          </div>
+          <div className=" item_description ">
+            <h3>{this.props.productDetails.itemName}</h3>
+            <p className="bold_text">$ {this.props.productDetails.price}</p>
+            <p>{this.props.productDetails.description}</p>
+            <label>Quantity</label>
+            <Input
+              elementTypes="quantityInput"
+              name="quantity"
+              placeholder="1"
+              changed={this.handleChange}
+            />
+            {/* <select
                 name="deliveryOptions"
                 value=""
                 onChange={this.handleChange}
@@ -87,15 +89,14 @@ class ProductDetails extends Component {
                 <option value="2">Every 2 Month</option>
                 <option value="3">Every 3 Month</option>
               </select> */}
-              <br />
-              <button
-                className={styles}
-                disabled={this.props.isLoading}
-                onClick={this.addToCart}
-              >
-                Add To Cart
-              </button>
-            </div>
+            <br />
+            <button
+              className={styles}
+              disabled={this.props.isLoading}
+              onClick={this.addToCart}
+            >
+              Add To Cart
+            </button>
           </div>
         </div>
       );
@@ -103,21 +104,18 @@ class ProductDetails extends Component {
     return canvas;
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     productDetails: state.product.productDetails,
-    isLoading: state.shoppingCart.isAddingToCart
+    isLoading: state.shoppingCart.isAddingToCart,
   };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onInItProductDetails: itemId =>
+    onInItProductDetails: (itemId) =>
       dispatch(actions.initProductDetails(itemId)),
     addProductToCart: (itemId, quantity, deliveryOptions) =>
-      dispatch(actions.addToCart(itemId, quantity, deliveryOptions))
+      dispatch(actions.addToCart(itemId, quantity, deliveryOptions)),
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(ProductDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);
