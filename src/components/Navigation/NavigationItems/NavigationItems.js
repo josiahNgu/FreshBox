@@ -2,7 +2,7 @@ import React from "react";
 import NavigationItem from "./NavigationItem/NavigationItem";
 
 import "./NavigationItems.css";
-const navigationItems = props => {
+const navigationItems = (props) => {
   let navigationLinks = (
     <ul>
       <NavigationItem link="/products">PRODUCTS</NavigationItem>
@@ -26,7 +26,7 @@ const navigationItems = props => {
   return (
     <nav id="NavigationItems">
       <h3 className="DesktopOnly">
-        <a href="/">CardBox</a>
+        <a href="/">FreshBox</a>
       </h3>
       <div className="nav_links">{navigationLinks}</div>
     </nav>

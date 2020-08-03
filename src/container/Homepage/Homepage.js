@@ -6,8 +6,8 @@ class Homepage extends Component {
     return (
       <main id="homepage-main">
         <div className="homepage-content">
-          <h1>CardBox</h1>
-          <p>Repetition Made Easy! Let us handle the reminder</p>
+          <h1>FreshBox</h1>
+          <p>Fresh fruits and vegetables directly from local farmers</p>
           <div className="shop_link">
             <Link to="/products">Shop Now</Link>
           </div>
