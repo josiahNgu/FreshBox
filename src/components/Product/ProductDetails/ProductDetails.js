@@ -58,11 +58,10 @@ class ProductDetails extends Component {
           <div id="alert" className={this.props.isLoading ? "show" : "hidden"}>
             <Alert message="Adding item to cart !" type="success" />
           </div>
-
-          <div className=" product_content pt_4">
-            <button onClick={this.goBack} className="back_btn">
-              &laquo; Back
-            </button>
+          <button onClick={this.goBack} className="DesktopOnly  pt_4 back_btn">
+            &laquo; Back
+          </button>
+          <div className=" product_content">
             <img
               className=""
               src={this.props.productDetails.imageURL}

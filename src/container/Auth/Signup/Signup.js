@@ -15,58 +15,58 @@ class Signup extends Component {
         elementType: "input",
         elementConfig: {
           placeholder: "Name",
-          type: "name"
+          type: "name",
         },
         value: "",
         valid: false,
         validation: {
           required: true,
-          minLength: 3
+          minLength: 3,
         },
-        touched: false
+        touched: false,
       },
       email: {
         elementType: "input",
         elementConfig: {
           placeholder: "Email",
-          type: "email"
+          type: "email",
         },
         value: "",
         valid: false,
         validation: {
           required: true,
-          isEmail: true
-        }
+          isEmail: true,
+        },
       },
       password: {
         elementType: "input",
         elementConfig: {
           placeholder: "Password (min. 6 characters)",
-          type: "password"
+          type: "password",
         },
         value: "",
         valid: false,
         validation: {
           required: true,
-          isPassword: true
+          isPassword: true,
         },
-        touched: false
+        touched: false,
       },
       confirmPassword: {
         elementType: "input",
         elementConfig: {
           placeholder: "Confirm Password",
-          type: "password"
+          type: "password",
         },
-        value: ""
-      }
+        value: "",
+      },
     },
-    showAlert: false
+    showAlert: false,
   };
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.errorMessage !== this.props.errorMessage) {
       this.setState({
-        propsErrorMessage: JSON.stringify(this.props.errorMessage)
+        propsErrorMessage: JSON.stringify(this.props.errorMessage),
       });
     }
   }
@@ -95,19 +95,19 @@ class Signup extends Component {
           event.target.value,
           this.state.formElements[elementName].validation
         ),
-        touched: true
-      }
+        touched: true,
+      },
     };
 
     this.setState({ formElements: updatedField });
   };
-  submitHandler = event => {
+  submitHandler = (event) => {
     event.preventDefault();
     if (!this.allFieldValid()) {
       this.setState({
         showAlert: true,
         errorMessage:
-          "Please make sure that every field is filled and fix fields with error"
+          "Please make sure that every field is filled and fix fields with error",
       });
     } else if (
       this.matchPassword(
@@ -125,7 +125,7 @@ class Signup extends Component {
     } else {
       this.setState({
         errorMessage: "Passwords should match",
-        showAlert: true
+        showAlert: true,
       });
     }
   };
@@ -142,7 +142,7 @@ class Signup extends Component {
     form = (
       <form onSubmit={this.submitHandler}>
         <h5 className="Header">Sign Up</h5>
-        {formElementsArray.map(formElement => (
+        {formElementsArray.map((formElement) => (
           <Input
             key={formElement.id}
             currentElement={formElement.id}
@@ -153,14 +153,14 @@ class Signup extends Component {
             value={formElement.config.value}
             errorMessage={formElement.config.errorMessage}
             touched={formElement.config.touched}
-            changed={event => this.inputChangedHandler(event, formElement.id)}
+            changed={(event) => this.inputChangedHandler(event, formElement.id)}
           />
         ))}
         <button className="primary_button">Submit</button>
       </form>
     );
     return (
-      <main className="pt_4">
+      <div>
         <div
           className={
             this.state.propsErrorMessage ? "signup_error" : "signup_hidden"
@@ -184,23 +184,20 @@ class Signup extends Component {
             <p>Enter your details and start journey with us!</p>
           </div>
         </div>
-      </main>
+      </div>
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     shouldRedirect: state.auth.shouldRedirect,
-    errorMessage: state.auth.signupError
+    errorMessage: state.auth.signupError,
   };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
     onSignupHandler: (email, password, userName) =>
-      dispatch(actions.signup(email, password, userName))
+      dispatch(actions.signup(email, password, userName)),
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Signup);
+export default connect(mapStateToProps, mapDispatchToProps)(Signup);
