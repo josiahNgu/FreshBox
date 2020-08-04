@@ -6,9 +6,17 @@ import ShoppingCartItem from "../ShoppingItem/ShoppingItem";
 import * as actions from "../../store/actions/index";
 class ShoppingList extends Component {
   componentDidMount() {
-    if (localStorage.getItem("shoppingList")) {
+    if (this.props.isAuthenticated) {
+      this.props.initUserShoppingCart();
+    } else if (
+      !this.props.isAuthenticated &&
+      localStorage.getItem("shoppingList") > 1
+    ) {
       this.props.initLocalShoppingCart();
-    } else if (localStorage.getItem("idToken")) {
+    }
+  }
+  componentWillReceiveProps(nextProps) {
+    if (this.props.isAuthenticated !== nextProps.isAuthenticated) {
       this.props.initUserShoppingCart();
     }
   }
@@ -35,7 +43,7 @@ class ShoppingList extends Component {
         />
       ));
     } else {
-      if (localStorage.getItem("shoppingList")) {
+      if (localStorage.getItem("shoppingList") > 1) {
         shoppingCart = <Spinner />;
       } else {
         shoppingCart = <p>Your shopping cart is empty</p>;
@@ -48,8 +56,10 @@ const mapStateToProps = (state) => {
   return {
     shoppingList: state.shoppingCart.shoppingList,
     totalPrice: state.shoppingCart.totalPrice,
+    isAuthenticated: state.auth.isAuthenticated,
   };
 };
+localStorage.getItem("idToken");
 const mapDispatchToProps = (dispatch) => {
   return {
     initLocalShoppingCart: () => dispatch(actions.initLocalShoppingList()),

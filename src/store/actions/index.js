@@ -5,6 +5,7 @@ export {
   initShoppingList,
   initLocalShoppingList,
   addToCart,
+  addAuthUserCart,
   getTotalPrice,
   isCheckingOut,
   deleteItem,

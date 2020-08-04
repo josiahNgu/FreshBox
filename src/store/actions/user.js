@@ -20,10 +20,8 @@ const setAuthenticationStatus = () => {
   };
 };
 export const getAuthenticatedUserData = () => {
-  let idToken = localStorage.getItem("idToken");
-
-  const FirebaseIdToken = "Bearer:" + idToken;
-  axios.defaults.headers.common["authorization"] = FirebaseIdToken;
+  const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;
+  axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
   // axios.get("/user").then(res => {
   //   console.log(res.data.userData.credentials);
   // });

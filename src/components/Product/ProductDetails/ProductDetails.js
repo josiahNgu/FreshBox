@@ -33,11 +33,18 @@ class ProductDetails extends Component {
     this.props.history.goBack();
   };
   addToCart = () => {
-    this.props.addProductToCart(
-      this.props.productDetails.id,
-      this.state.quantity,
-      this.state.deliveryOptions
-    );
+    if (this.props.isAuthenticated) {
+      this.props.addAuthUserCart(
+        this.props.productDetails.id,
+        this.state.quantity
+      );
+    } else {
+      this.props.addProductToCart(
+        this.props.productDetails.id,
+        this.state.quantity,
+        this.state.deliveryOptions
+      );
+    }
     this.setState({
       addToCart: true,
     });
@@ -50,15 +57,13 @@ class ProductDetails extends Component {
   };
   render() {
     let canvas = <Spinner />;
+    let alert = "";
     let styles = "ATC_btn";
     let message = "adding item to cart";
     if (this.props.productDetails) {
       canvas = (
-        <div id="product_details">
-          <div id="alert" className={this.props.isLoading ? "show" : "hidden"}>
-            <Alert message="Adding item to cart !" type="success" />
-          </div>
-          <button onClick={this.goBack} className="DesktopOnly  pt_4 back_btn">
+        <div id="product_details" className="pt_4">
+          <button onClick={this.goBack} className="DesktopOnly   back_btn">
             &laquo; Back
           </button>
           <div className=" product_content">
@@ -92,21 +97,26 @@ class ProductDetails extends Component {
         </div>
       );
     }
+
     return canvas;
   }
 }
 const mapStateToProps = (state) => {
   return {
     productDetails: state.product.productDetails,
-    isLoading: state.shoppingCart.isAddingToCart,
+    addingToCart: state.shoppingCart.isAddingToCart,
+    isAuthenticated: state.auth.isAuthenticated,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     onInItProductDetails: (itemId) =>
       dispatch(actions.initProductDetails(itemId)),
-    addProductToCart: (itemId, quantity, deliveryOptions) =>
-      dispatch(actions.addToCart(itemId, quantity, deliveryOptions)),
+    addProductToCart: (itemId, quantity) =>
+      dispatch(actions.addToCart(itemId, quantity)),
+    addAuthUserCart: (itemId, quantity) => {
+      dispatch(actions.addAuthUserCart(itemId, quantity));
+    },
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

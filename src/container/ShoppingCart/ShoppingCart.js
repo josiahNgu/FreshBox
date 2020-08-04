@@ -35,7 +35,6 @@ const mapStateToProps = (state, ownProps) => {
   return {
     shoppingList: state.shoppingCart.shoppingList,
     totalPrice: state.shoppingCart.totalPrice,
-    cookie: ownProps.cookies,
   };
 };
 export default connect(mapStateToProps)(ShoppingCart);

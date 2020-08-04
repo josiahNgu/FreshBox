@@ -33,26 +33,37 @@ const addToCartFinished = () => {
     isLoading: false,
   };
 };
-export const addToCart = (itemId, quantity, deliveryOptions) => {
-  console.log(itemId, quantity, deliveryOptions);
-  const addItem = {
-    itemId: itemId,
-    quantity: quantity,
-    deliveryOptions: deliveryOptions,
+export const addAuthUserCart = (itemId, quantity) => {
+  const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;
+  axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
+  const newItem = {
+    itemId,
+    quantity,
   };
   return (dispatch) => {
     dispatch(addingToCart());
-    if (localStorage.getItem("idToken") === null) {
-      let updateShoppingList = [];
-      if (localStorage.getItem("shoppingList")) {
-        updateShoppingList = JSON.parse(localStorage.getItem("shoppingList"));
-      }
-      updateShoppingList.push(addItem);
-      localStorage.setItem("shoppingList", JSON.stringify(updateShoppingList));
-      setTimeout(() => {
+    axios.post("shoppingCart", newItem).then((res) => {
+      if (res.status.toString() === "201") {
         dispatch(addToCartFinished());
-      }, 3000);
+      }
+    });
+  };
+};
+export const addToCart = (itemId, quantity) => {
+  console.log(itemId, quantity);
+  const addItem = {
+    itemId: itemId,
+    quantity: quantity,
+  };
+  return (dispatch) => {
+    dispatch(addingToCart());
+    let updateShoppingList = [];
+    if (localStorage.getItem("shoppingList")) {
+      updateShoppingList = JSON.parse(localStorage.getItem("shoppingList"));
     }
+    updateShoppingList.push(addItem);
+    localStorage.setItem("shoppingList", JSON.stringify(updateShoppingList));
+    dispatch(addToCartFinished());
   };
 };
 export const deleteItem = (index, totalPrice) => {
@@ -67,6 +78,9 @@ export const deleteItem = (index, totalPrice) => {
 export const deleteLoggedInUserItem = (itemId) => {
   const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;
   axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
+  return (dispatch) => {
+    // axios.
+  };
 };
 export const initShoppingList = () => {
   const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;
@@ -75,7 +89,6 @@ export const initShoppingList = () => {
     axios
       .get("/shoppingCart")
       .then((res) => {
-        console.log(res);
         const data = res.data.map((detail) => {
           return {
             itemId: detail.itemId,
@@ -88,9 +101,14 @@ export const initShoppingList = () => {
         dispatch(loadShoppingList(data));
       })
       .catch((err) => {
-        console.log("err.response.status", err.response.status);
-        if (err.response.status.toString() === "403") {
+        console.log("err.response.status", err);
+        if (
+          err.response.status.toString() === "403"
+          // ||
+          // err.response.status.toString() === "401"
+        ) {
           // authenticationFailed();
+          localStorage.removeItem("idToken");
           console.log("err", err);
         }
       });
