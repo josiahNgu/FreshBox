@@ -6,31 +6,31 @@ export const loadShoppingList = (data, totalPrice) => {
     shoppingList: data,
     totalPrice: totalPrice,
     fetchDataFinished: true,
-    isLoading: false,
+    isLoading: false
   };
 };
 const addingToCart = () => {
   return {
     type: actionTypes.IS_ADDING_TO_CART,
-    isLoading: true,
+    isLoading: true
   };
 };
 export const isCheckingOut = () => {
   return {
     type: actionTypes.IS_CHECKING_OUT,
-    isCheckingOut: true,
+    isCheckingOut: true
   };
 };
-const setTotalPrice = (totalPrice) => {
+const setTotalPrice = totalPrice => {
   return {
     type: actionTypes.TOTAL_PRICE,
-    totalPrice: totalPrice,
+    totalPrice: totalPrice
   };
 };
 const addToCartFinished = () => {
   return {
     type: actionTypes.IS_ADDING_TO_CART,
-    isLoading: false,
+    isLoading: false
   };
 };
 export const addAuthUserCart = (itemId, quantity) => {
@@ -38,11 +38,11 @@ export const addAuthUserCart = (itemId, quantity) => {
   axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
   const newItem = {
     itemId,
-    quantity,
+    quantity
   };
-  return (dispatch) => {
+  return dispatch => {
     dispatch(addingToCart());
-    axios.post("shoppingCart", newItem).then((res) => {
+    axios.post("shoppingCart", newItem).then(res => {
       if (res.status.toString() === "201") {
         dispatch(addToCartFinished());
       }
@@ -53,9 +53,9 @@ export const addToCart = (itemId, quantity) => {
   console.log(itemId, quantity);
   const addItem = {
     itemId: itemId,
-    quantity: quantity,
+    quantity: quantity
   };
-  return (dispatch) => {
+  return dispatch => {
     dispatch(addingToCart());
     let updateShoppingList = [];
     if (localStorage.getItem("shoppingList")) {
@@ -67,40 +67,44 @@ export const addToCart = (itemId, quantity) => {
   };
 };
 export const deleteItem = (index, totalPrice) => {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(getTotalPrice());
     dispatch({
       type: actionTypes.DELETE_ITEM,
-      deleteIndex: index,
+      deleteIndex: index
     });
   };
 };
-export const deleteLoggedInUserItem = (itemId) => {
+export const deleteLoggedInUserItem = itemId => {
   const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;
   axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
-  return (dispatch) => {
+  return dispatch => {
     // axios.
   };
 };
 export const initShoppingList = () => {
   const FirebaseIdToken = `Bearer:${localStorage.getItem("idToken")}`;
   axios.defaults.headers.common["Authorization"] = FirebaseIdToken;
-  return (dispatch) =>
+  let totalPrice = 0;
+  return dispatch =>
     axios
       .get("/shoppingCart")
-      .then((res) => {
-        const data = res.data.map((detail) => {
+      .then(res => {
+        const data = res.data.map(detail => {
+          totalPrice += detail.price * detail.quantity;
           return {
             itemId: detail.itemId,
             itemName: detail.itemName,
             quantity: detail.quantity,
             price: detail.price,
-            imageURL: detail.imageURL,
+            imageURL: detail.imageURL
           };
         });
+
         dispatch(loadShoppingList(data));
+        dispatch(setTotalPrice(totalPrice.toFixed(2)));
       })
-      .catch((err) => {
+      .catch(err => {
         console.log("err.response.status", err);
         if (
           err.response.status.toString() === "403"
@@ -108,7 +112,7 @@ export const initShoppingList = () => {
           // err.response.status.toString() === "401"
         ) {
           // authenticationFailed();
-          localStorage.removeItem("idToken");
+          window.location.reload();
           console.log("err", err);
         }
       });
@@ -116,17 +120,17 @@ export const initShoppingList = () => {
 const localStorageShoppingList = (ref, quantity, frequency) => {
   return axios
     .get(`/products/${ref}`)
-    .then((res) => {
+    .then(res => {
       return {
         itemId: res.data.id,
         price: res.data.price,
         itemName: res.data.itemName,
         imageURL: res.data.imageURL,
         quantity: quantity,
-        frequency: frequency,
+        frequency: frequency
       };
     })
-    .then((data) => {
+    .then(data => {
       return data;
     });
 };
@@ -135,14 +139,14 @@ export const initLocalShoppingList = () => {
   localStorage.removeItem("updatedSL");
   let updatedSL = [];
   let totalPrice = 0;
-  return (dispatch) => {
+  return dispatch => {
     const localShoppingList = JSON.parse(localStorage.getItem("shoppingList"));
-    let promises = localShoppingList.map((item) => {
+    let promises = localShoppingList.map(item => {
       return localStorageShoppingList(
         item.itemId,
         item.quantity,
         item.deliveryOptions
-      ).then((data) => {
+      ).then(data => {
         updatedSL.push(data);
         totalPrice += data.quantity * data.price;
       });
@@ -155,21 +159,21 @@ export const initLocalShoppingList = () => {
 const itemPrice = (ref, quantity) => {
   return axios
     .get(`/products/ref/${ref}`)
-    .then((res) => {
+    .then(res => {
       return {
         price: res.data.price,
-        quantity: quantity,
+        quantity: quantity
       };
     })
-    .then((data) => {
+    .then(data => {
       return data.price * data.quantity;
     });
 };
 export const getTotalPrice = () => {
   const localShoppingList = JSON.parse(localStorage.getItem("shoppingList"));
   let totalPrice = 0;
-  return (dispatch) => {
-    localShoppingList.map((item) => {
+  return dispatch => {
+    localShoppingList.map(item => {
       totalPrice += item.price;
     });
     dispatch(setTotalPrice(totalPrice.toFixed(2)));

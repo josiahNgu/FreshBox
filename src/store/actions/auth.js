@@ -4,27 +4,27 @@ import axios from "../../axios";
 // import "firebase/auth";
 export const loginSuccess = () => {
   return {
-    type: actionTypes.LOGIN_SUCCESS,
+    type: actionTypes.LOGIN_SUCCESS
   };
 };
 
-export const loginFailed = (error) => {
+export const loginFailed = error => {
   return {
     type: actionTypes.LOGIN_FAILED,
     errors: error,
-    hasError: true,
+    hasError: true
   };
 };
-export const setUserData = (user) => {
+export const setUserData = user => {
   return {
     type: actionTypes.SET_USER,
-    user: user,
+    user: user
   };
 };
-export const setCallbackLink = (callbackLink) => {
+export const setCallbackLink = callbackLink => {
   return {
     type: actionTypes.SET_CALLBACK_LINK,
-    callbackLink,
+    callbackLink
   };
 };
 export const logout = () => {
@@ -33,19 +33,17 @@ export const logout = () => {
 export const login = (email, password) => {
   const user = {
     email: email,
-    password: password,
+    password: password
   };
-  return (dispatch) => {
+  return dispatch => {
     axios
       .post("/auth", user)
-      .then((res) => {
+      .then(res => {
         localStorage.setItem("idToken", res.data.idToken);
-
-        // setAuthorizationHeader(res.data.idToken);
-        // dispatch(getUserData());
         dispatch(loginSuccess());
+        dispatch(setCallbackLink("/products"));
       })
-      .catch((err) => {
+      .catch(err => {
         console.log("err :>> ", err);
         dispatch(
           loginFailed("There was an error while log in. Please try again")
@@ -54,25 +52,25 @@ export const login = (email, password) => {
   };
 };
 export const getUserData = () => {
-  return (dispatch) => {
+  return dispatch => {
     axios
       .get("/user")
-      .then((res) => {
+      .then(res => {
         console.log(res);
         dispatch(setUserData(res.data));
       })
-      .catch((err) => {
+      .catch(err => {
         console.error(err);
       });
   };
 };
-export const authenticationStatus = (status) => {
+export const authenticationStatus = status => {
   return {
     type: actionTypes.IS_AUTHENTICATED,
-    isAuthenticated: status,
+    isAuthenticated: status
   };
 };
-const setAuthorizationHeader = (token) => {
+const setAuthorizationHeader = token => {
   const FirebaseIdToken = "Bearer:" + token;
   console.log("setAuthorizationHeader() token :", token);
   localStorage.setItem("idToken", token);

@@ -20,7 +20,7 @@ class ShoppingList extends Component {
       this.props.initUserShoppingCart();
     }
   }
-  deleteItem = (index) => {
+  deleteItem = index => {
     let oldList = JSON.parse(localStorage.getItem("shoppingList"));
     oldList.splice(index, 1);
     localStorage.setItem("shoppingList", JSON.stringify(oldList));
@@ -52,20 +52,20 @@ class ShoppingList extends Component {
     return <div className="shopping_cart_list ">{shoppingCart}</div>;
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     shoppingList: state.shoppingCart.shoppingList,
     totalPrice: state.shoppingCart.totalPrice,
-    isAuthenticated: state.auth.isAuthenticated,
+    isAuthenticated: state.auth.isAuthenticated
   };
 };
 localStorage.getItem("idToken");
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     initLocalShoppingCart: () => dispatch(actions.initLocalShoppingList()),
     getTotalPrice: () => dispatch(actions.getTotalPrice()),
-    deleteItem: (index) => dispatch(actions.deleteItem(index)),
-    initUserShoppingCart: () => dispatch(actions.initShoppingList()),
+    deleteItem: index => dispatch(actions.deleteItem(index)),
+    initUserShoppingCart: () => dispatch(actions.initShoppingList())
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ShoppingList);

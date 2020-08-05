@@ -13,23 +13,23 @@ class Auth extends Component {
         elementType: "input",
         elementConfig: {
           placeholder: "Email",
-          type: "email",
+          type: "email"
         },
-        value: "",
+        value: ""
       },
       password: {
         elementType: "input",
         elementConfig: {
           placeholder: "Password",
-          type: "password",
+          type: "password"
         },
-        value: "",
-      },
+        value: ""
+      }
     },
-    error: {},
+    error: {}
   };
 
-  changetoSignupPageHandler = (event) => {
+  changetoSignupPageHandler = event => {
     event.preventDefault();
     console.log("here");
     this.props.history.push("/signup");
@@ -39,12 +39,12 @@ class Auth extends Component {
       ...this.state.formElements,
       [elementName]: {
         ...this.state.formElements[elementName],
-        value: event.target.value,
-      },
+        value: event.target.value
+      }
     };
     this.setState({ formElements: updatedField });
   };
-  submitHandler = (event) => {
+  submitHandler = event => {
     event.preventDefault();
     this.props.login(
       this.state.formElements["email"].value,
@@ -60,13 +60,13 @@ class Auth extends Component {
     let form = (
       <form onSubmit={this.submitHandler}>
         <h5 className="Header">Sign In to Account</h5>
-        {formElementsArray.map((formElement) => (
+        {formElementsArray.map(formElement => (
           <Input
             key={formElement.id}
             elementTypes={formElement.config.elementType}
             elementConfig={formElement.config.elementConfig}
             value={formElement.config.value}
-            changed={(event) => this.inputChangedHandler(event, formElement.id)}
+            changed={event => this.inputChangedHandler(event, formElement.id)}
           />
         ))}
         <button className="signIn_button">Sign In</button>
@@ -98,15 +98,15 @@ class Auth extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     hasError: state.auth.hasError,
-    loginSuccess: state.auth.loginSuccess,
+    loginSuccess: state.auth.loginSuccess
   };
 };
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    login: (email, password) => dispatch(actions.login(email, password)),
+    login: (email, password) => dispatch(actions.login(email, password))
   };
 };
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Auth));
