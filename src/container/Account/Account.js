@@ -23,12 +23,11 @@ class Account extends Component {
     if (this.props.user) {
       userData = {
         userName: this.props.user.data.userData.displayName,
-        email: this.props.user.data.userData.email,
+        email: this.props.user.data.userData.email
       };
     }
     return (
-      <div className="pt_4">
-        <h2>My Account</h2>
+      <div className="">
         <div className="account_container pt_4">
           <section className="sidebar">
             <AccountSideBar />
@@ -45,14 +44,14 @@ class Account extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    user: state.user.user,
+    user: state.user.user
   };
 };
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    getUserData: () => dispatch(actions.getAuthenticatedUserData()),
+    getUserData: () => dispatch(actions.getAuthenticatedUserData())
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Account);

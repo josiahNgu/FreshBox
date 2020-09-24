@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Route, Switch, withRouter, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
+import { withRouter } from "react-router";
 import Homepage from "./container/Homepage/Homepage";
 import { connect } from "react-redux";
 import "./App.css";
@@ -11,6 +12,7 @@ import ShoppingCart from "./container/ShoppingCart/ShoppingCart";
 import Account from "./container/Account/Account";
 import Checkout from "./container/Checkout/Checkout";
 import Payment from "./container/Payment/Payment";
+import Order from "./container/Order/Order";
 import ProductDetails from "./components/Product/ProductDetails/ProductDetails";
 import * as actions from "./store/actions/index";
 
@@ -44,13 +46,13 @@ class App extends Component {
           <Route path="/shoppingCart" component={ShoppingCart} />
           <Route path="/checkout" component={Checkout} />
           <Route path="/payment" component={Payment} />
-          {/* <Route path="/" exact component={Homepage} /> */}
+          <Route path="/orders" component={Order} />
           <Redirect to="/products" />
         </Switch>
       );
     }
     return (
-      <Layout isAuthenticated={this.props.isAuthenticated}> {routes} </Layout>
+      <Layout isAuthenticated={this.props.isAuthenticated}>{routes}</Layout>
     );
   }
 }

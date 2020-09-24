@@ -10,7 +10,7 @@ class ShoppingList extends Component {
       this.props.initUserShoppingCart();
     } else if (
       !this.props.isAuthenticated &&
-      localStorage.getItem("shoppingList") > 1
+      localStorage.getItem("shoppingList")
     ) {
       this.props.initLocalShoppingCart();
     }

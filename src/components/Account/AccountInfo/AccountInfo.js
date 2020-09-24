@@ -1,9 +1,10 @@
 import React from "react";
 import "./AccountInfo.css";
-const AccountInfo = (props) => {
+const AccountInfo = props => {
   return (
     <aside>
-      <h3>personal information</h3>
+      <h3>Your information</h3>
+      <hr className="horizontal_line" />
       <h4>Full Name</h4>
       <p>{props.userInfo.userName}</p>
       <h4>Email</h4>

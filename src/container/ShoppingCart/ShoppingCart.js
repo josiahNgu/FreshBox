@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import ShoppingList from "../../components/ShoppingList/ShoppingList";
 import "./ShoppingCart.css";
 class ShoppingCart extends Component {
   routeCheckoutPage = () => {
-    const path = "/checkout";
-    this.props.history.push(path);
+    const { history } = this.props;
+    history.push("/checkout");
   };
-  deleteItem = (itemId) => {
+  deleteItem = itemId => {
     console.log("itemId :", itemId);
   };
   render() {
@@ -34,7 +35,7 @@ class ShoppingCart extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     shoppingList: state.shoppingCart.shoppingList,
-    totalPrice: state.shoppingCart.totalPrice,
+    totalPrice: state.shoppingCart.totalPrice
   };
 };
-export default connect(mapStateToProps)(ShoppingCart);
+export default withRouter(connect(mapStateToProps)(ShoppingCart));

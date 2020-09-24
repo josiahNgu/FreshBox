@@ -81,8 +81,9 @@ class Payment extends React.Component {
       cvc: this.state.cardElements.cvc.value,
       expDate: this.state.cardElements.expDate.value
     };
+    const updatedShoppingList = this.filterShoppingCartList();
     this.props.placeOrder(
-      this.props.userOrder,
+      updatedShoppingList,
       this.props.shippingForm,
       cardForm
     );
@@ -91,6 +92,16 @@ class Payment extends React.Component {
     this.props.history.push("/checkout");
   };
 
+  filterShoppingCartList = () => {
+    const shoppingList = [];
+    this.props.userOrder.forEach(item => {
+      shoppingList.push({
+        itemId: item.itemId,
+        quantity: item.quantity
+      });
+    });
+    return shoppingList;
+  };
   render() {
     return (
       <main className="Payment pt_4 container-fluid ">
@@ -150,7 +161,4 @@ const mapDispatchToProps = dispatch => {
       dispatch(actions.placeOrder(userOrder, shippingForm, cardForm))
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Payment);
+export default connect(mapStateToProps, mapDispatchToProps)(Payment);

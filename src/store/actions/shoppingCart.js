@@ -90,19 +90,20 @@ export const initShoppingList = () => {
     axios
       .get("/shoppingCart")
       .then(res => {
-        const data = res.data.map(detail => {
-          totalPrice += detail.price * detail.quantity;
-          return {
-            itemId: detail.itemId,
-            itemName: detail.itemName,
-            quantity: detail.quantity,
-            price: detail.price,
-            imageURL: detail.imageURL
-          };
-        });
-
-        dispatch(loadShoppingList(data));
-        dispatch(setTotalPrice(totalPrice.toFixed(2)));
+        if (res.status !== 204) {
+          const data = res.data.map(detail => {
+            totalPrice += detail.price * detail.quantity;
+            return {
+              itemId: detail.itemId,
+              itemName: detail.itemName,
+              quantity: detail.quantity,
+              price: detail.price,
+              imageURL: detail.imageURL
+            };
+          });
+          dispatch(loadShoppingList(data));
+          dispatch(setTotalPrice(totalPrice.toFixed(2)));
+        }
       })
       .catch(err => {
         console.log("err.response.status", err);
