@@ -3,20 +3,21 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import Product from "../../components/Product/Product";
 import Spinner from "../../components/UI/Spinner/Spinner";
-import "./Products.css";
+import "./Products.scss";
 class Products extends Component {
   componentDidMount() {
     this.props.onInitProducts();
   }
-  redirectToProductDetails = SKUid => {
+
+  redirectToProductDetails = (SKUid) => {
     this.props.history.push(`/products/ref/${SKUid}`);
   };
   render() {
     let productsArray = <Spinner />;
     if (this.props.fetchSuccess) {
-      productsArray = this.props.products.map(product => (
+      productsArray = this.props.products.map((product) => (
         <div
-          className="col-md-4 col-lg-3"
+          className="product-card col-12 col-md-4 col-lg-4 px-0"
           key={product.id}
           onClick={() => this.redirectToProductDetails(product.id)}
         >
@@ -39,19 +40,16 @@ class Products extends Component {
     );
   }
 }
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
     products: state.product.products,
     fetchSuccess: state.product.fetchDataFinished,
-    isLoading: state.product.isAddingToCart
+    isLoading: state.product.isAddingToCart,
   };
 };
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    onInitProducts: () => dispatch(actions.initProducts())
+    onInitProducts: () => dispatch(actions.initProducts()),
   };
 };
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Products);
+export default connect(mapStateToProps, mapDispatchToProps)(Products);

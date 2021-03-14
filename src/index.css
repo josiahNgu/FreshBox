@@ -6,14 +6,25 @@ body {
   font-family: "Karla", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: rgb(242, 244, 254);
+  background: linear-gradient(
+    90deg,
+    rgba(242, 244, 254, 1) 0%,
+    rgba(240, 239, 244, 1) 18%,
+    rgba(239, 238, 242, 1) 40%,
+    rgba(239, 238, 243, 1) 51%,
+    rgba(243, 243, 245, 1) 69%,
+    rgba(242, 242, 242, 1) 86%,
+    rgba(239, 239, 240, 1) 100%
+  );
 }
 
-/* html,
+html,
 body,
 #app,
-#app > div
-*/
-
+#app > div {
+  height: 100%;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
@@ -22,5 +33,5 @@ code {
 :root {
   --primary-color: #d896ff;
   --secondary-color: #b07cda;
-  --dark-color: #660066;
+  --dark-color: black;
 }

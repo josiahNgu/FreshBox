@@ -2,9 +2,9 @@
 import React from "react";
 import "./Product.scss";
 
-const Product = props => {
+const Product = (props) => {
   return (
-    <div className="product col-sm-12 dark_text">
+    <div className="product col-12 dark_text px-0">
       <img src={props.imageURL} alt="product image" />
       <p className="product_show_more">View</p>
       <div>

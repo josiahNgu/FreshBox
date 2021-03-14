@@ -1,0 +1,39 @@
+@import "src/utils/default";
+
+#homepage-main {
+  background: $bg-color;
+  background: $default-bg-gradient;
+  min-height: 100vh;
+  overflow: hidden;
+  position: relative;
+  height: calc(100vh - 10px);
+  .homepage-container {
+    height: 100%;
+    .homepage-content {
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    h1,
+    h3 {
+      font-family: $header-font-family;
+      font-weight: 600;
+      font-size: 4.5rem;
+    }
+    .description {
+      font-size: 1.5rem;
+      margin: 56px 0;
+    }
+    .shop-link {
+      @include default-btn;
+      margin-top: 32px;
+      a {
+        text-decoration: none;
+        color: $color;
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
