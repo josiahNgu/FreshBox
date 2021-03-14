@@ -35,4 +35,4 @@ Add additional notes about how to deploy this on a live system
 
 ## Live build
 
-https://subscriptionservice-f776d.firebaseapp.com/
+https://businessboomin.dev/
