@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import "./Homepage.scss";
 class Homepage extends Component {
+  navigateToPage = () => {
+    this.props.history.push("products");
+  };
   render() {
     return (
       <main id="homepage-main">
@@ -12,8 +14,8 @@ class Homepage extends Component {
             <p className="description">
               Crunchy fresh fruits and vegetables directly from local farmers
             </p>
-            <button className="shop-link">
-              <Link to="/products">Shop Now</Link>
+            <button className="shop-link" onClick={this.navigateToPage}>
+              Shop Now
             </button>
             {/* <h4>Top Picks</h4> */}
           </div>

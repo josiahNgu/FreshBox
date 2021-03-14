@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../../../store/actions/index";
-import "./ProductDetails.css";
+import "./ProductDetails.scss";
 import Spinner from "../../UI/Spinner/Spinner";
 import Alert from "../../UI/Alert/Alert";
 import Input from "../../UI/Input/Input";
@@ -11,20 +11,20 @@ class ProductDetails extends Component {
     this.state = {
       deliveryOptions: "1",
       quantity: "1",
-      addToCart: false,
+      addToCart: false
     };
     this.handleChange = this.handleChange.bind(this);
   }
   componentDidMount() {
     const {
-      match: { params },
+      match: { params }
     } = this.props;
     this.props.onInItProductDetails(params.productId);
   }
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.isLoading !== this.props.isLoading) {
       this.setState({
-        addToCart: this.props.isLoading,
+        addToCart: this.props.isLoading
       });
     }
   }
@@ -46,13 +46,13 @@ class ProductDetails extends Component {
       );
     }
     this.setState({
-      addToCart: true,
+      addToCart: true
     });
   };
-  handleChange = (event) => {
+  handleChange = event => {
     const { name, value } = event.target;
     this.setState({
-      [name]: value,
+      [name]: value
     });
   };
   render() {
@@ -63,36 +63,40 @@ class ProductDetails extends Component {
     if (this.props.productDetails) {
       canvas = (
         <div id="product_details" className="pt_4">
-          <button onClick={this.goBack} className="DesktopOnly   back_btn">
+          <button onClick={this.goBack} className="DesktopOnly back_btn">
             &laquo; Back
           </button>
-          <div className=" product_content">
-            <img
-              className=""
-              src={this.props.productDetails.imageURL}
-              alt="product"
-            />
-          </div>
-          <div className=" item_description ">
-            <h3>{this.props.productDetails.itemName}</h3>
-            <p className="bold_text">$ {this.props.productDetails.price}</p>
-            <p>{this.props.productDetails.description}</p>
-            <label>Quantity</label>
-            <Input
-              elementTypes="quantityInput"
-              name="quantity"
-              placeholder="1"
-              changed={this.handleChange}
-            />
+          <div className="product-container">
+            <div className="item_description">
+              <h3 className="product-title">
+                {this.props.productDetails.itemName}
+              </h3>
+              <p className="bold_text">$ {this.props.productDetails.price}</p>
+              <p>{this.props.productDetails.description}</p>
+              <label>Quantity</label>
+              <Input
+                elementTypes="quantityInput"
+                name="quantity"
+                placeholder="1"
+                changed={this.handleChange}
+              />
 
-            <br />
-            <button
-              className={styles}
-              disabled={this.props.isLoading}
-              onClick={this.addToCart}
-            >
-              Add To Cart
-            </button>
+              <br />
+              <button
+                className={styles}
+                disabled={this.props.isLoading}
+                onClick={this.addToCart}
+              >
+                Add To Cart
+              </button>
+            </div>
+            <div className=" product_content">
+              <img
+                className="product-img"
+                src={this.props.productDetails.imageURL}
+                alt="product"
+              />
+            </div>
           </div>
         </div>
       );
@@ -101,22 +105,22 @@ class ProductDetails extends Component {
     return canvas;
   }
 }
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     productDetails: state.product.productDetails,
     addingToCart: state.shoppingCart.isAddingToCart,
-    isAuthenticated: state.auth.isAuthenticated,
+    isAuthenticated: state.auth.isAuthenticated
   };
 };
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onInItProductDetails: (itemId) =>
+    onInItProductDetails: itemId =>
       dispatch(actions.initProductDetails(itemId)),
     addProductToCart: (itemId, quantity) =>
       dispatch(actions.addToCart(itemId, quantity)),
     addAuthUserCart: (itemId, quantity) => {
       dispatch(actions.addAuthUserCart(itemId, quantity));
-    },
+    }
   };
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

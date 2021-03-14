@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Spinner from "../UI/Spinner/Spinner";
-import "./ShoppingList.css";
+import "./ShoppingList.scss";
 import ShoppingCartItem from "../ShoppingItem/ShoppingItem";
 import * as actions from "../../store/actions/index";
 class ShoppingList extends Component {

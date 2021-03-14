@@ -1,0 +1,37 @@
+@import "src/utils/default";
+
+.Checkout {
+  min-height: 100vh;
+  text-align: center;
+.background{
+  background:transparent;
+}
+}
+
+.Delivery {
+  min-height: 10vh;
+  margin: auto;
+  padding: 20px;
+  color: white;
+}
+.checkout-form{
+  background: #ecf0f3;
+  box-shadow: 13px 13px 20px #cbced1,
+              -13px -13px 20px #ffffff;
+  
+  .shipping-form {
+    margin: auto;
+    margin-top: 54px;
+    padding: 20px 0;
+    color: white;
+
+    border-radius: 50px;
+    h5,label{
+      color: black;
+    }
+  }
+  .next-btn{
+    @include default-btn;
+    height: 3.5rem;
+  }
+}

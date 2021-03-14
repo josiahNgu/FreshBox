@@ -1,6 +1,8 @@
-.Payment {
-  background-color: whitesmoke;
-  /* min-height: 96vh; */
+@import "src/utils/default";
+
+.background{
+  background-color: transparent;
+  background:transparent;
 }
 
 .card_section {

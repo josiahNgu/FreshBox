@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Input from "../../components/UI/Input/Input";
 import ShoppingList from "../../components/ShoppingList/ShoppingList";
 import * as actions from "../../store/actions/index";
-import "./Checkout.css";
+import "./Checkout.scss";
 class Checkout extends Component {
   state = {
     deliveryOptions: {
@@ -110,8 +110,8 @@ class Checkout extends Component {
           <div className="col-md-12 col-lg-6 shoppingList">
             <ShoppingList />
           </div>
-          <div className="col-md-12 col-lg-6 gradient_background checkout_form">
-            <div className="ShippingForm ">
+          <div className="col-md-12 col-lg-6 background  checkout-form">
+            <div className="shipping-form">
               <h5>SHIPPING ADDRESS</h5>
               <label>Full Name</label>
               {this.shippingInputGenerator("shippingName")}
@@ -124,10 +124,7 @@ class Checkout extends Component {
               <label>Zip</label>
               {this.shippingInputGenerator("zip")}
             </div>
-            <button
-              className="secondary_button"
-              onClick={this.submitShippingForm}
-            >
+            <button className="next-btn" onClick={this.submitShippingForm}>
               Next
             </button>
           </div>
@@ -142,7 +139,4 @@ const mapDispatchToProps = dispatch => {
       dispatch(actions.shippingAddressForm(shippingInfo))
   };
 };
-export default connect(
-  null,
-  mapDispatchToProps
-)(Checkout);
+export default connect(null, mapDispatchToProps)(Checkout);

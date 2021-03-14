@@ -1,12 +1,13 @@
-@import url("https://fonts.googleapis.com/css?family=Karla:400,700&display=swap");
 
 
 .FormInput {
   font-weight: 400;
-  font-family: "Karla"sans-serif;
   padding: 12px 15px;
-  background-color: white;
-  border: 2px solid gainsboro;
+  border-radius: 47px;
+  background: #ecf0f3;
+  border-radius: 25px;
+  box-shadow: inset 8px 8px 8px #cbced1,
+              inset -8px -8px 8px #ffffff;
   width: 370px;
   margin-bottom: 15px;
   border-radius: 5px;

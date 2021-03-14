@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as actions from "../../store/actions/index";
 import ShoppingList from "../../components/ShoppingList/ShoppingList";
 import Input from "../../components/UI/Input/Input";
-import "./Payment.css";
+import "./Payment.scss";
 class Payment extends React.Component {
   componentDidMount() {
     console.log("this.props.shippingStatus :", this.props.shippingStatus);
@@ -112,7 +112,7 @@ class Payment extends React.Component {
             </button>
             <ShoppingList />
           </div>
-          <div className=" gradient_background text-center  col-md-6">
+          <div className=" background text-center  col-md-6">
             <section className="card_section">
               <h5>CREDIT/DEBIT CARD PAYMENT</h5>
               <div className="">

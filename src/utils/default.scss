@@ -9,12 +9,17 @@ $default-bg-gradient: linear-gradient(
   rgba(242, 242, 242, 1) 86%,
   rgba(239, 239, 240, 1) 100%
 );
+$header-color: rgb(247, 185, 48);
+$secondary-color: rgb(247, 185, 48);
+
 $header-font-family: "Merriweather", serif;
 $body-font-family: "Karla", sans-serif;
+$header-font-size:4.5rem;
+$border-radius:70px;
 $color: #000000;
 @mixin default-btn() {
   border-radius: 50px;
-  background: #e0e0e0;
+  background: #ecf0f3;
   box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
   border: none;
   width: 15rem;
@@ -30,5 +35,9 @@ $color: #000000;
     box-shadow: inset -4px -4px 8px rgba(255, 255, 255, 0.5),
       inset 8px 8px 16px rgba(0, 0, 0, 0.1);
     color: #79e3b6;
+  }
+  &:disabled {
+    color: #ffff;
+    pointer-events: none;
   }
 }

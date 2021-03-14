@@ -1,5 +1,5 @@
 import React from "react";
-import "./ShoppingItem.css";
+import "./ShoppingItem.scss";
 function displayFrequency(option) {
   let displayText = "Every Month";
   if (option === 2) {
@@ -12,9 +12,9 @@ function displayFrequency(option) {
 
 function ShoppingItem(props) {
   return (
-    <div className="container ShoppingItem">
+    <div className="container shopping-item">
       {/* product refer to product page class */}
-      <div className="CartItem col-sm-12 ">
+      <div className="cart-item col-sm-12 ">
         <div className="row">
           <div className="col-sm-6">
             <img src={props.imageURL} alt={props.itemName} />
