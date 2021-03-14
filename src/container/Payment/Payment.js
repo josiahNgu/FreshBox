@@ -135,10 +135,7 @@ class Payment extends React.Component {
                   </div>
                 </div>
               </div>
-              <button
-                className="secondary_button"
-                onClick={this.submitCardForm}
-              >
+              <button className="next-btn" onClick={this.submitCardForm}>
                 Place Order
               </button>
             </section>

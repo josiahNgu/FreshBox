@@ -15,7 +15,7 @@ class ShoppingCart extends Component {
     return (
       <div className="container col-md-12 shopping_cart">
         <div className="row">
-          <div className="col-md-8 shoppingList">
+          <div className="col-md-8 shopping-list">
             <ShoppingList />
           </div>
           <div className="payment_option  text-center pt_1 col-md-4">

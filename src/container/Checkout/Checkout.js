@@ -107,7 +107,7 @@ class Checkout extends Component {
     return (
       <main className="Checkout pt_4 container-fluid ">
         <div className="row">
-          <div className="col-md-12 col-lg-6 shoppingList">
+          <div className="col-md-12 col-lg-6 shopping-list ">
             <ShoppingList />
           </div>
           <div className="col-md-12 col-lg-6 background  checkout-form">

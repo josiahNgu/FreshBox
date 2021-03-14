@@ -1,8 +1,9 @@
 @import "src/utils/default";
 
 .background{
-  background-color: transparent;
-  background:transparent;
+  background: transparent;
+  box-shadow: 13px 13px 20px #cbced1,
+              -13px -13px 20px #ffffff;
 }
 
 .card_section {
@@ -10,5 +11,8 @@
   margin: auto;
   padding-top: 20px;
   color: white;
-
+.next-btn{
+  @include default-btn;
+  height: 3.5rem;
+}
 }

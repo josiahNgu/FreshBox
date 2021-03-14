@@ -6,6 +6,18 @@
 .background{
   background:transparent;
 }
+.shopping-list {
+  overflow-y: auto;
+  height: calc(100vh - 4rem);
+  position: relative;
+  padding-right: 5rem !important;
+}
+
+@media(max-width:425px) {
+  .shopping-list {
+      overflow-y: hidden;
+  }
+}
 }
 
 .Delivery {
@@ -15,7 +27,6 @@
   color: white;
 }
 .checkout-form{
-  background: #ecf0f3;
   box-shadow: 13px 13px 20px #cbced1,
               -13px -13px 20px #ffffff;
   
